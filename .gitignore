@@ -1,0 +1,3 @@
+# Personal vault — เนื้อหาภายในไม่ commit (เก็บเฉพาะเครื่อง)
+vault/*
+!vault/README.md
