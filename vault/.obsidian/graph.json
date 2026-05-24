@@ -11,14 +11,14 @@
       "query": "path:issues",
       "color": {
         "a": 1,
-        "rgb": 14719769
+        "rgb": 7640240
       }
     },
     {
       "query": "path:learnings",
       "color": {
         "a": 1,
-        "rgb": 12065792
+        "rgb": 11911304
       }
     }
   ],
@@ -32,5 +32,6 @@
   "repelStrength": 12,
   "linkStrength": 0.5,
   "linkDistance": 200,
+  "scale": 0.999999999999996,
   "close": false
 }

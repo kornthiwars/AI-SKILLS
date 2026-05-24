@@ -40,8 +40,8 @@ vault/
 
 | Query | โฟลเดอร์ | สี |
 |-------|----------|-----|
-| `path:issues` | `issues/` | ส้มแดง |
-| `path:learnings` | `learnings/` | ทอง |
+| `path:issues` | `issues/` | ฟ้าหม่น `#7494B0` |
+| `path:learnings` | `learnings/` | ดินอ่อน `#B59688` |
 
 ตั้งใน `vault/.obsidian/graph.json` — **ไม่ใช้ tag groups** อีกแล้ว
 
