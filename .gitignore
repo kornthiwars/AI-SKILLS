@@ -13,3 +13,6 @@ vault/learnings/*
 # Obsidian settings (vault folder = Obsidian vault root)
 !vault/.obsidian/
 !vault/.obsidian/**
+
+# Cursor local setup (junctions from scripts/setup-windows.ps1 — edit ai-skills/ ai-rules/)
+.cursor/
