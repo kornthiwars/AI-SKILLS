@@ -6,21 +6,16 @@ Canonical: [`ai-skills/`](ai-skills/README.md) · [`ai-rules/`](ai-rules/README.
 
 ---
 
-## Cursor setup (once per clone)
+## Setup (once per clone)
 
-```powershell
-cmd /c mklink /J .cursor\skills ai-skills
-cmd /c mklink /J .cursor\rules ai-rules
-```
+| OS | Command |
+|----|---------|
+| Windows | `.\scripts\setup.ps1` |
+| macOS / Linux | `./scripts/setup.sh` |
 
-Details: [.cursor/README.md](.cursor/README.md) · [.claude/README.md](.claude/README.md)
+Creates `.cursor/` + `.claude/` links to `ai-skills/` and `ai-rules/`, plus `vault/issues/` + `vault/learnings/`. See [scripts/README.md](scripts/README.md).
 
-## Claude Code setup (once per clone)
-
-```powershell
-cmd /c mklink /J .claude\skills ai-skills
-cmd /c mklink /J .claude\rules ai-rules
-```
+Manual: [.cursor/README.md](.cursor/README.md) · [.claude/README.md](.claude/README.md)
 
 Entry: [CLAUDE.md](CLAUDE.md) → `@AGENTS.md`
 

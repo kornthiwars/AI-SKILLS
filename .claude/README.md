@@ -4,8 +4,10 @@ Junctions to canonical folders — **แก้ที่ `ai-skills/` และ `
 
 | Path | Target | Setup (จาก repo root) |
 |------|--------|------------------------|
-| `skills/` | `ai-skills/` | `cmd /c mklink /J .claude\skills ai-skills` |
-| `rules/` | `ai-rules/` | `cmd /c mklink /J .claude\rules ai-rules` |
+| `skills/` | `ai-skills/` | `.\scripts\setup.ps1` (Win) · `./scripts/setup.sh` (Mac/Linux) |
+| `rules/` | `ai-rules/` | (same script) |
+
+Manual Win: `cmd /c mklink /J .claude\skills ai-skills` · `mklink /J .claude\rules ai-rules`
 
 Entry point: [CLAUDE.md](../CLAUDE.md) imports [AGENTS.md](../AGENTS.md).
 

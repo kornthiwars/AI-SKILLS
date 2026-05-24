@@ -4,7 +4,9 @@ Junctions to canonical folders — **แก้ที่ `ai-skills/` และ `
 
 | Path | Target | Setup (จาก repo root) |
 |------|--------|------------------------|
-| `skills/` | `ai-skills/` | `cmd /c mklink /J .cursor\skills ai-skills` |
-| `rules/` | `ai-rules/` | `cmd /c mklink /J .cursor\rules ai-rules` |
+| `skills/` | `ai-skills/` | `.\scripts\setup.ps1` (Win) · `./scripts/setup.sh` (Mac/Linux) |
+| `rules/` | `ai-rules/` | (same script) |
+
+Manual Win: `cmd /c mklink /J .cursor\skills ai-skills` · `mklink /J .cursor\rules ai-rules`
 
 Vault: [ai-rules/vault-learning.mdc](../ai-rules/vault-learning.mdc) (rules only, no hooks)

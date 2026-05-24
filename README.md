@@ -6,21 +6,76 @@ Repository สำหรับ **Cursor Agent Skills + Rules**
 
 ---
 
-## เริ่มต้น
+## ติดตั้ง
 
-**Cursor (ครั้งแรกหลัง clone):**
+### สิ่งที่ต้องมี
 
-```powershell
-cmd /c mklink /J .cursor\skills ai-skills
-cmd /c mklink /J .cursor\rules ai-rules
-cmd /c mklink /J .claude\skills ai-skills
-cmd /c mklink /J .claude\rules ai-rules
+| รายการ | ใช้ทำอะไร |
+|--------|-----------|
+| [Git](https://git-scm.com/) | clone repo |
+| [Cursor](https://cursor.com/) | ใช้ `@skill` จาก `ai-skills/` |
+| PowerShell 5.1+ (Windows) หรือ `bash` (macOS/Linux) | รัน setup script |
+| Obsidian (ถ้าต้องการ vault) | เปิด repo root เป็น vault — ไม่บังคับ |
+
+### 1 — Clone
+
+```bash
+git clone https://github.com/kornthiwars/AI-SKILLS.git
+cd AI-SKILLS
 ```
 
-→ [.cursor/README.md](.cursor/README.md) · [.claude/README.md](.claude/README.md) · reload Cursor
+### 2 — Setup (ครั้งเดียวหลัง clone)
 
-1. เรียก `@ui-builder`, `@debug`, `@git-push` ฯลฯ
-2. **Obsidian** — เปิด repo root เป็น vault · [vault/](vault/README.md)
+สคริปต์จะสร้าง link ให้ Cursor / Claude Code อ่าน skill จาก `ai-skills/` และ rule จาก `ai-rules/` รวมถึงโฟลเดอร์ `vault/issues/` + `vault/learnings/`
+
+**Windows** (PowerShell จาก repo root):
+
+```powershell
+cd AI-SKILLS
+.\scripts\setup.ps1
+```
+
+หรือดับเบิลคลิก `scripts\setup.bat`
+
+**macOS / Linux:**
+
+```bash
+cd AI-SKILLS
+chmod +x scripts/setup.sh
+./scripts/setup.sh
+```
+
+รายละเอียด / troubleshooting: [scripts/README.md](scripts/README.md)
+
+| ปัญหา | แก้ |
+|--------|-----|
+| Windows `mklink` ล้มเหลว | เปิด PowerShell **Run as administrator** แล้วรัน `.\scripts\setup.ps1` อีกครั้ง |
+| `.cursor/skills` มีอยู่แล้วแต่ไม่ใช่ link | ลบโฟลเดอร์นั้น (ถ้าไม่มีงานสำคัญ) แล้วรัน setup ใหม่ |
+
+### 3 — เปิดใน Cursor
+
+1. **File → Open Folder** → เลือกโฟลเดอร์ `AI-SKILLS` (repo root)
+2. **Developer: Reload Window** (หรือปิดเปิด Cursor ใหม่)
+3. ในแชทลอง `@ui-builder`, `@debug`, `@git-push` ฯลฯ
+
+แก้ skill / rule ที่ canonical เท่านั้น: `ai-skills/`, `ai-rules/` — อย่าแก้ใน `.cursor/` หรือ `.claude/` (เป็น mirror)
+
+### 4 — Obsidian (ถ้าใช้ vault)
+
+1. เปิด **repo root** (`AI-SKILLS`) เป็น vault — ไม่ใช่แค่โฟลเดอร์ `vault/`
+2. Templates อยู่ที่ `templates/` (repo root)
+3. ดู [vault/README.md](vault/README.md)
+
+### ติดตั้งมือ (ไม่ใช้ script)
+
+Windows junction: [.cursor/README.md](.cursor/README.md) · [.claude/README.md](.claude/README.md)
+
+---
+
+## เริ่มใช้
+
+- Ship งาน: `implement → @pr-review → @git-push` — [ai-skills/README.md](ai-skills/README.md)
+- แก้ skill ใน repo นี้: `@upgrade`
 
 ---
 
