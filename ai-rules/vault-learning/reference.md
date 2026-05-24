@@ -23,14 +23,14 @@ vault/issues/2026-05-24.md
 └── ## 5. เรื่องที่ห้า   ← วันเดียวกัน 5 เรื่อง = 5 sections
 ```
 
-Agent **append** each substantive Q&A — one file per day. **Write vault in English**; chat replies stay ~70% ไทย / ~30% English.
+Agent **append** work-related Q&A only — one file per day. Skip off-topic (weather, trivia). Vault body: **English**; chat: ~70% ไทย.
 
 ## Flow
 
 ```
-ถามทั่วไป / ประจำวัน     → issues/YYYY-MM-DD.md (append)
-ติดปัญหา + prompt ≥3 รอบ → learnings/ (ไฟล์แยก)
-debug หนัก              → อ่าน learnings/ ก่อน
+work Q&A (code, vault, skills, tools) → issues/YYYY-MM-DD.md (append)
+off-topic (weather, news, chitchat)   → do NOT write issues
+problem + prompt ≥3 rounds            → learnings/
 ```
 
 ## นับ "3 รอบ" (learnings)
@@ -44,4 +44,4 @@ debug หนัก              → อ่าน learnings/ ก่อน
 
 ## Git
 
-`learnings/` + `issues/` local only · `templates/` in git
+`learnings/` + `issues/` local only · `templates/` in git · `issues/README.md` + `learnings/README.md` in git

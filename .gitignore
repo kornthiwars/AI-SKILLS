@@ -1,5 +1,13 @@
-# Personal vault — issues/ + learnings/ local; templates + README in git
+# Personal vault — note content local; README + templates in git
 vault/*
 !vault/README.md
 !vault/templates/
 !vault/templates/**
+
+# Folder placeholders (README only; daily notes stay ignored)
+!vault/issues/
+vault/issues/*
+!vault/issues/README.md
+!vault/learnings/
+vault/learnings/*
+!vault/learnings/README.md
