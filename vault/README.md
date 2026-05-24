@@ -1,36 +1,55 @@
-# vault
+﻿# vault
 
-Obsidian — **issues รายวัน (ไฟล์เดียวต่อวัน)** · **learnings หลังแก้ปัญหา ≥3 prompt**
+Obsidian vault root = **`AI/vault`**
 
 ## โครงสร้าง
 
 ```
 vault/
-├── templates/       ← git
-├── issues/
-│   ├── README.md    ← git (placeholder)
-│   └── YYYY-MM-DD.md    ← local
-└── learnings/
-    ├── README.md    ← git (placeholder)
-    └── *-learning.md    ← local
+├── .obsidian/         ← graph: tags ON + color groups
+├── templates/
+├── issues/YYYY-MM-DD.md
+└── learnings/YYYY-MM-DD-HHmm.md
 ```
 
-## ใช้ยังไง
+## Tags
 
-| สถานการณ์ | ที่เก็บ |
-|-----------|---------|
-| ถามเรื่องงาน / repo / vault / tools | `issues/YYYY-MM-DD.md` (append) |
-| อากาศ / chitchat / trivia | **ไม่** เขียน issues |
-| ติดปัญหา แก้ด้วย prompt ≥3 ครั้ง | `learnings/*.md` |
+### Type (บังคับ)
 
-ตัวอย่าง: วันเดียวมี 5 คำถาม → ไฟล์เดียว 5 sections
+| Tag | ใช้กับ |
+|-----|--------|
+| `#issues` | ไฟล์รายวัน `issues/` (หนึ่งไฟล์ต่อวัน) |
+| `#learning` | ไฟล์ lesson `learnings/` |
 
-**ภาษา:** เนื้อหาใน vault = **English** (ลด token) · แชทกับ user = **~70% ไทย / ~30% English**
+### Topic (เลือก 1–3 ต่อ section หรือ note)
 
-รายละเอียด: [ai-rules/vault-learning](../ai-rules/vault-learning/reference.md)
+| Tag | หัวข้อ |
+|-----|--------|
+| `#vault` | โครง vault, rules การเขียน |
+| `#git` | gitignore, commit, push |
+| `#research` | graph, plugins, investigation |
+| `#ui` | Cursor UI, editor, agent UX |
+| `#api` | REST/API, endpoints, backend |
+| `#infrastructure` | repo layout, CI, agent policies |
+| `#debug` | แก้ bug / error |
 
-เปิด Obsidian ที่ **repo root**
+**Issues:** ใส่ใน frontmatter (รวมทุก topic ของวัน) + บรรทัด `#vault` ใต้ `##` แต่ละข้อ  
+**Learnings:** `tags: [learning, vault]` — `skill:` ต้องตรงกับ topic tag
+
+Graph สี: `#issues` · `#learning` · `#vault` · `#research` · `#git` · `#ui` · `#api` · `#infrastructure`
+
+## Learnings — ชื่อไฟล์ vs ชื่อแสดง
+
+| ที่ | ค่า |
+|----|-----|
+| ไฟล์ | `2026-05-23-1545.md` |
+| Graph / tabs | **`title:`** (plugin Property Over File Name) |
+
+**ไม่มี hub file** — เชื่อม graph ด้วย tags เปิด ไม่ใช้ wikilink footer
+
+Rule: `../ai-rules/vault-learning.mdc`
 
 ## Git
 
-`issues/*.md` + `learnings/*-learning.md` = local only · **README.md** ในแต่ละโฟลเดอร์ track ใน git
+**ใน git:** README, templates, `.obsidian`  
+**local:** `issues/*.md`, `learnings/*.md`

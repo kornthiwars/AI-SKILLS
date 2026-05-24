@@ -2,8 +2,10 @@
 
 Use when same **problem** took **≥3 user prompt rounds** to resolve (vault-learning rule).
 
-**Path:** `vault/learnings/YYYY-MM-DD-HHmm-learning.md`
+**Path:** `vault/learnings/YYYY-MM-DD-HHmm.md`
 
-**Template:** [vault/templates/template.learning.md](../../../vault/templates/template.learning.md) — **English** (Problem · Fix · Don't repeat)
+**Frontmatter:** `title:` + same text as `# H1` (for graph display with Property Over File Name plugin)
 
-Tags: `#learning` `#debug` · no secrets
+**Template:** [vault/templates/template.learning.md](../../../vault/templates/template.learning.md)
+
+Tags: `#learning` · no secrets

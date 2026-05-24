@@ -1,13 +1,15 @@
 ---
 date: {{YYYY-MM-DD}}
-tags: [issues, daily]
+tags: [issues]
 ---
 
 # Issues — {{YYYY-MM-DD}}
 
-<!-- One file per day; each Q&A = new ## N section. Body: English only. -->
+<!-- Type: issues. Add topic tags to frontmatter + #tags under each ## (see vault/README.md). -->
 
 ## {{n}}. {{title}}
+
+#vault
 
 ### Question
 

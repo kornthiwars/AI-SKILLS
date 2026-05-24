@@ -7,41 +7,30 @@
 ```
 vault/
 ├── templates/
-│   ├── template.learning.md    ← Problem · Fix · Don't repeat (EN)
-│   └── template.issue.md       ← daily sections; **English** body
-├── learnings/                  ← ไฟล์ต่อ lesson (≥3 prompt rounds)
-└── issues/
-    └── YYYY-MM-DD.md           ← ไฟล์เดียวต่อวัน — หลายเรื่องในไฟล์เดียวกัน
+├── issues/YYYY-MM-DD.md     tags: [issues, …topics]
+└── learnings/YYYY-MM-DD-HHmm.md   tags: [learning] + title: (graph label via plugin)
 ```
 
-## Issues รายวัน
-
-```
-vault/issues/2026-05-24.md
-├── ## 1. เรื่องแรก
-├── ## 2. เรื่องที่สอง
-└── ## 5. เรื่องที่ห้า   ← วันเดียวกัน 5 เรื่อง = 5 sections
-```
-
-Agent **append** work-related Q&A only — one file per day. Skip off-topic (weather, trivia). Vault body: **English**; chat: ~70% ไทย.
+**No hub file** — graph groups by type + topic tags (`#issues`, `#learning`, `#vault`, …).
 
 ## Flow
 
 ```
-work Q&A (code, vault, skills, tools) → issues/YYYY-MM-DD.md (append)
-off-topic (weather, news, chitchat)   → do NOT write issues
-problem + prompt ≥3 rounds            → learnings/
+work Q&A        → issues/YYYY-MM-DD.md (append, tags [issues, …topics])
+off-topic       → skip
+problem ≥3 rnds → learnings/ (tags [learning])
 ```
 
-## นับ "3 รอบ" (learnings)
+## Obsidian graph
 
-นับ **ข้อความ user** ที่เกี่ยวกับปัญหาเดียวกันในแชทนี้ (ไม่นับทักทาย). รอบที่ 3 ขึ้นไป + แก้ได้ → เขียน learning
-
-## Obsidian
-
-- Vault root = repo root
-- Daily note pattern: `vault/issues/{{date}}.md` (optional)
+- Config: `vault/.obsidian/graph.json`
+- **Display → Tags: ON** — tag nodes เชื่อม notes
+- **Groups:** `#issues`, `#learning`, `#vault`, `#research`, `#git`, `#ui`, `#api`, `#infrastructure`
+- **Topics:** `vault`, `git`, `research`, `ui`, `api`, `infrastructure`, `debug` (see rule table)
+- **Filter:** `-path:templates -file:README`
+- **Orphans:** ON — note ไม่ต้อง wikilink กัน
+- No hub file · no wikilink footers
 
 ## Git
 
-`learnings/` + `issues/` local only · `templates/` in git · `issues/README.md` + `learnings/README.md` in git
+Notes local · templates + README + `.obsidian` in git

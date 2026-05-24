@@ -5,25 +5,42 @@ Lessons after **problem-solving** — one file per lesson.
 ## File pattern
 
 ```
-YYYY-MM-DD-HHmm-learning.md
+YYYY-MM-DD-HHmm.md
 ```
+
+Example: `2026-05-23-1545.md`
+
+| Field | Purpose |
+|-------|---------|
+| Filename | Sortable id (date + time) |
+| `title:` + `# H1` | **Display name** (graph / tabs with plugin) |
+
+## Graph — show title not filename
+
+Obsidian **core graph** uses filename (`2026-05-23-1545`) by default.
+
+This vault ships **Property Over File Name** under `.obsidian/plugins/` (enabled in `community-plugins.json`). It reads frontmatter `title:` in graph, file explorer, and tabs.
+
+If labels still show filenames:
+
+1. **Settings → Community plugins** → turn **Restricted mode** off if prompted, then enable **Property Over File Name**
+2. Plugin settings → **In graph view** on, property key `title`
+3. Reload vault (close/reopen Obsidian or **Reload app without saving**)
+
+## Tags
+
+`tags: [learning, vault]` — ตัวที่สอง = `skill:` (เช่น `vault`, `debug`, `git`)
+
+Topic tags เดียวกับ issues: `vault`, `git`, `research`, `ui`, `api`, `infrastructure`, `debug`
 
 ## When agent writes
 
-All must apply:
-
-1. Fixing a problem (bug, error, config, debug)
-2. **≥3 user prompt rounds** on the same problem
-3. Clear outcome (fixed, root cause, or workaround)
-
-Plain Q&A → use [issues/](../issues/) instead.
+≥3 prompt rounds · problem solved · `tags: [learning, <skill>]`
 
 ## Template
 
-[vault/templates/template.learning.md](../templates/template.learning.md) — Problem · Fix · Don't repeat (**English**)
+`vault/templates/template.learning.md`
 
 ## Git
 
-This README is tracked. `*-learning.md` files are **local only** (gitignored).
-
-Agent creates this folder before first write if missing. Search here before debug.
+README tracked · learning files local only

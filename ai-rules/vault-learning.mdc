@@ -1,5 +1,5 @@
 ---
-description: Vault — issues auto; learnings after ≥3 prompt rounds on same problem; read learnings before debug
+description: Vault — issues auto; learnings after ≥3 prompt rounds; graph by tags (no hub file)
 alwaysApply: true
 ---
 
@@ -7,7 +7,7 @@ alwaysApply: true
 
 Design: [ai-rules/vault-learning/reference.md](ai-rules/vault-learning/reference.md)
 
-**Deprecated:** `.cursor/learnings.md`
+**Deprecated:** `.cursor/learnings.md` · hub files (`map`, `index`, `Project`)
 
 ## Language
 
@@ -26,7 +26,39 @@ Design: [ai-rules/vault-learning/reference.md](ai-rules/vault-learning/reference
 
 ## Ensure folders
 
-Before any vault write, create if missing: `vault/learnings/`, `vault/issues/`, `vault/templates/`. (README placeholders may already exist from git clone.)
+Before any vault write, create if missing: `vault/learnings/`, `vault/issues/`, `vault/templates/`.
+
+## Graph (Obsidian) — tags, not hub
+
+**No `Project.md` / hub file.** Group notes in graph by **tags** (frontmatter + inline `#topic`).
+
+### Type tags (always)
+
+| Note | Required |
+|------|----------|
+| Daily issues | `issues` |
+| Learning | `learning` |
+
+### Topic tags (pick 1–3)
+
+Use in **frontmatter** `tags: [...]` and/or one line under each issues `##` heading:
+
+`#vault` `#git` `#research` `#ui` `#api` `#infrastructure` `#debug`
+
+| Tag | When |
+|-----|------|
+| `vault` | vault layout, issues/learnings rules, templates |
+| `git` | gitignore, commit, push, repo |
+| `research` | graph, plugins, reading & investigation |
+| `ui` | Cursor UI, editor, agent UX |
+| `api` | REST/API design, endpoints, backend integration |
+| `infrastructure` | repo layout, CI, junctions, agent policies |
+| `debug` | bugs, errors, troubleshooting |
+
+**Issues file:** frontmatter = type tags + union of that day’s section topics.  
+**Learning file:** `tags: [learning, <skill>]` — `skill:` must match a topic tag (e.g. `vault`, `debug`).
+
+Do **not** add `Related:` wikilink footers. Do **not** link README or templates.
 
 ## Read before debug / fix
 
@@ -34,48 +66,37 @@ Search **`vault/learnings/`** (not `issues/`) for related symptoms, tags, skill,
 
 ## Write — issues (auto · one file per day)
 
-After you answer, write **without asking** only when this turn is **work-related** Q&A tied to code, repo, skills, rules, vault, tools, or dev workflow — **not** off-topic chat.
+After you answer, write **without asking** only when this turn is **work-related** Q&A — **not** off-topic chat.
 
-**Write to issues when (examples):**
-- Configuring vault, rules, junctions, skills
-- How-to about this project or dev stack
-- Decisions / blockers from today's work session
-
-**Do NOT write to issues (examples):**
-- Weather, news, trivia, personal chitchat
-- General knowledge unrelated to work/repo
-- Greetings, thanks only
-- Post-mortem after fixing a bug → use `learnings/` instead
+**Write when:** code, repo, api, infrastructure, vault, tools, dev workflow  
+**Skip:** weather, chitchat, trivia, greetings, bug post-mortem → `learnings/`
 
 Steps:
 
-1. **Path:** `vault/issues/YYYY-MM-DD.md` (local date — **one file per day**)
-2. **File exists** → **append** `## N. title` (N = next number)
-3. **No file yet** → create from [vault/templates/template.issue.md](vault/templates/template.issue.md), start at `## 1.`
-4. Each section: **Question** + **Answer / status** (English)
-5. Skip duplicate topic in the same day's file
+1. **Path:** `vault/issues/YYYY-MM-DD.md` (one file per day)
+2. **Append** `## N. title` or create from [template.issue.md](vault/templates/template.issue.md)
+3. Frontmatter: `tags: [issues, …topics]` (add section topics to the list as you append)
+4. Each section: after `## N. title`, optional line `#vault #git` (1–3 topic tags); then **Question** + **Answer / status** (English)
+5. Skip duplicate topic same day
 
 ## Write — learnings (≥3 prompt rounds)
 
-Write when **all** apply:
+Write when **all** apply: problem-solving · ≥3 user prompt rounds same issue · clear outcome.
 
-1. Session เป็นการ **แก้ปัญหา** (bug, error, logic ผิด, config, debug) — ไม่ใช่แค่ถามทั่วไป
-2. User ใช้ prompt ไล่แก้ **≥3 รอบ** ในเรื่องเดียวกัน (นับข้อความ user ที่เกี่ยวกับปัญหานั้น)
-3. มีผลลัพธ์ชัด (แก้ได้ / รู้ root cause / workaround ที่ใช้ได้)
+1. `vault/learnings/YYYY-MM-DD-HHmm.md` (local time, unique per lesson)
+2. [template.learning.md](vault/templates/template.learning.md) — **title** in frontmatter + `# title` as H1 (same text)
+3. Frontmatter: `tags: [learning, <skill>]`, `skill:` (same as second tag), `time: "HHmm"`, `title:` (English)
+4. Never secrets · no wikilink footers
 
-Then:
+**Graph display:** core graph uses filename; plugin *Property Over File Name* shows `title:` — see `vault/README.md`.
 
-1. `vault/learnings/YYYY-MM-DD-HHmm-learning.md`
-2. [vault/templates/template.learning.md](vault/templates/template.learning.md) — **Problem · Fix · Don't repeat** (English)
-3. Never secrets
-
-Do **not** write learning ถ้า <3 รอบ หรือเป็น Q&A ธรรมดา (ใช้ `issues/` แทน).
+Do **not** write learning if <3 rounds or plain Q&A → use `issues/`.
 
 ## Before finishing
 
-- Work-related Q&A not yet in today's `issues/YYYY-MM-DD.md` → append
-- แก้ปัญหา ≥3 รอบยังไม่มี learning → เขียน `learnings/`
+- Work-related Q&A not in today's `issues/YYYY-MM-DD.md` → append
+- Problem ≥3 rounds without learning → write `learnings/`
 
 ## After writing
 
-In **chat** (70/30): one short line e.g. บันทึกแล้ว → `path` — vault file itself stays English
+In **chat** (70/30): one short line e.g. บันทึกแล้ว → `path`

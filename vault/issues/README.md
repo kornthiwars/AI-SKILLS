@@ -10,15 +10,24 @@ YYYY-MM-DD.md    ← e.g. 2026-05-24.md
 
 Each Q&A = section `## 1.`, `## 2.`, … in the same file.
 
+## Tags
+
+| Layer | Example |
+|-------|---------|
+| File (frontmatter) | `tags: [issues, vault, git]` |
+| Section (under `##`) | `#vault #ui` |
+
+Type tags บังคับ · topic 1–3 ต่อ section — รายการเต็มใน `vault/README.md`
+
 ## When agent writes (auto)
 
-Work-related only: code, repo, skills, rules, vault, tools, workflow.
+Work-related only: code, repo, api, infrastructure, vault, tools, workflow.
 
 **Not** written: weather, chitchat, trivia, greetings.
 
 ## Template
 
-[vault/templates/template.issue.md](../templates/template.issue.md) — Question · Answer / status (**English**)
+Copy from `vault/templates/template.issue.md` (plain path — no markdown link).
 
 ## Git
 

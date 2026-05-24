@@ -11,3 +11,7 @@ vault/issues/*
 !vault/learnings/
 vault/learnings/*
 !vault/learnings/README.md
+
+# Obsidian settings (vault folder = Obsidian vault root)
+!vault/.obsidian/
+!vault/.obsidian/**
