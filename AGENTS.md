@@ -15,8 +15,6 @@ Canonical: [`ai-skills/`](ai-skills/README.md) · [`ai-rules/`](ai-rules/README.
 
 Creates `.cursor/` + `.claude/` links to `ai-skills/` and `ai-rules/`, plus `vault/issues/` + `vault/learnings/`. See [scripts/README.md](scripts/README.md).
 
-Manual: [.cursor/README.md](.cursor/README.md) · [.claude/README.md](.claude/README.md)
-
 Entry: [CLAUDE.md](CLAUDE.md) → `@AGENTS.md`
 
 ---

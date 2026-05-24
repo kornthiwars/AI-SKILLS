@@ -31,7 +31,7 @@ ai-skills/                         # repo root (canonical)
 └── git-push/                      # sole git CLI skill
 ```
 
-**Cursor mirror:** junction `.cursor/skills` → `../ai-skills` (ดู [.cursor/README.md](../.cursor/README.md))
+**Cursor mirror:** junction `.cursor/skills` → `ai-skills` (ดู [scripts/README.md](../scripts/README.md))
 
 ### โครงสร้างต่อ skill
 

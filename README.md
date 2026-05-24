@@ -68,7 +68,7 @@ chmod +x scripts/setup.sh
 
 ### ติดตั้งมือ (ไม่ใช้ script)
 
-Windows junction: [.cursor/README.md](.cursor/README.md) · [.claude/README.md](.claude/README.md)
+ดูคำสั่ง `mklink` / `ln` ใน [scripts/README.md](scripts/README.md) และ [AGENTS.md](AGENTS.md) § Setup
 
 ---
 

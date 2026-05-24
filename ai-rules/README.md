@@ -17,7 +17,7 @@ cmd /c mklink /J .cursor\rules ai-rules
 cmd /c mklink /J .claude\rules ai-rules
 ```
 
-คู่กับ Cursor: [.cursor/README.md](../.cursor/README.md) · Claude: [.claude/README.md](../.claude/README.md)
+Setup ครบ: [scripts/README.md](../scripts/README.md) · [AGENTS.md](../AGENTS.md) § Setup
 
 ---
 

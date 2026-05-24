@@ -2,7 +2,7 @@
 
 ชุด Agent Skills — Cursor `@skill-name` · Claude Code อ่านจาก `.claude/skills/`
 
-**Setup:** junction `.cursor/skills` + `.claude/skills` → `ai-skills` — [.cursor/README.md](../.cursor/README.md) · [.claude/README.md](../.claude/README.md)
+**Setup:** junction `.cursor/skills` + `.claude/skills` → `ai-skills` — [scripts/README.md](../scripts/README.md) · [AGENTS.md](../AGENTS.md) § Setup
 
 แต่ละ skill อยู่ที่ **`<skill-name>/`**
 
