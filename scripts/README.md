@@ -1,31 +1,65 @@
 # scripts
 
-Post-clone setup for **AI-SKILLS**.
+Post-clone setup for **AI-SKILLS** — **Windows** and **macOS/Linux** use the same behavior.
 
-## What it does
+| OS | Script | Links |
+|----|--------|--------|
+| **Windows** | [setup-windows.ps1](setup-windows.ps1) · [setup-windows.bat](setup-windows.bat) | NTFS junction (`mklink /J`) |
+| **macOS / Linux** | [setup-macos-linux.sh](setup-macos-linux.sh) | symlink (`ln -sfn`) |
 
-1. Links `.cursor/skills` + `.cursor/rules` → `ai-skills` / `ai-rules`
-2. Links `.claude/skills` + `.claude/rules` → same canonical folders
-3. Creates `vault/issues/` and `vault/learnings/` if missing
+## What setup creates (both platforms)
 
-| OS | Command (from repo root) |
-|----|---------------------------|
-| **Windows** | `.\scripts\setup.ps1` or double-click `scripts\setup.bat` |
-| **macOS / Linux** | `chmod +x scripts/setup.sh && ./scripts/setup.sh` |
+1. `.cursor/skills`, `.cursor/rules`, `.claude/skills`, `.claude/rules` → `ai-skills` / `ai-rules`
+2. `vault/issues/YYYY-MM-DD.md` bootstrap (in the clone)
+3. `.cursor/ai-skills-vault.json` — tells agents where `vault/` lives
+4. **Workspace mode:** `vault/` symlink/junction at the folder you open in Cursor
+
+## Layout: AI-SKILLS + web + api (multi-project)
+
+```
+your-workspace/          ← open this in Cursor (any folder name)
+├── AI-SKILLS/           ← clone
+├── web/
+└── api/
+```
+
+**One command** (from inside the clone):
+
+```bash
+# macOS / Linux
+chmod +x scripts/setup-macos-linux.sh
+./scripts/setup-macos-linux.sh
+```
+
+```powershell
+# Windows
+.\scripts\setup-windows.ps1
+```
+
+If **any project folder** sits next to the clone (`web/`, `api/`, or e.g. `twitch-drops/`), setup **auto-installs on the parent** — junctions/symlinks + `vault/` + `ai-skills-vault.json`. No fixed workspace name required.
+
+**macOS/Linux from parent** (like `setup-windows.bat` on Windows):
+
+```bash
+chmod +x AI-SKILLS/scripts/setup-macos-linux-parent.sh
+./AI-SKILLS/scripts/setup-macos-linux-parent.sh
+```
+
+## Modes
+
+| Mode | When | Command |
+|------|------|---------|
+| **Auto parent** | Siblings `web/`, `api/`, … detected | `./scripts/setup-macos-linux.sh` (default) |
+| **Explicit parent** | Any layout | `WORKSPACE_ROOT=/path ./scripts/setup-macos-linux.sh` or `-WorkspaceRoot` (Windows) |
+| **Repo only** | Cursor opens only `AI-SKILLS/` | `REPO_ONLY=1` / `-RepoOnly` |
+
+## Verify (both)
+
+- `.cursor/skills/upgrade/SKILL.md` resolves
+- `vault/issues/<today>.md` exists in clone
+- Workspace mode: `../vault/issues/<today>.md` and `.cursor/ai-skills-vault.json` at parent
 
 ## Requirements
 
-- **Windows:** NTFS; junctions usually work without Admin on a local drive. If `mklink` fails, run PowerShell as Administrator once.
-- **macOS / Linux:** `bash`, `ln`. No extra packages.
-
-## Re-run
-
-Safe to run again — replaces links that point to the wrong folder (e.g. Windows `.cursor\ai-skills` instead of repo `ai-skills`).
-
-## Verify
-
-Setup ends with a check that `.cursor/skills/upgrade/SKILL.md` (and rules) exist. If verify fails, re-run the script or remove broken `.cursor/skills` / `.cursor/rules` folders and run again.
-
-## Do not commit
-
-Junctions/symlinks under `.cursor/` and `.claude/` stay local (gitignored or untracked). Edit **only** `ai-skills/` and `ai-rules/`.
+- **Windows:** NTFS; Admin only if `mklink /J` fails
+- **macOS / Linux:** `bash`, `ln`

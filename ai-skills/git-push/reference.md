@@ -24,7 +24,7 @@ Use when workspace is this monorepo (`ai-skills/`, `ai-rules/`, `vault/`). In **
 |------|--------|----------------|
 | Skills | `ai-skills/**` | SKILL.md, reference.md, assets — skill behavior only |
 | Rules | `ai-rules/**` | `.mdc`, `reference.md` — agent rules |
-| Scripts | `scripts/**` | setup.ps1, setup.sh |
+| Scripts | `scripts/**` | setup-windows.ps1, setup-macos-linux.sh |
 | Vault docs | `vault/README.md`, `vault/issues/README.md`, `vault/learnings/README.md` | user-facing vault docs |
 | Vault templates | `templates/**` | `template.issue.md`, `template.learning.md` (repo root) |
 | Obsidian shared | `vault/.obsidian/graph.json`, `app.json`, `core-plugins.json`, `community-plugins.json`, `appearance.json`, `plugins/**` | graph groups, plugins shipped with vault |

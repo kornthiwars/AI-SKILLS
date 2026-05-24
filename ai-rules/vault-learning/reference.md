@@ -13,6 +13,20 @@ vault/
 
 **No hub file** — graph groups by type + topic tags (`#issues`, `#learning`, `#vault`, …).
 
+## Multi-project workspace
+
+```
+parent/                    ← open in Cursor
+├── AI-SKILLS/             ← clone (vault lives here)
+├── web/
+└── api/
+```
+
+Setup (either OS): run `./scripts/setup-macos-linux.sh` or `.\scripts\setup-windows.ps1` from clone — **auto** parent when `web/`/`api/` siblings exist.  
+Or explicit: `WORKSPACE_ROOT=<parent>` / `-WorkspaceRoot`.  
+Creates: `parent/.cursor/ai-skills-vault.json` · `parent/vault` → `AI-SKILLS/vault`.  
+Fallback: agents use `AI-SKILLS/vault/issues/` (rule § Resolve vault root).
+
 ## Flow
 
 ```

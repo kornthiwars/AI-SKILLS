@@ -32,24 +32,40 @@ cd AI-SKILLS
 
 ```powershell
 cd AI-SKILLS
-.\scripts\setup.ps1
+.\scripts\setup-windows.ps1
 ```
 
-หรือดับเบิลคลิก `scripts\setup.bat`
+หรือดับเบิลคลิก `scripts\setup-windows.bat`
 
-**macOS / Linux:**
+**ถ้าเปิด Cursor ที่โฟลเดอร์แม่** (มี `AI-SKILLS` + โปรเจกต์อื่นข้างๆ):
+
+- รัน setup จากใน clone ครั้งเดียว — **ทั้ง Windows และ macOS/Linux จะตรวจจับโฟลเดอร์แม่ให้อัตโนมัติ** (ไม่ต้องตั้งชื่อ `SK`)
+- Windows จากแม่: ดับเบิลคลิก `setup-windows.bat` ที่ root workspace (ถ้ามี)
+- macOS/Linux จากแม่: `./AI-SKILLS/scripts/setup-macos-linux-parent.sh`
+
+หรือบังคับ path แม่:
+
+```powershell
+.\scripts\setup-windows.ps1 -WorkspaceRoot C:\path\to\your-workspace
+```
+
+```bash
+WORKSPACE_ROOT=/path/to/your-workspace ./scripts/setup-macos-linux.sh
+```
+
+**macOS / Linux** (จากใน clone):
 
 ```bash
 cd AI-SKILLS
-chmod +x scripts/setup.sh
-./scripts/setup.sh
+chmod +x scripts/setup-macos-linux.sh
+./scripts/setup-macos-linux.sh
 ```
 
 รายละเอียด / troubleshooting: [scripts/README.md](scripts/README.md)
 
 | ปัญหา | แก้ |
 |--------|-----|
-| Windows `mklink` ล้มเหลว | เปิด PowerShell **Run as administrator** แล้วรัน `.\scripts\setup.ps1` อีกครั้ง |
+| Windows `mklink` ล้มเหลว | เปิด PowerShell **Run as administrator** แล้วรัน `.\scripts\setup-windows.ps1` อีกครั้ง |
 | `.cursor/skills` มีอยู่แล้วแต่ไม่ใช่ link | ลบโฟลเดอร์นั้น (ถ้าไม่มีงานสำคัญ) แล้วรัน setup ใหม่ |
 
 ### 3 — เปิดใน Cursor

@@ -10,8 +10,8 @@ Canonical: [`ai-skills/`](ai-skills/README.md) · [`ai-rules/`](ai-rules/README.
 
 | OS | Command |
 |----|---------|
-| Windows | `.\scripts\setup.ps1` |
-| macOS / Linux | `./scripts/setup.sh` |
+| Windows | `.\scripts\setup-windows.ps1` · optional `-WorkspaceRoot <path>` |
+| macOS / Linux | `./scripts/setup-macos-linux.sh` · optional `WORKSPACE_ROOT=/path` |
 
 Creates `.cursor/` + `.claude/` links to `ai-skills/` and `ai-rules/`, plus `vault/issues/` + `vault/learnings/`. See [scripts/README.md](scripts/README.md).
 
