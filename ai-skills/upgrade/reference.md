@@ -59,7 +59,7 @@
 - [ ] `description` สั้น — WHAT + WHEN NOT; ไม่ยัด workflow
 - [ ] Workflow บอก **เมื่อไหร่** อ่าน `reference.md` / `assets/` (ไม่ Read ทั้งก้อนตอนเริ่ม)
 - [ ] SKILL.md ต่ำกว่า 500 บรรทัด; รายละเอียดยาวอยู่ใน reference
-- [ ] Ship chain: pr-review โหมดเดียวที่พอ → git-push R1–R10 **gap only** หลัง `ready`
+- [ ] Ship chain: pr-review โหมดเดียวที่พอ (optional) → git-push safety only หลัง `ready`
 - [ ] ไม่แนะนำรวมหลาย skill เป็นไฟล์เดียวเพื่อ “ประหยัด”
 - [ ] `reference.md` มี § Common rationalizations + § Red flags (เนื้อหาตรง skill)
 

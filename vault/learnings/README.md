@@ -31,6 +31,10 @@ If labels still show filenames:
 
 `tags: [learning, vault]` — ตัวที่สอง = `skill:` (เช่น `vault`, `debug`, `git`)
 
+## Search (agent)
+
+Grep with `symptoms:` / `files:` frontmatter + tags — read **≤3** files max. Rule: [ai-rules/vault-learning.mdc](../../ai-rules/vault-learning.mdc) § Search learnings.
+
 Topic tags เดียวกับ issues: `vault`, `git`, `research`, `ui`, `api`, `infrastructure`, `debug`
 
 ## When agent writes

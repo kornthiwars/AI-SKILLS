@@ -1,16 +1,16 @@
 ---
 name: git-push
 description: >-
-  Safe git commit and push workflow — inspect status/diff, pre-push review
-  (secrets, debug noise, scope, correctness), confirm with user, push to remote.
+  Git commit and push — inspect diff, safety checks (secrets, staging scope),
+  user confirmation, push. No code review (use @pr-review separately if needed).
   Triggers on /git-push, @git-push, git push, push ขึ้น git, push github, อัปโค้ด,
-  ส่งขึ้น remote, ตรวจโค้ดก่อน push. Often after @pr-review ready on same diff.
-  Does not apply to force-push unless user
-  explicitly requests, amending pushed commits, git config changes, or non-git VCS.
+  ส่งขึ้น remote. Does not apply to force-push unless user explicitly requests,
+  amending pushed commits, git config changes, non-git VCS, or code-quality review
+  (pr-review).
 compatibility: Cursor and Claude Code; git CLI; gh for PR only when user asks
 disable-model-invocation: true
 metadata:
-  version: "1.0.2"
+  version: "2.0.0"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -19,23 +19,24 @@ metadata:
 
 # Git push
 
-**Safe push** for the current workspace repo: inspect → pre-push review → commit (if needed) → confirm → push.
+**Commit and push** for the current workspace repo: inspect → **safety checks** (not code review) → commit (if needed) → confirm → push.
+
+**Code review** → [`@pr-review`](../pr-review/SKILL.md) — optional, separate skill. **Do not** run R1–R10 or duplicate pr-review in this skill.
 
 Details: [reference.md](reference.md)
 
 ## Operating stance
 
-- **Safe by default** — inspect and review before any push
-- **Pre-push gate** — no push while review reports blockers unless user waives in chat
-- **Push confirmation gate (ยืนยันก่อน push จริง)** — ห้ามรัน `git push` จนกว่าผู้ใช้ตอบยืนยันในแชท **หลัง** ตาราง step 4 (ดู § Confirm)
+- **Git only** — status, diff, commit, push; no reviewing logic/tests/style here
+- **Safety, not review** — block secrets and wrong staging paths; do not judge correctness (R4–R10)
+- **Push confirmation gate** — no `git push` until user confirms **after** step 3 table
 - **No destructive git** — no force-push to main, no config changes, no hook skip unless user explicitly asks
-- **Token** — after `@pr-review` `ready` on same diff: step 2 runs R1–R10 **gaps only**; load [reference.md](reference.md) § Pre-push when step 2 starts
+- **Optional pr-review** — if user already ran `@pr-review`, paste verdict in summary only; **do not** re-scan the diff for code quality
 
 ## Language
 
-- **70% ไทย / 30% อังกฤษ** — สรุป, คำถามยืนยัน, ตาราง pre-push เป็นภาษาไทย; ใช้อังกฤษ ~30% สำหรับ git term (branch, remote, ahead, force push), blocker, R1–R10
-- **Mix ธรรมชาติ** — เช่น "branch **ahead** origin 2 commits — มี **blocker** 1 จุดก่อน push"
-- **Gloss ครั้งแรกต่อ reply** — `force push (บังคับ push ทับ remote)`, `ahead (นำหน้า origin)`, `blocker (ต้องแก้ก่อน push)`
+- **70% ไทย / 30% อังกฤษ** — สรุป, คำถามยืนยัน, ตารางเป็นภาษาไทย; git terms, blocker, safety check
+- **Gloss ครั้งแรกต่อ reply** — `blocker (ต้องแก้ก่อน push)`, `ahead (นำหน้า origin)`
 - **ไม่แปล** — คำสั่ง git, path, branch name
 
 ## Required inputs
@@ -49,17 +50,18 @@ If nothing to push and nothing to commit, report and **stop**.
 
 ## Hard rules
 
-- **Sole git skill in this repo** — only `@git-push` may run git CLI or `gh` for commit/push/PR sync; other skills must hand off here
-- **Pre-push review before push** — run checklist R1–R10 ([reference.md](reference.md) § Pre-push review) on diff before `git push`
+- **Sole git skill in this repo** — only `@git-push` may run git CLI or `gh` for commit/push/PR sync
+- **No code review** — do not run R1–R10, correctness, tests, or "production readiness" checks; suggest `@pr-review` if user wants that
+- **Safety checks before push** — [reference.md](reference.md) § Secret scan + § AI-SKILLS staging (and § Search learnings on git friction only)
 - **Never** `git config` changes
 - **Never** `push --force` to `main`/`master` unless user **explicitly** requests — warn about overwrite
 - **Never** `--no-verify` / skip hooks unless user explicitly requests
 - **Never** `commit --amend` unless [reference.md](reference.md) § Amend rules all pass
-- **Never** commit `.env`, credentials, `*.pem`, tokens — see [reference.md](reference.md) § Secret scan
-- **Never** push if review reports **blocker** unless user waives in writing in chat
-- **Never** run `git push` without **push confirmation** in the **same chat turn** after step 4 table — `/git-push`, `@git-push`, or "push" alone is **not** confirmation (see step 4)
-- **Stop after step 4** when confirmation is missing — do not run step 5 in that turn
-- **Do not** create commits unless user asked to commit (or changes are clearly part of "push my work")
+- **Never** commit `.env`, credentials, `*.pem`, tokens
+- **Never** push if **safety** reports **blocker** unless user waives in writing in chat
+- **Never** run `git push` without push confirmation after step 3 table
+- **Stop after step 3** when confirmation is missing — step 4 only after user confirms
+- **Do not** create commits unless user asked to commit (or "push my work" with uncommitted changes)
 - **AI-SKILLS staging** — stage only paths in [reference.md](reference.md) § AI-SKILLS repo; **never** `.cursor/*`, `.claude/*` junctions or `vault/issues|learnings/*.md` notes
 
 ## Quick reference
@@ -67,11 +69,11 @@ If nothing to push and nothing to commit, report and **stop**.
 | Step | Action |
 |------|--------|
 | 1 | `git status` + `git diff` (+ staged) |
-| 2 | Pre-push review (R1–R10) |
-| 3 | Commit (if requested) — message from actual diff |
-| 4 | **Confirm gate** — ตาราง + รอคำยืนยัน (ห้าม push ในเทิร์นเดียวกัน) |
-| 5 | `git push` — **เฉพาะหลัง** ผู้ใช้ยืนยัน |
-| 6 | Report URL / `git status -sb` |
+| 2 | Safety checks (secrets + staging scope) — **not** code review |
+| 3 | Commit (if requested) |
+| 4 | **Confirm gate** — table + wait for user |
+| 5 | `git push` — after user confirms |
+| 6 | Report `git status -sb` |
 
 ## Workflow
 
@@ -89,111 +91,93 @@ git rev-parse --abbrev-ref HEAD
 
 Note: ahead/behind origin, untracked files, staged vs unstaged.
 
-Classify paths with [reference.md](reference.md) § **AI-SKILLS repo** (commit vs skip vs never stage). ใน summary บอกสั้นๆ ว่าไฟล์ไหนควรอยู่ใน commit ประมาณไหน.
+Classify paths with [reference.md](reference.md) § **AI-SKILLS repo**. Short summary of what will be committed/pushed — **no** review table for code quality.
 
-### 2 — Pre-push review
+### 2 — Safety checks (not code review)
 
-On **staged + unstaged** diff (or full PR range if user says). Load [reference.md](reference.md) § Pre-push review **now** (not at step 1).
+Load [reference.md](reference.md) § Secret scan + § AI-SKILLS repo now.
 
-**If user already ran `@pr-review` → `ready` on this diff:** paste or cite the pr-review table; run R1–R10 only for axes **not** covered or findings still open — **do not** duplicate the full review.
+| Check | Blocker? |
+|-------|----------|
+| Secrets in diff (`.env`, tokens, keys) | yes |
+| Junctions / local vault notes staged | yes |
+| Wrong paths for this repo layout | yes |
+| Logic bugs, missing tests, style | **out of scope** — suggest `@pr-review` |
 
-**Otherwise:** full R1–R10 on the diff.
+**Git friction** (rebase, hooks, auth): [reference.md](reference.md) § Search vault learnings — Grep → ≤3 reads.
 
-- **Blockers** → fix or stop; do not push
-- **Notes** → list in push summary
+If user pasted `@pr-review` `ready` — note in summary only; **do not** re-audit code.
 
-Output header:
+Output (short):
 
 ```text
-[git-push] Review — <branch or scope>
-Files: N changed
+[git-push] Safety — <branch>
+Files: N changed | commits to push: N
 Verdict: pass | block
-
-| ID | severity | file:line | finding | suggestion |
+Blockers: … (secrets/staging only)
 ```
 
 ### 3 — Commit (optional)
 
 Only if user asked to commit or said "push my changes" with uncommitted work:
 
-1. Stage only paths from [reference.md](reference.md) § AI-SKILLS repo (not secrets, not junctions, not local `vault/issues|learnings` notes).
-2. Message: 1–2 sentences, **why** not just what ([reference.md](reference.md) § Commit message).
-3. PowerShell: use here-string for message (see reference).
-4. If hook fails → **new commit**, do not amend unless amend rules pass.
+1. Stage only allowed paths ([reference.md](reference.md) § AI-SKILLS repo).
+2. Message: 1–2 sentences, **why** ([reference.md](reference.md) § Commit message).
+3. If hook fails → **new commit**, do not amend unless amend rules pass.
 
-### 4 — Confirm (push gate — บังคับ)
+### 4 — Confirm (push gate)
 
-**ห้าม** รัน `git push` ในเทิร์นเดียวกับ step 1–3 จนกว่าผู้ใช้ตอบยืนยันในแชท **หลัง** ตารางนี้
-
-แสดงตาราง (ครบทุกแถวที่มีข้อมูล):
+**Do not** run `git push` in the same turn as steps 1–3 until user confirms **after** this table.
 
 | Field | Value |
 |-------|-------|
-| repo | path หรือชื่อโฟลเดอร์ |
+| repo | path |
 | branch | … |
 | remote | … |
-| commits to push | N (พร้อม `git log origin/<branch>..HEAD --oneline` ถ้า N > 0) |
-| scope | paths ที่จะ push / เพิ่ง commit (ตาม § AI-SKILLS repo) |
-| review | pass / block / notes |
-| force? | no (unless explicit) |
+| commits to push | N (+ `git log origin/<branch>..HEAD --oneline` if N > 0) |
+| scope | paths in commit/push |
+| safety | pass / block |
+| pr-review | optional note if user ran it |
+| force? | no |
 
-ถ้า N = 0 และไม่มีงาน commit ที่ผู้ใช้ขอ → รายงานแล้ว **หยุด** (ไม่ถามยืนยัน push)
+Ask once in Thai: ยืนยัน push ขึ้น `<remote>/<branch>` จำนวน N commit ตอนนี้ไหม?
 
-ถ้ามี commit จะ push → ถาม **หนึ่งครั้ง** เป็นภาษาไทย:
+Trigger alone (`/git-push`, "push เลย") is **not** confirmation. See [reference.md](reference.md) § Push confirmation gate.
 
-```text
-ยืนยัน push ขึ้น <remote>/<branch> จำนวน <N> commit ตอนนี้ไหม?
-(ตอบ: ยืนยัน / push / ใช่ — หรือ ยกเลิก)
-```
-
-**ไม่นับเป็นยืนยัน push:** `/git-push`, `@git-push`, "push ให้หน่อย", "ส่งขึ้น git" ในข้อความแรก — นี่คือแค่เริ่ม workflow
-
-**นับเป็นยืนยัน push (ข้อความถัดไปของผู้ใช้):** `ยืนยัน`, `push`, `ใช่`, `ok`, `confirm`, `go ahead` (หรือชัดเจนเทียบเท่า)
-
-**ยกเลิก:** `ยกเลิก`, `cancel`, `ไม่`, `stop` → หยุด ไม่ push
-
-ถ้าผู้ใช้ยืนยันแล้วแต่ diff/commit เปลี่ยนก่อน push → กลับ step 1–2 แล้วถามยืนยันใหม่
-
-รายละเอียด: [reference.md](reference.md) § Push confirmation gate
-
-### 5 — Push (หลังยืนยันเท่านั้น)
-
-รัน **เฉพาะ** เมื่อได้ push confirmation ในเทิร์นถัดไป (หรือข้อความเดียวกันที่ตอบยืนยันชัดเจน **หลัง** ตาราง step 4)
+### 5 — Push (after confirm)
 
 ```powershell
 git push -u origin HEAD
 ```
 
-Use `-u` when upstream not set. If behind remote → `git pull --rebase` only if user agrees ([reference.md](reference.md) § Behind remote).
+If behind remote → [reference.md](reference.md) § Behind remote.
 
 ### 6 — Report
 
 - `git status -sb` after push
-- If `gh` available and user wanted PR → remind `gh pr create` or run if they asked
+- `gh pr create` only if user asked
 
 ## When to use / NOT
 
-**Use:** push ขึ้น GitHub, sync remote, ส่ง commit, `@git-push`, ตรวจ diff ก่อน push
+**Use:** push to remote, commit + push, sync GitHub, `@git-push`
 
-**After `@pr-review`:** if same diff and verdict `ready`, step 2 may cite pr-review table and run R1–R10 only for gaps.
-
-**NOT:** force push without explicit ask · rebase -i · change git config · monorepo deploy · @upgrade (ai-skills repo)
+**NOT:** code review → `@pr-review` · force push without ask · `@upgrade` (ai-skills repo) · rebase -i
 
 ## Output flow
 
-1. Inspect → 2. Pre-push review → 3. Commit? → 4. Confirm gate (รอผู้ใช้) → 5. Push → 6. Report  
+1. Inspect → 2. Safety (secrets/staging) → 3. Commit? → 4. Confirm gate → 5. Push → 6. Report
 
-**สองเทิร์นเป็นปกติ:** เทิร์นแรกจบที่ step 4 · เทิร์นที่สอง (หลังผู้ใช้ยืนยัน) = step 5–6
-7. **Vault:** search `vault/learnings/` before git friction; learning if ≥3 prompt rounds on same problem; issues auto on Q&A.
+**Two turns normal:** turn 1 ends at step 4 · turn 2 after user confirms = steps 5–6
 
 ## Project learnings
 
-Git friction (rebase, hook fail, auth) → search `vault/learnings/` first; write learning if ≥3 prompt rounds — not in `ai-skills/git-push/` canonical.
+Git friction → [ai-rules/vault-learning.mdc](../../ai-rules/vault-learning.mdc) § Search learnings before guessing.
 
 ## Resources
 
 | File | Use |
 |------|-----|
-| [reference.md](reference.md) | R1–R10, amend, secrets · § Rationalizations / Red flags |
+| [reference.md](reference.md) | Secrets, staging, amend, confirm gate |
+| [pr-review/SKILL.md](../pr-review/SKILL.md) | Optional code review before push |
 
 Canonical: `ai-skills/git-push/`

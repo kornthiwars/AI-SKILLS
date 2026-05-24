@@ -14,6 +14,7 @@
 | P8 Error handling | **req+** | req | req |
 | P9 Performance | note | req | **req+** |
 | P10 Maintainability | note | req | req |
+| P10b Dead / unused code | note | **req** | note |
 | P11 Docs / changelog | skip | req | req |
 | P12 Prior gate evidence | skip | req | note |
 
@@ -104,6 +105,24 @@ Always output **Performance (TH):** one sentence.
 - duplicate logic, wrong abstraction layer
 - **major:** copy-paste security-sensitive code
 
+## P10b Dead / unused code
+
+Scope: **diff only** — do not repo-wide purge unless user asks. Prefer grep/IDE hints over reading every file.
+
+| Find | Action |
+|------|--------|
+| New export/function with **zero** references in repo (app code) | **major** (production+) · **note** (bugs) |
+| Imports added in diff but unused | **major** (production+) |
+| Large commented-out blocks left in diff | **major** |
+| Deleted caller but callee / route / component still present | **major** |
+| `@deprecated` re-export kept without migration note | **note** |
+| Intentional stub for next PR (user said so) | skip with note |
+| Generated / vendor / lockfile churn | skip |
+
+**Token:** check symbols **touched in diff** and their immediate callers — not full dead-code audit of monorepo.
+
+**Not here:** runtime memory leaks, deleting files user did not change — suggest separate cleanup task.
+
 ## P11 Docs / changelog
 
 - public API / env vars documented?
@@ -149,7 +168,7 @@ If the environment has no AskQuestion, show the three options as a numbered list
 | "ready เลย ไม่มี blocker ชัด" | `ready` = 0 blockers **สำหรับโหมดนี้** — ต้องมีตาราง |
 | "production ครอบ bugs แล้ว" | เลือกโหมดตรงงาน — bugs เล็กไม่ต้อง production ทุกครั้ง |
 | "ข้าม AskQuestion user บอก push" | Step 0 บังคับถ้าไม่ระบุโหมด |
-| "git-push จะรีวิวอีกที ข้าม pr-review" | งาน app ควร pr-review ก่อน — git-push ทำ R1–R10 gap only |
+| "git-push จะรีวิวโค้ดให้" | git-push v2 ไม่รีวิวโค้ด — ใช้ pr-review ก่อนถ้าต้องการ |
 | "waive ทุก major ในหัว" | major waive ต้องเขียนใน chat ต่อแถว |
 
 ## Red flags

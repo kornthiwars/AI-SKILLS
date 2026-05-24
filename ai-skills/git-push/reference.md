@@ -1,4 +1,6 @@
-# reference — git-push safety
+# reference — git-push (v2.0.0)
+
+**v2.0.0:** No code review in this skill — use [`@pr-review`](../pr-review/SKILL.md) for bugs/production/security. This file covers **git safety** only.
 
 ## Secret scan (block commit/push)
 
@@ -22,105 +24,48 @@ Use when workspace is this monorepo (`ai-skills/`, `ai-rules/`, `vault/`). In **
 |------|--------|----------------|
 | Skills | `ai-skills/**` | SKILL.md, reference.md, assets — skill behavior only |
 | Rules | `ai-rules/**` | `.mdc`, `reference.md` — agent rules |
+| Scripts | `scripts/**` | setup.ps1, setup.sh |
 | Vault docs | `vault/README.md`, `vault/issues/README.md`, `vault/learnings/README.md` | user-facing vault docs |
 | Vault templates | `templates/**` | `template.issue.md`, `template.learning.md` (repo root) |
 | Obsidian shared | `vault/.obsidian/graph.json`, `app.json`, `core-plugins.json`, `community-plugins.json`, `appearance.json`, `plugins/**` | graph groups, plugins shipped with vault |
-| Obsidian snippets | `vault/.obsidian/snippets/*.css` | optional CSS (if any) |
 | Repo root | `AGENTS.md`, `CLAUDE.md`, `README.md`, `.gitignore` | entry docs, gitignore exceptions |
 
-### Do not stage (blocker in R3 if staged)
+### Do not stage (safety blocker)
 
 | Path | Why |
 |------|-----|
-| `.cursor/skills`, `.cursor/rules` | junction → `ai-skills` / `ai-rules` — edit canonical only |
+| `.cursor/skills`, `.cursor/rules` | junction → edit `ai-skills` / `ai-rules` only |
 | `.claude/skills`, `.claude/rules` | same |
 | `vault/issues/20*.md`, `vault/learnings/20*.md` | personal notes — **gitignored** |
-| `.env`, credentials, tokens | secrets (R1) |
+| `.env`, credentials, tokens | secrets |
 
 ### Usually skip unless user asks
 
 | Path | Why |
 |------|-----|
-| `vault/.obsidian/workspace.json` | local UI layout (panes, zoom) — machine-specific |
+| `vault/.obsidian/workspace.json` | local UI layout |
 | `vault/.obsidian/workspace-mobile.json` | same |
 
-### Commit scope by change type
+In **confirm table**, list **scope** paths user will push.
 
-| User changed | Stage roughly |
-|--------------|----------------|
-| Skill / rule only | `ai-skills/...` and/or `ai-rules/...` |
-| Vault policy / tags / graph | `ai-rules/vault-learning*`, `vault/README.md`, `vault/.obsidian/graph.json`, `templates/` |
-| Plugin bump | `vault/.obsidian/plugins/<id>/**` + `community-plugins.json` |
-| Docs only | `**/*.md` under paths above — no junctions |
+## Search vault learnings (git friction)
 
-In **step 4** confirm table, add row **scope** listing staged paths (or “already committed”) so user sees what will push.
+Before guessing on rebase/hooks/auth — [ai-rules/vault-learning.mdc](../../ai-rules/vault-learning.mdc) § Search learnings:
 
-## Pre-push review (R1–R10)
+1. Grep `vault/learnings/` — `rebase`, `hook`, `auth`, `push`, `skill: git`
+2. `head_limit` ~15
+3. Read **≤3** files
 
-Run on **staged + unstaged** diff (or range user gives). Judge what changed; open surrounding context for changed symbols.
+## Code review — not in git-push
 
-| Verdict | Meaning |
-|---------|---------|
-| **pass** | 0 blockers; notes optional |
-| **block** | ≥1 blocker — fix before push |
+| Want | Use |
+|------|-----|
+| Bugs, edge cases | `@pr-review` mode `bugs` |
+| Production readiness | `@pr-review` mode `production` |
+| Security / scale | `@pr-review` mode `scale-security` |
+| Then push | `@git-push` — safety only; optional note if pr-review was `ready` |
 
-| ID | Check | Blocker if |
-|----|-------|------------|
-| R1 | Secrets / credentials in diff | keys, tokens, `.env` production values |
-| R2 | Debug noise | `console.log`, `print(`, `debugger`, commented-out blocks left in |
-| R3 | Scope creep | unrelated files, drive-by refactors, or **junction / local vault notes** staged (see § AI-SKILLS repo) |
-| R4 | Correctness | obvious logic bug, wrong condition, off-by-one, null unsafe |
-| R5 | Error handling | swallowed errors, empty catch, missing return on failure path |
-| R6 | Tests | behavior change without test update when repo already has tests nearby |
-| R7 | Types / compile | obvious type errors in typed languages from diff |
-| R8 | Security | SQL string concat, `eval`, path traversal, missing auth on new route |
-| R9 | Data loss | destructive migration without backup note |
-| R10 | Docs drift | public API changed but README/OpenAPI not updated (note or blocker per severity) |
-
-Severity:
-
-- **blocker** — must fix before push
-- **note** — recommend fix; push allowed if user accepts in chat
-
-### R1 Secrets (detail)
-
-| Find | Action |
-|------|--------|
-| `.env` with real values | blocker — use `.env.example` |
-| Private keys | blocker |
-| Hardcoded production URLs with tokens | blocker |
-
-### R2 Debug noise (detail)
-
-| Find | Action |
-|------|--------|
-| `console.log` / `print(` in production paths | note or blocker if many |
-| `debugger` | blocker |
-| `TODO FIXME` without ticket | note |
-
-### R4 Correctness hints
-
-- Changed `if` without else branch when contract requires handling
-- Async without await on critical path
-- Resource not closed in language that needs it
-
-### R6 Tests
-
-If diff touches `src/foo.ts` and `foo.test.ts` exists but unchanged → **note** or **blocker** if risky behavior change.
-
-### R8 Security (API)
-
-New route without auth middleware when siblings use auth → **blocker**.
-
-### R9 Migrations
-
-DROP column/table without migration plan in commit message → **blocker**.
-
-### Waivers
-
-User may accept **notes** in chat. **Blockers** need fix or explicit "waive R3" with reason logged in review table.
-
-If diff unchanged after a completed review in the same session, step 2 may cite prior verdict and skip re-scan.
+**Removed in v2:** R1–R10 full checklist in git-push (was duplicate of pr-review + slow on docs-only repos).
 
 ## Commit message
 
@@ -143,9 +88,9 @@ Amend **only** if:
 
 1. User explicitly requested amend, **or** hook auto-modified files after successful commit
 2. HEAD commit was created in **this** session by you
-3. Commit **not** pushed yet (`git status` not ahead-only on remote for that commit)
+3. Commit **not** pushed yet
 
-If commit **failed** or hook **rejected** → fix and **new commit**, never amend.
+If commit **failed** → **new commit**, never amend.
 
 If already pushed → never amend unless user explicitly wants force push (warn).
 
@@ -153,14 +98,13 @@ If already pushed → never amend unless user explicitly wants force push (warn)
 
 | Situation | Action |
 |-----------|--------|
-| behind origin | Stop; show `git log origin/branch..HEAD` and `git log HEAD..origin/branch` |
-| user wants sync | `git pull --rebase origin <branch>` then re-run pre-push review if conflict resolution touched code |
-| diverged | Ask: merge vs rebase — do not guess |
+| behind origin | Stop; show `git log` both directions |
+| user wants sync | `git pull --rebase origin <branch>` then re-run **safety** if diff changed |
+| diverged | Ask: merge vs rebase |
 
 ## Force push
 
 - **Refuse** `push --force` to `main`/`master` without explicit user request + warning
-- Feature branch: only if user names branch and accepts data loss risk
 
 ## Non-interactive git
 
@@ -170,37 +114,24 @@ Never use `-i` flags (`rebase -i`, `add -i`).
 
 | Rationalization | Reality |
 |-----------------|---------|
-| "/git-push = ยืนยัน push แล้ว" | Trigger เท่านั้น — ต้องยืนยัน **หลัง** ตาราง step 4 |
-| "pr-review แล้ว ไม่ต้อง R1–R10" | หลัง `ready` ทำ **gap only** — ไม่ข้าม secrets/debug |
-| "push ในเทิร์นเดียวกับ review" | ห้าม same-turn push |
-| "แค่ note ไม่มี blocker ก็ push" | blocker = หยุด unless user waives **ในแชท** |
+| "/git-push = ยืนยัน push แล้ว" | Trigger only — confirm **after** step 4 table |
+| "ต้องรีวิวโค้ดก่อน push" | `@pr-review` — not git-push |
+| "git-push ต้องรัน R1–R10" | Removed v2 — safety only |
+| "pr-review แล้ว ต้อง gap R1–R10 อีก" | No — optional cite verdict; no re-scan |
 | "commit .env.local ชั่วคราว" | Secret scan = block |
 
 ## Red flags
 
-- `git push` ก่อนข้อความยืนยันของ user หลังตาราง
-- Review verdict `block` แต่เสนอ push ต่อ
-- `--no-verify` / `--force` โดย user ไม่ขอชัด
-- Duplicate full R1–R10 หลัง pr-review table ครบแล้ว
-- `git config` เปลี่ยนใน workflow
+- `git push` before user confirm after table
+- Running correctness/test review inside git-push
+- `--no-verify` / `--force` without explicit user ask
+- Staging junctions or local vault notes
 
 ## Push confirmation gate
 
-**บังคับก่อน `git push`:** agent ต้องแสดงตาราง step 4 แล้ว **หยุด** — รอข้อความถัดไปจากผู้ใช้
-
 | Rule | Detail |
 |------|--------|
-| No same-turn push | ห้ามรัน `git push` ในเทิร์นเดียวกับ inspect / review / commit / ตารางยืนยัน |
-| Trigger ≠ confirm | `/git-push`, `@git-push`, "push github" = เริ่ม workflow เท่านั้น |
-| Valid confirm | ข้อความชัดเจนหลังตาราง: ยืนยัน, push, ใช่, ok, confirm |
-| Invalid confirm | เงียบ, คำถามอื่น, แก้โค้ดต่อ — ยังไม่ push |
-| Diff changed | หลังยืนยันแต่ก่อน push มี commit/stage ใหม่ → ตาราง + ถามใหม่ |
-| Cancel | ยกเลิก / cancel / ไม่ → จบ workflow |
-
-ตัวอย่างเทิร์นแรก (จบที่ gate):
-
-```text
-[git-push] พร้อม push — ยืนยัน push ขึ้น origin/main จำนวน 1 commit ตอนนี้ไหม?
-```
-
-ตัวอย่างเทิร์นที่สอง (ผู้ใช้: "ยืนยัน") → รัน `git push` แล้ว report
+| No same-turn push | No `git push` same turn as inspect/safety/commit/table |
+| Trigger ≠ confirm | `/git-push`, "push เลย" alone = start workflow |
+| Valid confirm | ยืนยัน, push, ใช่, ok, confirm (after table) |
+| Diff changed | Re-run safety + new table + ask again |

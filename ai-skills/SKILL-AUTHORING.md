@@ -58,19 +58,19 @@ ai-skills/                         # repo root (canonical)
 | [git-push](git-push/SKILL.md) | — | (reference only) |
 | [upgrade](upgrade/SKILL.md) | — | (reference only) |
 
-## Git operations — `@pr-review` then `@git-push`
+## Git operations — `@git-push` · `@pr-review` optional
 
 **App repos (ship finished work):**
 
 ```
-implement → @pr-review (select mode) → ready → @git-push
+implement → @pr-review (optional) → ready → @git-push
 ```
 
 | กฎ | รายละเอียด |
 |-----|-------------|
-| **เจ้าของ git CLI** | เฉพาะ [`git-push`](git-push/SKILL.md) |
-| **self-review ก่อน push** | [`pr-review`](pr-review/SKILL.md) — ไม่รัน git; AskQuestion โหมดถ้า user ไม่ระบุ |
-| **skill อื่น** | **ห้าม** รัน git CLI → hand off **`@pr-review`** แล้ว **`@git-push`** |
+| **เจ้าของ git CLI** | เฉพาะ [`git-push`](git-push/SKILL.md) — safety + push (no code review) |
+| **code review (optional)** | [`pr-review`](pr-review/SKILL.md) — bugs / production / scale-security; ไม่รัน git |
+| **skill อื่น** | **ห้าม** รัน git CLI → hand off **`@git-push`**; แนะนำ **`@pr-review`** ก่อน push ถ้าต้องการรีวิวโค้ด |
 | **ai-skills repo นี้** | แก้ canonical ด้วย `@upgrade` — ship ด้วย `@git-push` |
 | **Hard rules template** | `- **No git commands** — … ship → @pr-review then @git-push` |
 
@@ -88,7 +88,7 @@ Agent Skills โหลดเป็น 3 ชั้น ([agentskills.io](https://a
 | **อ่าน assets เมื่อถึง gate** | `assets/template.*` / `assets/checklist.*` — เปิดเมื่อ post Gate หรือ deliver |
 | **description สั้น แม่น** | WHAT + WHEN NOT — อย่ายัด workflow |
 | **pr-review โหมดเดียว** | `bugs` / `production` / `scale-security` — ไม่รันทั้ง 3 ถ้าไม่จำเป็น |
-| **หลัง pr-review `ready`** | `@git-push` R1–R10 **เฉพาะ gap** |
+| **หลัง pr-review `ready`** | `@git-push` — safety only; ไม่รีวิวโค้ดซ้ำ (git-push v2) |
 
 ### สำหรับผู้เขียน skill
 

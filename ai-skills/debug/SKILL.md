@@ -11,7 +11,7 @@ description: >-
 compatibility: Cursor and Claude Code; project test runner and HTTP client; optional browser MCP for repro
 disable-model-invocation: true
 metadata:
-  version: "1.0.2"
+  version: "1.0.3"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -93,7 +93,7 @@ Use [assets/template.diagnosis-report.md](assets/template.diagnosis-report.md).
 | 6 Gate D | diagnosis template | Approved / Revise |
 | 7 Fix | user confirm | Patch or handoff packet |
 | 8 Validate | re-pro | Same steps → expected |
-| 9 Close | [post-fix-learning](assets/template.post-fix-learning.md) | `vault/learnings/*-learning.md` if ≥3 prompt rounds on same problem |
+| 9 Close | [post-fix-learning](assets/template.post-fix-learning.md) | `vault/learnings/YYYY-MM-DD-HHmm.md` if ≥3 prompt rounds on same problem |
 
 ## When to use / NOT
 
@@ -104,6 +104,17 @@ Use [assets/template.diagnosis-report.md](assets/template.diagnosis-report.md).
 ## Workflow
 
 Run in order. Details: [reference.md](reference.md).
+
+### 0 — Search learnings (if vault exists)
+
+Per [ai-rules/vault-learning.mdc](../../ai-rules/vault-learning.mdc) § Search learnings — **before D1**:
+
+1. Grep `vault/learnings/` for symptom, error text, `skill:`, `symptoms:`, `files:` (English)
+2. `head_limit` ~15 — do **not** read the whole folder
+3. Read **≤3** best matches only
+4. If none relevant, continue; optional grep today's `vault/issues/YYYY-MM-DD.md`
+
+Load [reference.md](reference.md) § Search learnings only if grep hits need interpretation.
 
 ### 1 — Repro (D1)
 
@@ -165,7 +176,7 @@ Next: …
 
 ## Output flow
 
-1. Confirm required inputs · if `vault/learnings/` exists: search related learnings before D1  
+1. Confirm required inputs · **step 0** search learnings (Grep → ≤3 reads) if `vault/learnings/` exists  
 2. D1 repro (pass / flaky / none)  
 3. Evidence + fail path trace  
 4. Layer table + breadcrumb ledger → hypotheses falsified  

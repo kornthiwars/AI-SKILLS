@@ -60,9 +60,22 @@ Use in **frontmatter** `tags: [...]` and/or one line under each issues `##` head
 
 Do **not** add `Related:` wikilink footers. Do **not** link README or templates.
 
-## Read before debug / fix
+## Search learnings (token-efficient)
 
-Search **`vault/learnings/`** (not `issues/`) for related symptoms, tags, skill, files.
+Before debug, git friction, or repeating a hard fix — search **`vault/learnings/`** only (not `issues/` for deep lessons).
+
+**Do not** read every file in `vault/learnings/` — disk scan is cheap; **context tokens** are not.
+
+| Step | Action |
+|------|--------|
+| 1 | **Grep** `vault/learnings/` with English keywords: symptom, error text, `skill:`, topic tag, path from `symptoms:` / `files:` frontmatter |
+| 2 | Cap matches — use `head_limit` ~15 lines; prefer newest filenames (`YYYY-MM-DD-HHmm`) |
+| 3 | **Read** at most **3** learning files that best match; skip the rest |
+| 4 | Still weak → grep today's `vault/issues/YYYY-MM-DD.md` for same topic; then proceed |
+
+**No hub file** — do not maintain a manual index; optional frontmatter on each learning (`symptoms`, `files`) makes step 1 precise.
+
+If `vault/learnings/` is empty or missing, skip search.
 
 ## Write — issues (auto · one file per day)
 
@@ -86,7 +99,8 @@ Write when **all** apply: problem-solving · ≥3 user prompt rounds same issue 
 1. `vault/learnings/YYYY-MM-DD-HHmm.md` (local time, unique per lesson)
 2. [template.learning.md](../templates/template.learning.md) — **title** in frontmatter + `# title` as H1 (same text)
 3. Frontmatter: `tags: [learning, <skill>]`, `skill:` (same as second tag), `time: "HHmm"`, `title:` (English)
-4. Never secrets · no wikilink footers
+4. Optional (for search): `symptoms: [...]` · `files: [...]` — short English tokens, no prose
+5. Never secrets · no wikilink footers
 
 **Graph display:** core graph uses filename; plugin *Property Over File Name* shows `title:` — see `vault/README.md`.
 

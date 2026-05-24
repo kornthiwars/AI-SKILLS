@@ -1,6 +1,18 @@
-# Debug — reference (v1.0.2)
+# Debug — reference (v1.0.3)
 
 Layer detail, fail path, breadcrumb ledger, pitfalls.
+
+## Search learnings (step 0)
+
+Before D1 — [ai-rules/vault-learning.mdc](../../ai-rules/vault-learning.mdc) § Search learnings.
+
+| Do | Don't |
+|----|-------|
+| Grep `vault/learnings/` with symptom, `skill:`, `symptoms:`, `files:` | Read every file in learnings/ |
+| Read ≤3 best matches | Load learnings into context "just in case" |
+| `head_limit` on grep output | Paste full archive of old lessons |
+
+If a prior lesson matches, cite filename in diagnosis — do not duplicate long bodies in chat.
 
 ## Layer detail
 

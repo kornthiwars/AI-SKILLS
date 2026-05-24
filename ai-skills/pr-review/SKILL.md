@@ -4,14 +4,15 @@ description: >-
   PR Review — author self-review before commit, PR, or deploy. Modes: bugs (edge
   cases), production (readiness), scale-security (scalability, security, performance).
   User picks mode via select when not specified. Triggers on /pr-review, @pr-review,
-  pr review, รีวิวก่อน push, รีวิวก่อน commit, production readiness, scalability review.
+  pr review, รีวิวก่อน push, รีวิวก่อน commit, production readiness, scalability review,
+  dead code, unused code, โค้ดไม่ใช้, ลบโค้ดค้าง.
   Does not apply to pixel/mockup (ui-builder), API implementation (api-builder),
   full feature orchestration (feature-builder), debugging fixes (debug), ai-skills repo
   maintenance (@upgrade), or any git commit/push (git-push only).
 compatibility: Cursor and Claude Code; read-only review; AskQuestion for mode when not specified
 disable-model-invocation: true
 metadata:
-  version: "1.0.2"
+  version: "1.0.4"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -114,6 +115,8 @@ Inspect changed files in the workspace (open files around hunks). User may paste
 
 Run only checks marked **required** for the active mode in [reference.md](reference.md) § Modes.
 
+Include **P10b Dead / unused code** when in diff scope — [reference.md](reference.md) § P10b (diff-only, no full-repo purge).
+
 Record every **blocker** and **major** in the output table. **nit** / **note** optional.
 
 ### 3 — Verdict
@@ -129,7 +132,7 @@ Record every **blocker** and **major** in the output table. **nit** / **note** o
 
 | Verdict | Next |
 |---------|------|
-| `ready` + before push | `@git-push` — cite this review table; git-push runs R1–R10 **gap only** on same diff |
+| `ready` + before push | `@git-push` — optional: user may paste this verdict; git-push does **not** re-run code review (v2) |
 | `revise` | list fixes; offer to apply if user wants; then re-run `@pr-review` same mode |
 | `ready` + `scale-security` before deploy | remind deploy checklist / monitoring; still no git from this skill |
 
@@ -139,7 +142,7 @@ Record every **blocker** and **major** in the output table. **nit** / **note** o
 2. **Scope + diff** — confirm batch goal and file range  
 3. **Checklist** — active mode only ([reference.md](reference.md) § Modes)  
 4. **Verdict** — `ready` | `revise` + findings table + Performance line (TH)  
-5. **Handoff** — `@git-push` (gap R1–R10) | fix + re-review | deploy note for `scale-security`
+5. **Handoff** — `@git-push` (safety only) | fix + re-review | deploy note for `scale-security`
 
 **Deliverable (required before ending turn):**
 
@@ -175,7 +178,7 @@ Do not merge checklists without running both modes.
 
 | File | Use |
 |------|-----|
-| [reference.md](reference.md) | P1–P12, modes · § Rationalizations / Red flags |
+| [reference.md](reference.md) | P1–P12 + P10b dead code · § Rationalizations / Red flags |
 | [assets/template.review-comment.md](assets/template.review-comment.md) | Paste-ready summary |
 
 Canonical: `ai-skills/pr-review/`

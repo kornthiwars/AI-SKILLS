@@ -54,6 +54,22 @@ ensure_vault_folders() {
   done
 }
 
+test_mirror_links() {
+  local checks=(
+    ".cursor/skills/upgrade/SKILL.md:Cursor skills"
+    ".cursor/rules/vault-learning.mdc:Cursor rules"
+    ".claude/skills/upgrade/SKILL.md:Claude skills"
+    ".claude/rules/vault-learning.mdc:Claude rules"
+  )
+  local entry name path
+  for entry in "${checks[@]}"; do
+    path="${entry%%:*}"
+    name="${entry#*:}"
+    [[ -f "$REPO_ROOT/$path" ]] || fail "Verify failed ($name): missing $REPO_ROOT/$path"
+  done
+  ok "all mirror links resolve to canonical files"
+}
+
 printf '\nAI-SKILLS setup (macOS / Linux)\n'
 printf 'Repo: %s\n' "$REPO_ROOT"
 
@@ -68,6 +84,9 @@ link_into_parent .claude rules  ai-rules
 
 step "Ensuring vault folders"
 ensure_vault_folders
+
+step "Verifying links"
+test_mirror_links
 
 printf '\nDone.\n'
 printf 'Next: open this folder in Cursor, reload the window, then use @ui-builder / @git-push etc.\n'

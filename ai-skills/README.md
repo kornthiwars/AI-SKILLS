@@ -13,9 +13,9 @@ Universal index: [AGENTS.md](../AGENTS.md)
 | UI Builder | 1.0.1 | [ui-builder/](ui-builder/SKILL.md) |
 | API Builder | 1.0.2 | [api-builder/](api-builder/SKILL.md) |
 | Feature Builder | 1.0.1 | [feature-builder/](feature-builder/SKILL.md) |
-| Debug | 1.0.2 | [debug/](debug/SKILL.md) |
-| PR Review | 1.0.2 | [pr-review/](pr-review/SKILL.md) |
-| Git Push | 1.0.2 | [git-push/](git-push/SKILL.md) |
+| Debug | 1.0.3 | [debug/](debug/SKILL.md) |
+| PR Review | 1.0.4 | [pr-review/](pr-review/SKILL.md) — incl. P10b dead/unused code |
+| Git Push | 2.0.0 | [git-push/](git-push/SKILL.md) — safety + push; no code review |
 | Upgrade | 1.1.0 | [upgrade/](upgrade/SKILL.md) |
 
 คู่มือสร้าง/แก้ skill: [SKILL-AUTHORING.md](SKILL-AUTHORING.md)
@@ -35,7 +35,7 @@ Universal index: [AGENTS.md](../AGENTS.md)
 | แก้ skill ใน repo นี้ | `@upgrade` |
 
 **กฎสำคัญ:** หนึ่งเทิร์นต่อหนึ่ง `@skill` — งานข้าม domain ให้ส่งต่อ skill ถัดไป  
-**Git:** skill อื่นห้ามรัน git → จบงานแล้ว `@pr-review` → `@git-push`
+**Git:** skill อื่นห้ามรัน git → `@git-push` for push · `@pr-review` **optional** for code review (แนะนำ app repo ก่อน push ถ้าต้องการรีวิว)
 
 ---
 
@@ -143,7 +143,7 @@ Universal index: [AGENTS.md](../AGENTS.md)
 
 **ใช้เมื่อ**
 - อยาก **push ขึ้น GitHub / remote**
-- ต้องการ inspect diff + pre-push review (R1–R10) + ยืนยันก่อน push
+- ต้องการ inspect diff + safety (secrets/staging) + ยืนยันก่อน push — **ไม่**รีวิวโค้ด (ใช้ `@pr-review` แยกถ้าต้องการ)
 
 **ต้องมีก่อนเริ่ม**
 - Workspace เป็น git repo (มี `.git`)
@@ -154,8 +154,8 @@ Universal index: [AGENTS.md](../AGENTS.md)
 - force push / amend commit ที่ push แล้ว (ยกเว้น user ขอชัด)
 - เปลี่ยน git config
 
-**แนะนำลำดับ (app repo):** `@pr-review` → `ready` → `@git-push`  
-หลัง pr-review `ready` บน diff เดียวกัน — git-push ทำ R1–R10 **เฉพาะ gap** ไม่รีวิวซ้ำทั้งก้อน
+**รีวิวโค้ด (optional):** `@pr-review` → `ready` → `@git-push`  
+`@git-push` v2 — safety + push เท่านั้น ไม่รัน R1–R10 ซ้ำ
 
 ---
 

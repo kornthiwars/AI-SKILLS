@@ -33,7 +33,7 @@ Entry: [CLAUDE.md](CLAUDE.md) → `@AGENTS.md`
 | [git-push](ai-skills/git-push/SKILL.md) | Commit + push (sole git skill) |
 | [upgrade](ai-skills/upgrade/SKILL.md) | Maintain skills in this repo |
 
-**Git rule:** `@pr-review` then `@git-push` — [ai-skills/README.md](ai-skills/README.md)
+**Git rule:** `@git-push` for commit/push (safety only) · `@pr-review` optional for code review — [ai-skills/README.md](ai-skills/README.md)
 
 ---
 

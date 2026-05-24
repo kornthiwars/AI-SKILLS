@@ -72,20 +72,34 @@ Remove or rename it manually, then re-run scripts/setup.ps1
 "@
     }
 
-    $linkDir = Split-Path -Leaf $linkPath
-    $targetName = Split-Path -Leaf $targetPath
-    $parentDir = Split-Path -Parent $linkPath
-    Push-Location $parentDir
-    try {
-        $null = cmd /c mklink /J $linkDir $targetName 2>&1
-        if ($LASTEXITCODE -ne 0) {
-            throw "mklink failed for $LinkRelative (exit $LASTEXITCODE). Try running PowerShell as Administrator."
-        }
+    # mklink target must be absolute or repo-root-relative from cwd — NOT parent-relative
+    # (running inside .cursor with target "ai-skills" wrongly creates .cursor\ai-skills)
+    $targetAbs = (Resolve-Path -LiteralPath $targetPath).Path
+    $linkAbs = $linkPath
+    if (-not (Test-Path -LiteralPath (Split-Path -Parent $linkAbs))) {
+        New-Item -ItemType Directory -Path (Split-Path -Parent $linkAbs) -Force | Out-Null
     }
-    finally {
-        Pop-Location
+    $mklinkOut = cmd /c mklink /J "$linkAbs" "$targetAbs" 2>&1
+    if ($LASTEXITCODE -ne 0) {
+        throw "mklink failed for $LinkRelative (exit $LASTEXITCODE): $mklinkOut`nTry PowerShell as Administrator."
     }
     Write-Host "  OK  $LinkRelative -> $TargetRelative"
+}
+
+function Test-MirrorLinks {
+    $checks = @(
+        @{ Link = '.cursor\skills\upgrade\SKILL.md'; Name = 'Cursor skills' },
+        @{ Link = '.cursor\rules\vault-learning.mdc'; Name = 'Cursor rules' },
+        @{ Link = '.claude\skills\upgrade\SKILL.md'; Name = 'Claude skills' },
+        @{ Link = '.claude\rules\vault-learning.mdc'; Name = 'Claude rules' }
+    )
+    foreach ($c in $checks) {
+        $p = Join-Path $RepoRoot $c.Link
+        if (-not (Test-Path -LiteralPath $p)) {
+            throw "Verify failed ($($c.Name)): missing $p"
+        }
+    }
+    Write-Host "  OK  all mirror links resolve to canonical files"
 }
 
 function Ensure-VaultFolders {
@@ -117,6 +131,9 @@ New-DirectoryJunction -LinkRelative '.claude\rules'  -TargetRelative 'ai-rules'
 
 Write-Step "Ensuring vault folders"
 Ensure-VaultFolders
+
+Write-Step "Verifying links"
+Test-MirrorLinks
 
 Write-Host ""
 Write-Host "Done." -ForegroundColor Green

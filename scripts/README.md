@@ -20,7 +20,11 @@ Post-clone setup for **AI-SKILLS**.
 
 ## Re-run
 
-Safe to run again — skips links that already point to the right target.
+Safe to run again — replaces links that point to the wrong folder (e.g. Windows `.cursor\ai-skills` instead of repo `ai-skills`).
+
+## Verify
+
+Setup ends with a check that `.cursor/skills/upgrade/SKILL.md` (and rules) exist. If verify fails, re-run the script or remove broken `.cursor/skills` / `.cursor/rules` folders and run again.
 
 ## Do not commit
 
