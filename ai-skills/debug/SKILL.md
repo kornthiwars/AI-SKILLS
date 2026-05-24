@@ -92,7 +92,7 @@ Use [assets/template.diagnosis-report.md](assets/template.diagnosis-report.md).
 | 6 Gate D | diagnosis template | Approved / Revise |
 | 7 Fix | user confirm | Patch or handoff packet |
 | 8 Validate | re-pro | Same steps → expected |
-| 9 Close | [post-fix-rca-snippet](assets/template.post-fix-learning.md) | `.cursor/learnings.md` if ≥2 rounds or big bug |
+| 9 Close | [post-fix-learning](assets/template.post-fix-learning.md) | `vault/learnings/*-learning.md` if ≥3 prompt rounds on same problem |
 
 ## When to use / NOT
 
@@ -164,14 +164,14 @@ Next: …
 
 ## Output flow
 
-1. Confirm required inputs · app repo: auto-scan `.cursor/learnings.md` (project rule; index/#tags)  
+1. Confirm required inputs · if `vault/learnings/` exists: search related learnings before D1  
 2. D1 repro (pass / flaky / none)  
 3. Evidence + fail path trace  
 4. Layer table + breadcrumb ledger → hypotheses falsified  
 5. **Gate D** (Approved only if D1 pass)  
 6. User confirms fix → minimal patch **or** handoff  
 7. Re-pro validate  
-8. Offer [post-fix-rca-snippet](assets/template.post-fix-learning.md) → learnings append (≥2 rounds; user OK)  
+8. Write [post-fix-learning](assets/template.post-fix-learning.md) → `vault/learnings/` if ≥3 prompt rounds on same problem (rule vault-learning)  
 9. Suggest `@pr-review` (select mode) then `@git-push` when user wants to ship  
 
 ## Cross-skill

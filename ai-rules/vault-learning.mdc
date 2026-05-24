@@ -1,0 +1,70 @@
+---
+description: Vault — issues auto; learnings after ≥3 prompt rounds on same problem; read learnings before debug
+alwaysApply: true
+---
+
+# Vault (Obsidian)
+
+Design: [ai-rules/vault-learning/reference.md](ai-rules/vault-learning/reference.md)
+
+**Deprecated:** `.cursor/learnings.md`
+
+## Language
+
+| Where | Language |
+|-------|----------|
+| **Vault files** (`issues/`, `learnings/`) | **English only** — titles, headings, body (save tokens) |
+| **Chat replies to user** | **~70% ไทย / ~30% English** — unchanged |
+
+## Folders
+
+| Folder | ใช้เก็บ | เมื่อเขียน |
+|--------|---------|-----------|
+| `vault/issues/` | ประจำวัน — **ไฟล์เดียวต่อวัน** | **อัตโนมัติ** — append Q&A สาระ (ดูด้านล่าง) |
+| `vault/learnings/` | lesson หลังแก้ปัญหา | เมื่อ **ติดปัญหา** แล้วใช้ prompt แก้ **≥3 รอบ** |
+| `vault/templates/` | template สั้น | track git |
+
+## Ensure folders
+
+Before any vault write, create if missing: `vault/learnings/`, `vault/issues/`, `vault/templates/`.
+
+## Read before debug / fix
+
+Search **`vault/learnings/`** (not `issues/`) for related symptoms, tags, skill, files.
+
+## Write — issues (อัตโนมัติ · ไฟล์เดียวต่อวัน)
+
+After you answer, write **without asking** when this turn is **Q&A / ถามเรื่อง / ขอคำแนะนำ / ประเด็นประจำวัน** (ไม่ใช่ post-mortem หลังแก้ bug):
+
+1. **Path:** `vault/issues/YYYY-MM-DD.md` (local date — **หนึ่งไฟล์ต่อวัน**)
+2. **มีไฟล์วันนี้แล้ว** → **append** section ใหม่ `## N. title` (N = ลำดับถัดไป; วันนี้มี 4 เรื่องแล้ว → เรื่องที่ 5 เป็น `## 5.`)
+3. **ยังไม่มี** → สร้างจาก [vault/templates/template.issue.md](vault/templates/template.issue.md) เริ่มที่ `## 1.`
+4. Each section: **Question** + **Answer / status** (English)
+5. Skip ทักทาย / ขอบคุณ / topic ซ้ำในไฟล์วันเดียวกัน
+
+Do **not** put RCA / root-cause writeups in `issues/` — those go to `learnings/`.
+
+## Write — learnings (≥3 prompt rounds)
+
+Write when **all** apply:
+
+1. Session เป็นการ **แก้ปัญหา** (bug, error, logic ผิด, config, debug) — ไม่ใช่แค่ถามทั่วไป
+2. User ใช้ prompt ไล่แก้ **≥3 รอบ** ในเรื่องเดียวกัน (นับข้อความ user ที่เกี่ยวกับปัญหานั้น)
+3. มีผลลัพธ์ชัด (แก้ได้ / รู้ root cause / workaround ที่ใช้ได้)
+
+Then:
+
+1. `vault/learnings/YYYY-MM-DD-HHmm-learning.md`
+2. [vault/templates/template.learning.md](vault/templates/template.learning.md) — **Problem · Fix · Don't repeat** (English)
+3. Never secrets
+
+Do **not** write learning ถ้า <3 รอบ หรือเป็น Q&A ธรรมดา (ใช้ `issues/` แทน).
+
+## Before finishing
+
+- Q&A สาระยังไม่ได้ append ใน `issues/YYYY-MM-DD.md` วันนี้ → append
+- แก้ปัญหา ≥3 รอบยังไม่มี learning → เขียน `learnings/`
+
+## After writing
+
+In **chat** (70/30): one short line e.g. บันทึกแล้ว → `path` — vault file itself stays English

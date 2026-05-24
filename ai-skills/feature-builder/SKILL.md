@@ -142,7 +142,7 @@ Run [integration-checklist](assets/checklist.integration.md). Post **Feature Shi
 
 ### Close
 
-**App repo learnings:** project rule auto-scans `.cursor/learnings.md` before F0+; after ≥2 rounds offer append — `templates/project-learnings-template.md`. Data bug → `@debug` [post-fix-learning](../debug/assets/template.post-fix-learning.md).
+**Vault:** search `vault/learnings/` before F0+; learning if ≥3 prompt rounds on same problem; issues auto on Q&A. Data bug → `@debug` [post-fix-learning](../debug/assets/template.post-fix-learning.md).
 
 ## Output flow
 

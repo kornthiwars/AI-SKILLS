@@ -31,7 +31,7 @@ ai-skills/                         # repo root (canonical)
 └── git-push/                      # sole git CLI skill
 ```
 
-**Mirror ใน IDE (optional):** `.cursor/skills/<name>/` · `.claude/skills/<name>/` — copy/link จาก canonical ด้านบน
+**Cursor mirror:** junction `.cursor/skills` → `../ai-skills` (ดู [.cursor/README.md](../.cursor/README.md))
 
 ### โครงสร้างต่อ skill
 
@@ -208,14 +208,24 @@ Skill ที่ไม่มี template/checklist (เช่น `git-push`, `upg
 5. copy/link ไป `.cursor/skills/<name>/` ถ้าใช้ mirror
 6. ship ด้วย `@git-push` เมื่อ user ขอ commit
 
-## Project learnings (app repo — ไม่ commit ใน skills repo)
+## Vault learnings (app repo + repo นี้)
 
-เมื่องานกินเวลา (≥2 รอบ / bug ซ้ำ):
+**แทน `.cursor/learnings.md` (เลิกใช้)**
+
+| ที่ | เก็บอะไร |
+|-----|----------|
+| `vault/issues/YYYY-MM-DD.md` | ประจำวัน — append `## N.` — auto · **English** body |
+| `vault/learnings/*.md` | **≥3 prompt rounds** · **English** body |
+| `vault/templates/template.*.md` | template สั้น |
+| `ai-rules/vault-learning.mdc` | อ่าน learnings ก่อน debug |
+
+เมื่องานกินเวลา (แก้ปัญหา ≥3 รอบ):
 
 1. **อย่า** ยัดยาวใน `SKILL.md` canonical
-2. เสนอ append **5–12 บรรทัด** ในโปรเจกต์เป้าหมาย: `.cursor/learnings.md` — **ถาม user ก่อน**
-3. แท็ก skill: `#ui-builder` `#debug` `#git` · มี index ถ้าหัวข้อเยอะ
-4. โปรเจกต์นั้น gitignore หรือ commit learnings เอง — ไม่ push เข้า `ai-skills`
+2. **อ่าน** `vault/learnings/` ก่อน debug (ถ้ามี vault)
+3. **เขียน** `vault/learnings/...` เมื่อ ≥3 prompt rounds บนปัญหาเดียวกัน
+4. **issues** — rule จัดการ auto หลัง Q&A (ไม่ต้องใส่ใน skill ยาวๆ)
+5. App repo: copy `vault/` + rule จาก AI-SKILLS
 
 ## Agent discipline (Rationalizations + Red flags)
 

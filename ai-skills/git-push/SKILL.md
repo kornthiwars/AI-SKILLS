@@ -179,11 +179,11 @@ Use `-u` when upstream not set. If behind remote → `git pull --rebase` only if
 1. Inspect → 2. Pre-push review → 3. Commit? → 4. Confirm gate (รอผู้ใช้) → 5. Push → 6. Report  
 
 **สองเทิร์นเป็นปกติ:** เทิร์นแรกจบที่ step 4 · เทิร์นที่สอง (หลังผู้ใช้ยืนยัน) = step 5–6
-7. **App repo learnings:** auto-scan via project rule before inspect if git friction likely; after ≥2 rounds on push/conflict offer append — `templates/project-learnings-template.md`.
+7. **Vault:** search `vault/learnings/` before git friction; learning if ≥3 prompt rounds on same problem; issues auto on Q&A.
 
 ## Project learnings
 
-Git friction (rebase, hook fail, auth) → project rule scans `.cursor/learnings.md` first; offer short entry after ≥2 rounds — not in `skills/git-push/` canonical.
+Git friction (rebase, hook fail, auth) → search `vault/learnings/` first; write learning if ≥3 prompt rounds — not in `skills/git-push/` canonical.
 
 ## Resources
 

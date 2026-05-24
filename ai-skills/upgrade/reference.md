@@ -10,7 +10,8 @@
 | author review ก่อน push | `@pr-review` ไม่ใช่ revive-code |
 | `design-coding`, `@design-coding` | `ui-builder`, `@ui-builder` |
 | `skills/design/`, `skills/engineering/`, `skills/ops/` | `skills/<skill-name>/` |
-| learnings "เมื่ออาการตรง" / user ต้องบอกเคยเจอ | proactive scan — `templates/cursor-rule-learnings.mdc` (`alwaysApply: true`) |
+| `.cursor/learnings.md`, `project-learnings-template`, `cursor-rule-learnings.mdc`, `bootstrap-learnings.ps1` | `vault/learnings/` + `ai-rules/vault-learning` |
+| issues ไฟล์ละเรื่อง / learnings ≥2 | `issues/YYYY-MM-DD.md` วันละไฟล์ · `learnings/` ≥3 rounds |
 
 ## Per-skill checklist
 
@@ -139,11 +140,11 @@ semver: ui-builder 2.2.1 → 2.2.2 (PATCH)
 - [ ] ตรวจ cross-ref และไฟล์ที่ SKILL.md อ้างอิง — ไม่มีลิงก์พัง
 - [ ] ไม่ commit จน user ขอ
 
-## Project learnings (optional input)
+## Project vault (optional input)
 
 ถ้า user ให้ path โปรเจกต์เป้าหมาย:
 
-1. ตรวจ `.cursor/learnings.md` / `.claude/learnings.md` + rule (`templates/cursor-rule-learnings.mdc` / `claude-rule-learnings.md`) — **proactive scan** ตรง AUTHORING หรือไม่
-2. แถวที่ tag skill → **candidate** สำหรับ canonical หรือเก็บในโปรเจกต์เท่านั้น
+1. ตรวจ `vault/` + rule `vault-learning` — issues auto · learnings ≥3 rounds · **search learnings ก่อน debug**
+2. แถวที่ tag skill → **candidate** สำหรับ canonical หรือเก็บใน vault โปรเจกต์เท่านั้น
 3. ยืนยันกับ user ก่อน merge เข้า `skills/`
-4. Bootstrap ขาด → แนะนำ `.\scripts\bootstrap-learnings.ps1 -ProjectPath <app>`
+4. ไม่มี vault → แนะนำ copy `vault/templates/` + `ai-rules/vault-learning.mdc` จาก AI-SKILLS

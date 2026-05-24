@@ -31,7 +31,7 @@ Checklist ละเอียด: [reference.md](reference.md)
 - **เสนอก่อน แก้หลังยืนยัน** — สรุป findings + แผน + **ข้อดี/ข้อเสีย** + semver แล้วถาม scope ก่อนแตะไฟล์
 - **Trade-offs บังคับ** — ทุกแผนอัปเกรดต้องมีข้อดีและข้อเสียชัดเจน (ไม่ rubber-stamp ว่าแก้แล้วดีเสมอ)
 - **แก้จริง** — หลัง user ยืนยัน ให้ implement ใน repo (ไม่ใช่แค่รายงานว่า “ไม่ต้องอัปเกรด”)
-- **Learnings แยก** — incident จากโปรเจกต์อื่น → `.cursor/learnings.md` ไม่ยัดเข้า canonical (เสนอเป็น candidate ได้) · audit รวม `templates/` + `scripts/bootstrap-learnings.ps1` เมื่อเกี่ยวกับ learnings
+- **Learnings แยก** — incident จากโปรเจกต์อื่น → `vault/learnings/` ใน app repo (ไม่ยัดเข้า canonical) · repo นี้ใช้ `vault/` ที่ root
 - **Token-aware upgrades** — เมื่อ audit ให้เช็ค [SKILL-AUTHORING.md](../SKILL-AUTHORING.md) § Token efficiency; อย่าเพิ่มเนื้อหาใน SKILL.md ถ้าย้ายไป `reference.md` ได้
 
 ## Required inputs

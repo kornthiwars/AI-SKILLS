@@ -1,3 +1,5 @@
-# Personal vault — เนื้อหาภายในไม่ commit (เก็บเฉพาะเครื่อง)
+# Personal vault — issues/ + learnings/ local; templates + README in git
 vault/*
 !vault/README.md
+!vault/templates/
+!vault/templates/**

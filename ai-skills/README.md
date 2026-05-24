@@ -1,10 +1,12 @@
 # ai-skills
 
-ชุด Cursor Agent Skills — เรียกด้วย `@skill-name` (เช่น `@ui-builder`)
+ชุด Agent Skills — Cursor `@skill-name` · Claude Code อ่านจาก `.claude/skills/`
 
-แต่ละ skill อยู่ที่ **`<skill-name>/`** — ชื่อโฟลเดอร์ตรงกับ `name:` ใน `SKILL.md`
+**Setup:** junction `.cursor/skills` + `.claude/skills` → `ai-skills` — [.cursor/README.md](../.cursor/README.md) · [.claude/README.md](../.claude/README.md)
 
-Mirror ใน IDE (optional): `.cursor/skills/<name>/` · `.claude/skills/<name>/`
+แต่ละ skill อยู่ที่ **`<skill-name>/`**
+
+Universal index: [AGENTS.md](../AGENTS.md)
 
 | Skill | Version | Path |
 |-------|---------|------|
