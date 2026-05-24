@@ -1,8 +1,6 @@
-# Personal vault — note content local; README + templates in git
+# Personal vault — note content local; README in git (templates at repo root)
 vault/*
 !vault/README.md
-!vault/templates/
-!vault/templates/**
 
 # Folder placeholders (README only; daily notes stay ignored)
 !vault/issues/

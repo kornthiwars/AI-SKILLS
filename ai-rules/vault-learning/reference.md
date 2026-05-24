@@ -5,8 +5,8 @@
 ## โครงสร้าง
 
 ```
+templates/                   repo root — template.issue.md, template.learning.md
 vault/
-├── templates/
 ├── issues/YYYY-MM-DD.md     tags: [issues, …topics]
 └── learnings/YYYY-MM-DD-HHmm.md   tags: [learning] + title: (graph label via plugin)
 ```
@@ -33,4 +33,4 @@ problem ≥3 rnds → learnings/ (tags [learning])
 
 ## Git
 
-Notes local · templates + README + `.obsidian` in git
+Notes local · `templates/` + vault README + `.obsidian` in git

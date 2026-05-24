@@ -22,11 +22,11 @@ Design: [ai-rules/vault-learning/reference.md](ai-rules/vault-learning/reference
 |--------|---------|-----------|
 | `vault/issues/` | Daily **work** log — one file/day | **Auto** — work-related Q&A only |
 | `vault/learnings/` | lesson หลังแก้ปัญหา | เมื่อ **ติดปัญหา** แล้วใช้ prompt แก้ **≥3 รอบ** |
-| `vault/templates/` | template สั้น | track git |
+| `templates/` | template สั้น (repo root) | track git |
 
 ## Ensure folders
 
-Before any vault write, create if missing: `vault/learnings/`, `vault/issues/`, `vault/templates/`.
+Before any vault write, create if missing: `vault/learnings/`, `vault/issues/`.
 
 ## Graph (Obsidian) — path colors + topic tags
 
@@ -74,7 +74,7 @@ After you answer, write **without asking** only when this turn is **work-related
 Steps:
 
 1. **Path:** `vault/issues/YYYY-MM-DD.md` (one file per day)
-2. **Append** `## N. title` or create from [template.issue.md](vault/templates/template.issue.md)
+2. **Append** `## N. title` or create from [template.issue.md](../templates/template.issue.md)
 3. Frontmatter: `tags: [issues, …topics]` (add section topics to the list as you append)
 4. Each section: after `## N. title`, optional line `#vault #git` (1–3 topic tags); then **Question** + **Answer / status** (English)
 5. Skip duplicate topic same day
@@ -84,7 +84,7 @@ Steps:
 Write when **all** apply: problem-solving · ≥3 user prompt rounds same issue · clear outcome.
 
 1. `vault/learnings/YYYY-MM-DD-HHmm.md` (local time, unique per lesson)
-2. [template.learning.md](vault/templates/template.learning.md) — **title** in frontmatter + `# title` as H1 (same text)
+2. [template.learning.md](../templates/template.learning.md) — **title** in frontmatter + `# title` as H1 (same text)
 3. Frontmatter: `tags: [learning, <skill>]`, `skill:` (same as second tag), `time: "HHmm"`, `title:` (English)
 4. Never secrets · no wikilink footers
 

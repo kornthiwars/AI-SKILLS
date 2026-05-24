@@ -7,9 +7,10 @@ description: >-
   ส่งขึ้น remote, ตรวจโค้ดก่อน push. Often after @pr-review ready on same diff.
   Does not apply to force-push unless user
   explicitly requests, amending pushed commits, git config changes, or non-git VCS.
+compatibility: Cursor and Claude Code; git CLI; gh for PR only when user asks
 disable-model-invocation: true
 metadata:
-  version: "1.0.0"
+  version: "1.0.2"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -176,7 +177,7 @@ Use `-u` when upstream not set. If behind remote → `git pull --rebase` only if
 
 **After `@pr-review`:** if same diff and verdict `ready`, step 2 may cite pr-review table and run R1–R10 only for gaps.
 
-**NOT:** force push without explicit ask · rebase -i · change git config · monorepo deploy · @upgrade (skills repo)
+**NOT:** force push without explicit ask · rebase -i · change git config · monorepo deploy · @upgrade (ai-skills repo)
 
 ## Output flow
 
@@ -187,7 +188,7 @@ Use `-u` when upstream not set. If behind remote → `git pull --rebase` only if
 
 ## Project learnings
 
-Git friction (rebase, hook fail, auth) → search `vault/learnings/` first; write learning if ≥3 prompt rounds — not in `skills/git-push/` canonical.
+Git friction (rebase, hook fail, auth) → search `vault/learnings/` first; write learning if ≥3 prompt rounds — not in `ai-skills/git-push/` canonical.
 
 ## Resources
 
@@ -195,4 +196,4 @@ Git friction (rebase, hook fail, auth) → search `vault/learnings/` first; writ
 |------|-----|
 | [reference.md](reference.md) | R1–R10, amend, secrets · § Rationalizations / Red flags |
 
-Canonical: `skills/git-push/`
+Canonical: `ai-skills/git-push/`

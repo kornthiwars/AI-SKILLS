@@ -1,4 +1,4 @@
-# Feature Builder — reference (v1.0.0)
+# Feature Builder — reference (v1.0.1)
 
 Orchestration detail, pitfalls, troubleshooting.
 
@@ -54,7 +54,7 @@ Manual smoke only in v1 ([integration-checklist](assets/checklist.integration.md
 | F7 | feature-builder writes components | Move work to `@ui-builder` packet |
 | F8 | "Done" without Gate B | Require ui-builder Confirmed evidence |
 | F9 | Skipped auth in plan | Add session model to F0/F1 |
-| F10 | skills repo mistaken for app | Confirm target workspace |
+| F10 | ai-skills repo mistaken for app | Confirm target workspace |
 | F11 | Data correct in API, wrong on UI | After F4, suggest `@debug` — not api-builder |
 | F12 | User wants push in same breath | After Feature Ship → `@pr-review` → `@git-push` |
 | F13 | User says "ทำครบ/ฟังก์ชันครบ" one message | F0–F1 + F2 packet + F4 packet; **stop** — no TSX/CSS in orchestrator turn |
@@ -69,7 +69,7 @@ Manual smoke only in v1 ([integration-checklist](assets/checklist.integration.md
 | Endpoint/validation/DB | `@api-builder` |
 | Pixel/layout vs ref | `@ui-builder` |
 | JSON correct, UI map wrong | `@debug` |
-| Edit skills in skills repo | `@upgrade` |
+| Maintain ai-skills canonical | `@upgrade` |
 | Ship | `@pr-review` → `@git-push` — orchestrator never runs git CLI |
 
 ## Common rationalizations (agent discipline)

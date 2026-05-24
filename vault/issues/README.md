@@ -27,7 +27,7 @@ Work-related only: code, repo, api, infrastructure, vault, tools, workflow.
 
 ## Template
 
-Copy from `vault/templates/template.issue.md` (plain path — no markdown link).
+Copy from `templates/template.issue.md` (plain path — no markdown link).
 
 ## Git
 

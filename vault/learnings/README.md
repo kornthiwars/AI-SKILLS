@@ -39,7 +39,7 @@ Topic tags เดียวกับ issues: `vault`, `git`, `research`, `ui`, `a
 
 ## Template
 
-`vault/templates/template.learning.md`
+`templates/template.learning.md`
 
 ## Git
 

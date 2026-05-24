@@ -6,11 +6,12 @@ description: >-
   User picks mode via select when not specified. Triggers on /pr-review, @pr-review,
   pr review, รีวิวก่อน push, รีวิวก่อน commit, production readiness, scalability review.
   Does not apply to pixel/mockup (ui-builder), API implementation (api-builder),
-  full feature orchestration (feature-builder), debugging fixes (debug), skills repo
-  (upgrade), or any git commit/push (git-push only).
+  full feature orchestration (feature-builder), debugging fixes (debug), ai-skills repo
+  maintenance (@upgrade), or any git commit/push (git-push only).
+compatibility: Cursor and Claude Code; read-only review; AskQuestion for mode when not specified
 disable-model-invocation: true
 metadata:
-  version: "1.0.0"
+  version: "1.0.2"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -177,4 +178,4 @@ Do not merge checklists without running both modes.
 | [reference.md](reference.md) | P1–P12, modes · § Rationalizations / Red flags |
 | [assets/template.review-comment.md](assets/template.review-comment.md) | Paste-ready summary |
 
-Canonical: `skills/pr-review/`
+Canonical: `ai-skills/pr-review/`

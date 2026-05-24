@@ -6,6 +6,6 @@ Use when same **problem** took **≥3 user prompt rounds** to resolve (vault-lea
 
 **Frontmatter:** `title:` + same text as `# H1` (for graph display with Property Over File Name plugin)
 
-**Template:** [vault/templates/template.learning.md](../../../vault/templates/template.learning.md)
+**Template:** [templates/template.learning.md](../../../../templates/template.learning.md)
 
 Tags: `#learning` · no secrets

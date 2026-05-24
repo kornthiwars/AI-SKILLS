@@ -23,7 +23,7 @@ Use when workspace is this monorepo (`ai-skills/`, `ai-rules/`, `vault/`). In **
 | Skills | `ai-skills/**` | SKILL.md, reference.md, assets — skill behavior only |
 | Rules | `ai-rules/**` | `.mdc`, `reference.md` — agent rules |
 | Vault docs | `vault/README.md`, `vault/issues/README.md`, `vault/learnings/README.md` | user-facing vault docs |
-| Vault templates | `vault/templates/**` | `template.issue.md`, `template.learning.md` |
+| Vault templates | `templates/**` | `template.issue.md`, `template.learning.md` (repo root) |
 | Obsidian shared | `vault/.obsidian/graph.json`, `app.json`, `core-plugins.json`, `community-plugins.json`, `appearance.json`, `plugins/**` | graph groups, plugins shipped with vault |
 | Obsidian snippets | `vault/.obsidian/snippets/*.css` | optional CSS (if any) |
 | Repo root | `AGENTS.md`, `CLAUDE.md`, `README.md`, `.gitignore` | entry docs, gitignore exceptions |
@@ -49,7 +49,7 @@ Use when workspace is this monorepo (`ai-skills/`, `ai-rules/`, `vault/`). In **
 | User changed | Stage roughly |
 |--------------|----------------|
 | Skill / rule only | `ai-skills/...` and/or `ai-rules/...` |
-| Vault policy / tags / graph | `ai-rules/vault-learning*`, `vault/README.md`, `vault/.obsidian/graph.json`, templates |
+| Vault policy / tags / graph | `ai-rules/vault-learning*`, `vault/README.md`, `vault/.obsidian/graph.json`, `templates/` |
 | Plugin bump | `vault/.obsidian/plugins/<id>/**` + `community-plugins.json` |
 | Docs only | `**/*.md` under paths above — no junctions |
 

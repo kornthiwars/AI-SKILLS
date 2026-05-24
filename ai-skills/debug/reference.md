@@ -1,4 +1,4 @@
-# Debug — reference (v1.0.0)
+# Debug — reference (v1.0.2)
 
 Layer detail, fail path, breadcrumb ledger, pitfalls.
 
@@ -95,7 +95,7 @@ New theory must explain **all** prior rows or be discarded.
 | 7 | Ignore auth on repro | 401 cached as empty list |
 | 8 | Test only happy path | Include failing user data |
 | 9 | Multiple root causes | Rank primary + notes |
-| 10 | debug in skills repo | Wrong workspace — app repo only |
+| 10 | debug in ai-skills repo | Wrong workspace — app repo only |
 | 11 | Confuse loading skeleton with wrong data | Wait for settled state in repro |
 | 12 | Server timezone vs display | Note layer D3/D4 + formatter |
 | 13 | List key={index} hiding reorder bugs | Note in D6 |

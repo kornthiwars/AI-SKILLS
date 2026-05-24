@@ -5,9 +5,9 @@ Obsidian vault root = **`AI/vault`**
 ## โครงสร้าง
 
 ```
+templates/             ← repo root (not inside vault/)
 vault/
 ├── .obsidian/         ← graph: 2 color groups by folder
-├── templates/
 ├── issues/YYYY-MM-DD.md
 └── learnings/YYYY-MM-DD-HHmm.md
 ```
@@ -60,5 +60,5 @@ Rule: `../ai-rules/vault-learning.mdc`
 
 ## Git
 
-**ใน git:** README, templates, `.obsidian`  
+**ใน git:** README, `.obsidian` · templates อยู่ที่ `../templates/`  
 **local:** `issues/*.md`, `learnings/*.md`

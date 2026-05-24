@@ -10,13 +10,13 @@ Universal index: [AGENTS.md](../AGENTS.md)
 
 | Skill | Version | Path |
 |-------|---------|------|
-| UI Builder | 1.0.0 | [ui-builder/](ui-builder/SKILL.md) |
-| API Builder | 1.0.0 | [api-builder/](api-builder/SKILL.md) |
-| Feature Builder | 1.0.0 | [feature-builder/](feature-builder/SKILL.md) |
-| Debug | 1.0.0 | [debug/](debug/SKILL.md) |
-| PR Review | 1.0.0 | [pr-review/](pr-review/SKILL.md) |
-| Git Push | 1.0.0 | [git-push/](git-push/SKILL.md) |
-| Upgrade | 1.0.0 | [upgrade/](upgrade/SKILL.md) |
+| UI Builder | 1.0.1 | [ui-builder/](ui-builder/SKILL.md) |
+| API Builder | 1.0.2 | [api-builder/](api-builder/SKILL.md) |
+| Feature Builder | 1.0.1 | [feature-builder/](feature-builder/SKILL.md) |
+| Debug | 1.0.2 | [debug/](debug/SKILL.md) |
+| PR Review | 1.0.2 | [pr-review/](pr-review/SKILL.md) |
+| Git Push | 1.0.2 | [git-push/](git-push/SKILL.md) |
+| Upgrade | 1.1.0 | [upgrade/](upgrade/SKILL.md) |
 
 คู่มือสร้าง/แก้ skill: [SKILL-AUTHORING.md](SKILL-AUTHORING.md)
 
@@ -49,7 +49,7 @@ Universal index: [AGENTS.md](../AGENTS.md)
 
 **ต้องมีก่อนเริ่ม**
 - ชื่อฟีเจอร์ + user story (เช่น login ด้วย email/password)
-- repo แอปจริง (ไม่ใช่แค่ maintain skills repo)
+- repo แอปจริง (ไม่ใช่แค่ maintain ai-skills repo)
 - ถ้ามี UI — ต้องมี visual ref หรือยอมรับว่า phase UI **blocked**
 
 **อย่าใช้เมื่อ**

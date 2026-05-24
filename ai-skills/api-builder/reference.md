@@ -4,7 +4,7 @@
 
 ## Stack discovery (Phase 0)
 
-Before Phase 1, scan the **user's project** (not skills repo). Record findings in the intake summary.
+Before Phase 1, scan the **user's project** (not this ai-skills repo). Record findings in the intake summary.
 
 | Signal | Look for |
 |--------|----------|

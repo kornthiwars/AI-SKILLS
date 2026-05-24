@@ -71,7 +71,7 @@ implement → @pr-review (select mode) → ready → @git-push
 | **เจ้าของ git CLI** | เฉพาะ [`git-push`](git-push/SKILL.md) |
 | **self-review ก่อน push** | [`pr-review`](pr-review/SKILL.md) — ไม่รัน git; AskQuestion โหมดถ้า user ไม่ระบุ |
 | **skill อื่น** | **ห้าม** รัน git CLI → hand off **`@pr-review`** แล้ว **`@git-push`** |
-| **skills repo นี้** | แก้ canonical ด้วย `@upgrade` — ship ด้วย `@git-push` |
+| **ai-skills repo นี้** | แก้ canonical ด้วย `@upgrade` — ship ด้วย `@git-push` |
 | **Hard rules template** | `- **No git commands** — … ship → @pr-review then @git-push` |
 
 ## Token efficiency
@@ -216,7 +216,7 @@ Skill ที่ไม่มี template/checklist (เช่น `git-push`, `upg
 |-----|----------|
 | `vault/issues/YYYY-MM-DD.md` | ประจำวัน — append `## N.` — auto · **English** body |
 | `vault/learnings/*.md` | **≥3 prompt rounds** · **English** body |
-| `vault/templates/template.*.md` | template สั้น |
+| `templates/template.*.md` | template สั้น (repo root) |
 | `ai-rules/vault-learning.mdc` | อ่าน learnings ก่อน debug |
 
 เมื่องานกินเวลา (แก้ปัญหา ≥3 รอบ):

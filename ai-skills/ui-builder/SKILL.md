@@ -15,7 +15,7 @@ description: >-
 compatibility: Cursor and Claude Code; cursor-ide-browser MCP; npx serve for preview; file:// blocked in agent browser
 disable-model-invocation: true
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -137,7 +137,7 @@ Paste A + B → summary (viewport, theme, verify, deviations)
 
 ## Maintainer
 
-Canonical: `skills/ui-builder/`
+Canonical: `ai-skills/ui-builder/`
 
 ## Resources
 
@@ -149,4 +149,4 @@ Canonical: `skills/ui-builder/`
 | [assets/checklist.quality-tier.md](assets/checklist.quality-tier.md) | Default bar 10/10 · waivers |
 | [assets/template.gate-b.md](assets/template.gate-b.md) | Gate B + Score |
 
-Authoring: `skills/SKILL-AUTHORING.md`
+Authoring: `ai-skills/SKILL-AUTHORING.md`

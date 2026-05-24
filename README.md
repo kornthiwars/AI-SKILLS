@@ -29,6 +29,7 @@ cmd /c mklink /J .claude\rules ai-rules
 ```
 ai-skills/          canonical
 ai-rules/           canonical
+templates/          vault note templates (repo root)
 .cursor/            junction → ai-skills, ai-rules
 .claude/            junction → ai-skills, ai-rules
 AGENTS.md · CLAUDE.md
@@ -37,7 +38,9 @@ vault/
 
 ---
 
-## Skills (v1.0.0)
+## Skills
+
+Versions: [ai-skills/README.md](ai-skills/README.md) (table at top)
 
 | Skill | ใช้เมื่อ |
 |-------|----------|

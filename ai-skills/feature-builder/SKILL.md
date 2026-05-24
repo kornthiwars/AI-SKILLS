@@ -6,10 +6,12 @@ description: >-
   Triggers on /feature-builder, @feature-builder, feature builder, Feature Builder,
   ฟีเจอร์ทั้งก้อน, login ครบ, full stack feature, FE+BE, ทำฟีเจอร์ครบ. Does not
   apply when API-only (@api-builder), UI-only with ref (@ui-builder), debug/data
-  mapping only (debug), skills repo maintenance (@upgrade), or git push (git-push).
+  mapping only (debug), ai-skills repo maintenance (@upgrade), or git commit/push
+  (hand off @pr-review then @git-push).
+compatibility: Cursor and Claude Code; orchestrates api-builder and ui-builder in user app repo; no implementation in this skill
 disable-model-invocation: true
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -33,7 +35,7 @@ metadata:
 ## Required inputs — refuse F0 without these
 
 - [ ] **Feature name + user story** — e.g. login with email/password
-- [ ] **Target repo** — workspace with app code (not `skills` repo maintenance)
+- [ ] **Target repo** — workspace with app code (not `ai-skills` repo maintenance)
 - [ ] **API scope (rough)** — endpoints/entities expected, or agree api-builder will narrow
 - [ ] **UI scope** — which screens/components are in this feature
 - [ ] **Visual reference** for UI phase — mockup/screenshot per ui-builder rules (if missing → stop after API plan until user supplies)
@@ -70,7 +72,7 @@ List gaps in Thai and **stop** until user fills or defers UI phase explicitly.
 
 **Use:** login/register/checkout flow, FE+BE feature, `@feature-builder`, ฟีเจอร์ทั้งก้อน
 
-**NOT:** single endpoint only → `@api-builder` · pixel fix with ref only → `@ui-builder` · data wrong on screen → `@debug` · skills repo edits → `@upgrade`
+**NOT:** single endpoint only → `@api-builder` · pixel fix with ref only → `@ui-builder` · data wrong on screen → `@debug` · ai-skills repo edits → `@upgrade`
 
 ## Workflow
 
@@ -161,7 +163,7 @@ Run [integration-checklist](assets/checklist.integration.md). Post **Feature Shi
 | API contract + implement | `@api-builder` |
 | UI match reference | `@ui-builder` |
 | API OK, UI map wrong | `@debug` |
-| Maintain skills repo | `@upgrade` |
+| Maintain ai-skills repo | `@upgrade` |
 | Ship (review + push) | `@pr-review` (bugs → production optional) → `@git-push` |
 
 Child order for full features: **api-builder Ship → fe-handoff → ui-builder** ([api-builder § Cross-skill](../api-builder/SKILL.md)).
@@ -179,4 +181,4 @@ Child order for full features: **api-builder Ship → fe-handoff → ui-builder*
 |------|-----|
 | [reference.md](reference.md) | Pitfalls F1–F12, § Rationalizations / Red flags |
 
-Canonical: `skills/feature-builder/`
+Canonical: `ai-skills/feature-builder/`

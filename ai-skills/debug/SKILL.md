@@ -8,9 +8,10 @@ description: >-
   pixel/mockup (ui-builder), new API design (api-builder), full FE+BE
   orchestration (feature-builder), git commit/push (hand off @pr-review then @git-push)
   maintenance (@upgrade).
+compatibility: Cursor and Claude Code; project test runner and HTTP client; optional browser MCP for repro
 disable-model-invocation: true
 metadata:
-  version: "1.0.0"
+  version: "1.0.2"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -52,7 +53,7 @@ List gaps in Thai and **stop**.
 - **No new API contract** — no Gate Contract/Ship; hand off `@api-builder` when server is wrong
 - **No full-feature orchestration** — use `@feature-builder` for greenfield FE+BE
 - **No git commands** — no `git status` / `add` / `commit` / `push` / `pull` / `rebase` / `merge`; ship work → `@pr-review` then `@git-push` only
-- **No skills repo canonical edits** — use `@upgrade`
+- **No ai-skills repo canonical edits** — use `@upgrade`
 - **Gate D before large fix** — do not rewrite modules without Approved diagnosis
 - **Read-only default** — diagnose and table first; patch after confirm (or trivial one-line map typo)
 - **No fix before D1 pass** — no reliable repro → Revise or stop; do not declare "bug confirmed"
@@ -198,4 +199,4 @@ Next: …
 |------|-----|
 | [reference.md](reference.md) | Pitfalls, layers, handoff · § Rationalizations / Red flags |
 
-Canonical: `skills/debug/`
+Canonical: `ai-skills/debug/`

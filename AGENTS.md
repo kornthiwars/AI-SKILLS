@@ -55,7 +55,7 @@ Design: [ai-rules/vault-learning/reference.md](ai-rules/vault-learning/reference
 ## Vault + Obsidian
 
 - Open **repo root** as Obsidian vault
-- `vault/learnings/` · `vault/issues/YYYY-MM-DD.md` (gitignored) · templates in git
+- `vault/learnings/` · `vault/issues/YYYY-MM-DD.md` (gitignored) · `templates/` at repo root (git)
 
 ---
 
@@ -64,6 +64,7 @@ Design: [ai-rules/vault-learning/reference.md](ai-rules/vault-learning/reference
 ```
 ai-skills/
 ai-rules/
+templates/
 .cursor/   skills/ rules/  → junction
 .claude/   skills/ rules/  → junction
 CLAUDE.md · AGENTS.md

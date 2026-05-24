@@ -9,12 +9,12 @@ description: >-
   migration, Prisma, validation, contract, webhook, สร้าง API, แก้ API. Does not
   apply to mockup/pixel UI, FE-only mapping when server response is already
   correct (@debug), full FE+BE without split scope (use
-  @feature-builder), skills repo maintenance (@upgrade), visual work (ui-builder),
+  @feature-builder), ai-skills repo maintenance (@upgrade), visual work (ui-builder),
   or any git commit/push (hand off @pr-review then @git-push).
 compatibility: Cursor and Claude Code; project test runner and HTTP client; OpenAPI/GraphQL schema when present; stack conventions in reference.md
 disable-model-invocation: true
 metadata:
-  version: "1.0.0"
+  version: "1.0.2"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -129,7 +129,7 @@ When user wants a **full feature** (e.g. login):
 
 ## Maintainer
 
-Canonical: `skills/api-builder/`
+Canonical: `ai-skills/api-builder/`
 
 ## Resources
 
@@ -141,4 +141,4 @@ Canonical: `skills/api-builder/`
 | [assets/template.endpoint-delta.md](assets/template.endpoint-delta.md) | One endpoint, delta only |
 | [assets/template.handoff-to-ui.md](assets/template.handoff-to-ui.md) | After Ship → ui-builder |
 
-Authoring: `skills/SKILL-AUTHORING.md`
+Authoring: `ai-skills/SKILL-AUTHORING.md`

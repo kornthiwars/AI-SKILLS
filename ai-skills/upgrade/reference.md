@@ -1,4 +1,4 @@
-# Upgrade — audit reference (v1.0.0)
+# Upgrade — audit reference (v1.1.0)
 
 ใช้เมื่อ **อัปเกรด skill อื่น** — เทียบกับ [SKILL-AUTHORING.md](../SKILL-AUTHORING.md) และ gold skills
 
@@ -9,17 +9,19 @@
 | `revive-code`, `@revive-code`, `revivecode` | ลบแล้ว → `@pr-review` (select โหมด) แล้ว `@git-push` |
 | author review ก่อน push | `@pr-review` ไม่ใช่ revive-code |
 | `design-coding`, `@design-coding` | `ui-builder`, `@ui-builder` |
-| `skills/design/`, `skills/engineering/`, `skills/ops/` | `skills/<skill-name>/` |
+| `skills/design/`, `skills/engineering/`, `skills/ops/` (legacy) | `ai-skills/<skill-name>/` |
+| bare `skills/<name>/` in footers | `ai-skills/<name>/` |
+| `skills repo` (ambiguous) | `ai-skills repo` (this monorepo) |
 | `.cursor/learnings.md`, `project-learnings-template`, `cursor-rule-learnings.mdc`, `bootstrap-learnings.ps1` | `vault/learnings/` + `ai-rules/vault-learning` |
 | issues ไฟล์ละเรื่อง / learnings ≥2 | `issues/YYYY-MM-DD.md` วันละไฟล์ · `learnings/` ≥3 rounds |
 
 ## Per-skill checklist
 
-ทำทุกครั้งที่ audit `skills/<name>/`:
+ทำทุกครั้งที่ audit `ai-skills/<name>/`:
 
 ### Frontmatter & identity
 
-- [ ] `name:` ตรงชื่อโฟลเดอร์ (`skills/<name>/`)
+- [ ] `name:` ตรงชื่อโฟลเดอร์ (`ai-skills/<name>/`)
 - [ ] `description:` third-person + triggers TH/EN + **Does not apply when** (WHEN NOT)
 - [ ] `disable-model-invocation: true`
 - [ ] `metadata.version` semver string
@@ -146,5 +148,5 @@ semver: ui-builder 2.2.1 → 2.2.2 (PATCH)
 
 1. ตรวจ `vault/` + rule `vault-learning` — issues auto · learnings ≥3 rounds · **search learnings ก่อน debug**
 2. แถวที่ tag skill → **candidate** สำหรับ canonical หรือเก็บใน vault โปรเจกต์เท่านั้น
-3. ยืนยันกับ user ก่อน merge เข้า `skills/`
-4. ไม่มี vault → แนะนำ copy `vault/templates/` + `ai-rules/vault-learning.mdc` จาก AI-SKILLS
+3. ยืนยันกับ user ก่อน merge เข้า `ai-skills/`
+4. ไม่มี vault → แนะนำ copy `templates/` + `ai-rules/vault-learning.mdc` จาก AI-SKILLS
