@@ -59,6 +59,7 @@ If nothing to push and nothing to commit, report and **stop**.
 - **Never** run `git push` without **push confirmation** in the **same chat turn** after step 4 table — `/git-push`, `@git-push`, or "push" alone is **not** confirmation (see step 4)
 - **Stop after step 4** when confirmation is missing — do not run step 5 in that turn
 - **Do not** create commits unless user asked to commit (or changes are clearly part of "push my work")
+- **AI-SKILLS staging** — stage only paths in [reference.md](reference.md) § AI-SKILLS repo; **never** `.cursor/*`, `.claude/*` junctions or `vault/issues|learnings/*.md` notes
 
 ## Quick reference
 
@@ -87,6 +88,8 @@ git rev-parse --abbrev-ref HEAD
 
 Note: ahead/behind origin, untracked files, staged vs unstaged.
 
+Classify paths with [reference.md](reference.md) § **AI-SKILLS repo** (commit vs skip vs never stage). ใน summary บอกสั้นๆ ว่าไฟล์ไหนควรอยู่ใน commit ประมาณไหน.
+
 ### 2 — Pre-push review
 
 On **staged + unstaged** diff (or full PR range if user says). Load [reference.md](reference.md) § Pre-push review **now** (not at step 1).
@@ -112,7 +115,7 @@ Verdict: pass | block
 
 Only if user asked to commit or said "push my changes" with uncommitted work:
 
-1. Stage only relevant paths (not secrets).
+1. Stage only paths from [reference.md](reference.md) § AI-SKILLS repo (not secrets, not junctions, not local `vault/issues|learnings` notes).
 2. Message: 1–2 sentences, **why** not just what ([reference.md](reference.md) § Commit message).
 3. PowerShell: use here-string for message (see reference).
 4. If hook fails → **new commit**, do not amend unless amend rules pass.
@@ -129,6 +132,7 @@ Only if user asked to commit or said "push my changes" with uncommitted work:
 | branch | … |
 | remote | … |
 | commits to push | N (พร้อม `git log origin/<branch>..HEAD --oneline` ถ้า N > 0) |
+| scope | paths ที่จะ push / เพิ่ง commit (ตาม § AI-SKILLS repo) |
 | review | pass / block / notes |
 | force? | no (unless explicit) |
 

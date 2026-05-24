@@ -6,7 +6,7 @@ Obsidian vault root = **`AI/vault`**
 
 ```
 vault/
-├── .obsidian/         ← graph: tags ON + color groups
+├── .obsidian/         ← graph: 2 color groups by folder
 ├── templates/
 ├── issues/YYYY-MM-DD.md
 └── learnings/YYYY-MM-DD-HHmm.md
@@ -36,7 +36,16 @@ vault/
 **Issues:** ใส่ใน frontmatter (รวมทุก topic ของวัน) + บรรทัด `#vault` ใต้ `##` แต่ละข้อ  
 **Learnings:** `tags: [learning, vault]` — `skill:` ต้องตรงกับ topic tag
 
-Graph สี: `#issues` · `#learning` · `#vault` · `#research` · `#git` · `#ui` · `#api` · `#infrastructure`
+### Graph สี (Groups — แค่ 2 กลุ่ม)
+
+| Query | โฟลเดอร์ | สี |
+|-------|----------|-----|
+| `path:issues` | `issues/` | ส้มแดง |
+| `path:learnings` | `learnings/` | ทอง |
+
+ตั้งใน `vault/.obsidian/graph.json` — **ไม่ใช้ tag groups** อีกแล้ว
+
+โหนด `#tag` (ถ้าเปิด Display → Tags) ยังเป็นสีเขียวคงที่ของ Obsidian · สีโฟลเดอร์ดูที่ **จุดชื่อไฟล์**
 
 ## Learnings — ชื่อไฟล์ vs ชื่อแสดง
 

@@ -28,9 +28,9 @@ Design: [ai-rules/vault-learning/reference.md](ai-rules/vault-learning/reference
 
 Before any vault write, create if missing: `vault/learnings/`, `vault/issues/`, `vault/templates/`.
 
-## Graph (Obsidian) — tags, not hub
+## Graph (Obsidian) — path colors + topic tags
 
-**No `Project.md` / hub file.** Group notes in graph by **tags** (frontmatter + inline `#topic`).
+**No hub file.** Graph **file colors**: only `path:issues` + `path:learnings` in `vault/.obsidian/graph.json`. Topic **tags** below = frontmatter/search, not graph color groups.
 
 ### Type tags (always)
 

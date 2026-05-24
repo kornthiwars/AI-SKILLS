@@ -12,6 +12,49 @@ Block if diff adds or modifies:
 
 If user insists on committing env **example**, only `*.example` with placeholders.
 
+## AI-SKILLS repo — what to change / stage (scope)
+
+Use when workspace is this monorepo (`ai-skills/`, `ai-rules/`, `vault/`). In **step 1** and **step 3**, classify paths before `git add`.
+
+### Usually commit (tracked · shareable)
+
+| Area | Paths | แก้ประมาณไหน |
+|------|--------|----------------|
+| Skills | `ai-skills/**` | SKILL.md, reference.md, assets — skill behavior only |
+| Rules | `ai-rules/**` | `.mdc`, `reference.md` — agent rules |
+| Vault docs | `vault/README.md`, `vault/issues/README.md`, `vault/learnings/README.md` | user-facing vault docs |
+| Vault templates | `vault/templates/**` | `template.issue.md`, `template.learning.md` |
+| Obsidian shared | `vault/.obsidian/graph.json`, `app.json`, `core-plugins.json`, `community-plugins.json`, `appearance.json`, `plugins/**` | graph groups, plugins shipped with vault |
+| Obsidian snippets | `vault/.obsidian/snippets/*.css` | optional CSS (if any) |
+| Repo root | `AGENTS.md`, `CLAUDE.md`, `README.md`, `.gitignore` | entry docs, gitignore exceptions |
+
+### Do not stage (blocker in R3 if staged)
+
+| Path | Why |
+|------|-----|
+| `.cursor/skills`, `.cursor/rules` | junction → `ai-skills` / `ai-rules` — edit canonical only |
+| `.claude/skills`, `.claude/rules` | same |
+| `vault/issues/20*.md`, `vault/learnings/20*.md` | personal notes — **gitignored** |
+| `.env`, credentials, tokens | secrets (R1) |
+
+### Usually skip unless user asks
+
+| Path | Why |
+|------|-----|
+| `vault/.obsidian/workspace.json` | local UI layout (panes, zoom) — machine-specific |
+| `vault/.obsidian/workspace-mobile.json` | same |
+
+### Commit scope by change type
+
+| User changed | Stage roughly |
+|--------------|----------------|
+| Skill / rule only | `ai-skills/...` and/or `ai-rules/...` |
+| Vault policy / tags / graph | `ai-rules/vault-learning*`, `vault/README.md`, `vault/.obsidian/graph.json`, templates |
+| Plugin bump | `vault/.obsidian/plugins/<id>/**` + `community-plugins.json` |
+| Docs only | `**/*.md` under paths above — no junctions |
+
+In **step 4** confirm table, add row **scope** listing staged paths (or “already committed”) so user sees what will push.
+
 ## Pre-push review (R1–R10)
 
 Run on **staged + unstaged** diff (or range user gives). Judge what changed; open surrounding context for changed symbols.
@@ -25,7 +68,7 @@ Run on **staged + unstaged** diff (or range user gives). Judge what changed; ope
 |----|-------|------------|
 | R1 | Secrets / credentials in diff | keys, tokens, `.env` production values |
 | R2 | Debug noise | `console.log`, `print(`, `debugger`, commented-out blocks left in |
-| R3 | Scope creep | unrelated files or drive-by refactors user did not mention |
+| R3 | Scope creep | unrelated files, drive-by refactors, or **junction / local vault notes** staged (see § AI-SKILLS repo) |
 | R4 | Correctness | obvious logic bug, wrong condition, off-by-one, null unsafe |
 | R5 | Error handling | swallowed errors, empty catch, missing return on failure path |
 | R6 | Tests | behavior change without test update when repo already has tests nearby |

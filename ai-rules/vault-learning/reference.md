@@ -24,9 +24,9 @@ problem ≥3 rnds → learnings/ (tags [learning])
 ## Obsidian graph
 
 - Config: `vault/.obsidian/graph.json`
-- **Display → Tags: ON** — tag nodes เชื่อม notes
-- **Groups:** `#issues`, `#learning`, `#vault`, `#research`, `#git`, `#ui`, `#api`, `#infrastructure`
-- **Topics:** `vault`, `git`, `research`, `ui`, `api`, `infrastructure`, `debug` (see rule table)
+- **Display → Tags: ON** (optional)
+- **Groups (2 only):** `path:issues` (coral) · `path:learnings` (gold) — file color by folder
+- **Topic tags** in notes: `vault`, `git`, `research`, `ui`, `api`, `infrastructure`, `debug` (see rule table)
 - **Filter:** `-path:templates -file:README`
 - **Orphans:** ON — note ไม่ต้อง wikilink กัน
 - No hub file · no wikilink footers

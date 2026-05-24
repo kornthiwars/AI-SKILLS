@@ -8,59 +8,17 @@
   "collapse-color-groups": false,
   "colorGroups": [
     {
-      "query": "tag:#issues",
+      "query": "path:issues",
       "color": {
         "a": 1,
         "rgb": 14719769
       }
     },
     {
-      "query": "tag:#learning",
-      "color": {
-        "a": 1,
-        "rgb": 6066890
-      }
-    },
-    {
-      "query": "tag:#vault",
+      "query": "path:learnings",
       "color": {
         "a": 1,
         "rgb": 12065792
-      }
-    },
-    {
-      "query": "tag:#research",
-      "color": {
-        "a": 1,
-        "rgb": 10129152
-      }
-    },
-    {
-      "query": "tag:#git",
-      "color": {
-        "a": 1,
-        "rgb": 4521984
-      }
-    },
-    {
-      "query": "tag:#ui",
-      "color": {
-        "a": 1,
-        "rgb": 7833759
-      }
-    },
-    {
-      "query": "tag:#api",
-      "color": {
-        "a": 1,
-        "rgb": 13369344
-      }
-    },
-    {
-      "query": "tag:#infrastructure",
-      "color": {
-        "a": 1,
-        "rgb": 10066329
       }
     }
   ],
@@ -74,6 +32,5 @@
   "repelStrength": 12,
   "linkStrength": 0.5,
   "linkDistance": 200,
-  "scale": 0.6419479163601961,
   "close": false
 }
