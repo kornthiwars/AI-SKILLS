@@ -4,8 +4,8 @@ Inventory for `ai-skills/debug/`. Update when adding or removing files.
 
 | File | Role | Read when |
 |------|------|-----------|
-| [SKILL.md](SKILL.md) | D1–D6 workflow, Gate D, hard rules | Always on invoke |
-| [reference.md](reference.md) | Layers, fail path, pitfalls, rationalizations | Diagnosis depth, breadcrumbs |
+| [SKILL.md](SKILL.md) | Layers, Gate D, Quick ref, hard rules | Always on invoke |
+| [reference.md](reference.md) | § Workflow D0–D8 · layers · fail path · pitfalls | Per Quick ref step |
 | [assets/template.repro.md](assets/template.repro.md) | Repro steps | Start — before hypotheses |
 | [assets/template.evidence.md](assets/template.evidence.md) | API vs UI evidence | D2–D4 |
 | [assets/template.breadcrumb-ledger.md](assets/template.breadcrumb-ledger.md) | Experiment log | Each hypothesis run |

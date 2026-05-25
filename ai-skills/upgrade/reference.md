@@ -1,4 +1,4 @@
-# Upgrade — audit reference (v1.1.3)
+# Upgrade — audit reference (v1.1.4)
 
 ใช้เมื่อ **อัปเกรด skill อื่น** — เทียบกับ [SKILL-AUTHORING.md](../SKILL-AUTHORING.md) และ gold skills
 

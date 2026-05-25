@@ -4,8 +4,8 @@ Inventory for `ai-skills/flow-builder/`. Update when adding or removing files.
 
 | File | Role | Read when |
 |------|------|-----------|
-| [SKILL.md](SKILL.md) | Workflow F0–F4, Gate Flow, hard rules | Always on invoke |
-| [reference.md](reference.md) | Layers, repo discovery, pitfalls F1–F12 | F1+ detail, discipline |
+| [SKILL.md](SKILL.md) | Quick ref, Gate Flow verdict, hard rules | Always on invoke |
+| [reference.md](reference.md) | § Workflow F0–F4 · boundaries · repo discovery · pitfalls | Per Quick ref step |
 | [assets/template.action-flow.md](assets/template.action-flow.md) | Steps after trigger | F1 |
 | [assets/template.data-lineage.md](assets/template.data-lineage.md) | Field sources | F2 |
 | [assets/template.mutation-chain.md](assets/template.mutation-chain.md) | Create/update + ใช่มั้ย | F3 |

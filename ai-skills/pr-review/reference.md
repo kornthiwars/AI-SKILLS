@@ -1,4 +1,4 @@
-# reference — PR Review modes (v1.1.1)
+# reference — PR Review modes (v1.1.2)
 
 ## Modes matrix
 

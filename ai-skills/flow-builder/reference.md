@@ -1,6 +1,6 @@
-# reference — flow-builder (v1.0.1)
+# reference — flow-builder (v1.0.3)
 
-**Index:** Skill boundaries · Layers · Repo discovery · Pitfalls F1–F15 · Optional handoffs · Rationalizations · Red flags · Troubleshooting
+**Index:** Skill boundaries · **Workflow F0–F4** · Layers · Repo discovery · Pitfalls F1–F15 · Optional handoffs · Rationalizations · Red flags · Troubleshooting
 
 ## Skill boundaries (do not duplicate)
 
@@ -25,6 +25,60 @@
 | diagnosis report (debug) | **Bug** layers D1–D6 |
 
 Suggested HTTP rows in flow-spec are **skeletons for handoff** — not Gate Contract.
+
+## Workflow (F0–F4)
+
+Load per step in [SKILL.md](SKILL.md) Quick reference.
+
+### F0 — Intake
+
+Confirm required inputs. Echo scope in Thai.
+
+**Redirect (do not start F1–F4):**
+
+| User asks | Action |
+|-----------|--------|
+| How each **@skill** works / skill catalog | [ai-skills/README.md](../README.md) — **stop** |
+| Maintain or audit **AI-SKILLS** repo skills | `@upgrade` — **stop** |
+| Whole app or **many** buttons at once | Pick **one trigger** or `@feature-builder` — **stop** until scoped |
+| Data **already wrong** on screen | `@debug` — **stop** |
+
+If vague feature idea with **many** buttons, ask user to **pick one trigger** for this pass.
+
+### F1 — Action flow
+
+1. Load [template.action-flow.md](assets/template.action-flow.md).
+2. Build happy path: validate → network → UI feedback → navigation.
+3. Add mermaid `sequenceDiagram` when helpful.
+4. Tag evidence on API rows (`repo` | `user` | `assumed`).
+
+### F2 — Data lineage
+
+1. Load [template.data-lineage.md](assets/template.data-lineage.md).
+2. For each field user asked (or visible on screen): source = API path, local state, props, cache.
+3. If repo present: grep/read handler, store, query hooks — cite file path in Evidence.
+
+### F3 — Mutation chain
+
+1. Load [template.mutation-chain.md](assets/template.mutation-chain.md).
+2. Restate user hypothesis ("สร้างแล้วอัปเดต … ใช่มั้ย") if given.
+3. List Creates / Updates / Deletes per step; ask **User confirms** per row.
+4. **Stop** until user answers ใช่ / ไม่ / ไม่แน่ for every row (revise model on **ไม่**).
+
+### F4 — Gap check
+
+Run [checklist.flow-gaps.md](assets/checklist.flow-gaps.md). Record blockers.
+
+### Gate Flow
+
+Merge F1–F4 into [template.flow-spec.md](assets/template.flow-spec.md).
+
+| Verdict | Meaning |
+|---------|---------|
+| **Approved** | 0 blockers; mutations confirmed; gaps acceptable or documented |
+| **Revise** | open questions, user **ไม่** on chain, or critical gap |
+
+Paste flow-spec to user. Optional: suggest `docs/flows/<name>.md` in app repo (user commits via `@git-push`).
 
 ## Layers
 
