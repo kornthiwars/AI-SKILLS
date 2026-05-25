@@ -13,6 +13,7 @@ Universal index: [AGENTS.md](../AGENTS.md)
 | UI Builder | 1.0.2 | [ui-builder/](ui-builder/SKILL.md) |
 | API Builder | 1.0.3 | [api-builder/](api-builder/SKILL.md) |
 | Feature Builder | 1.1.2 | [feature-builder/](feature-builder/SKILL.md) |
+| Flow Builder | 1.0.0 | [flow-builder/](flow-builder/SKILL.md) |
 | Debug | 1.0.4 | [debug/](debug/SKILL.md) |
 | PR Review | 1.0.5 | [pr-review/](pr-review/SKILL.md) — incl. P10b dead/unused code |
 | Git Push | 2.0.2 | [git-push/](git-push/SKILL.md) — safety + push; no code review |
@@ -27,6 +28,7 @@ Universal index: [AGENTS.md](../AGENTS.md)
 | อยากทำอะไร | ใช้ skill |
 |------------|---------|
 | ฟีเจอร์ครบ FE+BE (login, checkout) | `@feature-builder` |
+| ไล่ flow ปุ่ม/ข้อมูล/สร้าง-อัปเดต ก่อนลงมือ | `@flow-builder` |
 | สร้าง/แก้ API, contract, migration | `@api-builder` |
 | UI ตรง mockup / Figma / screenshot | `@ui-builder` |
 | ข้อมูลหรือ logic บนจอผิด (API ถูกแล้ว) | `@debug` |
@@ -60,6 +62,29 @@ Universal index: [AGENTS.md](../AGENTS.md)
 **ลำดับลูก:** `@api-builder` (Ship) → handoff → `@ui-builder` (Gate A→B)
 
 **วิธีรัน:** `feature-builder/assets/template.runbook.md` · **รูปแบบตอบ agent:** `template.reply.md` (ทุกเทิร์น)
+
+**แนะนำ (ไม่บังคับ):** ถ้ายังไม่ชัดปุ่ม/ข้อมูล/สร้าง-อัปเดต → `@flow-builder` ก่อน F0 แล้ว paste `flow-spec` ใน F0
+
+---
+
+### `@flow-builder` — ไล่ flow ก่อนลงมือ
+
+**ใช้เมื่อ**
+- อยากรู้ **กดปุ่มนี้แล้วเกิดอะไร** (ขั้นตอน, API, redirect)
+- **ข้อมูลบนจอมาจากไหน** (GET path, state, cache)
+- คิดว่า **กดแล้วสร้าง X แล้วอัปเดต Y** — ต้องการยืนยัน **ใช่มั้ย** ก่อน implement
+
+**ต้องมีก่อนเริ่ม**
+- Trigger (ปุ่ม/เหตุการณ์) + หน้าจอ/โซน
+- ผลที่คาด (1–3 ประโยค)
+- repo แอป หรือ requirement อย่างเดียว
+
+**อย่าใช้เมื่อ**
+- ของพังบนจอแล้ว → `@debug`
+- สร้าง API/UI จริง → `@api-builder` / `@ui-builder`
+- ฟีเจอร์ครบ FE+BE พร้อมแผน phase → `@feature-builder` (อาจแนบ flow-spec หลัง Gate Flow)
+
+**Deliverable:** `template.flow-spec.md` — Gate Flow **Approved** | **Revise**
 
 ---
 
@@ -185,6 +210,14 @@ Universal index: [AGENTS.md](../AGENTS.md)
 implement (skill งาน) → @pr-review → ready → @git-push
 ```
 
+### ไม่ชัด flow ปุ่ม / ข้อมูล / สร้าง-อัปเดต
+
+```
+@flow-builder (Gate Flow Approved + flow-spec)
+  → @api-builder และ/หรือ @ui-builder ตามต้องการ
+  → หรือ @feature-builder (แนบ flow-spec ใน F0)
+```
+
 ### ฟีเจอร์ login ครบ stack
 
 ```
@@ -215,4 +248,5 @@ implement (skill งาน) → @pr-review → ready → @git-push
 | git status / commit / push (skill งาน) | `@git-push` |
 | รีวิวโค้ดก่อน push (skill งาน) | `@pr-review` |
 | รวม UI + API ใน skill เดียว | `@feature-builder` แล้วส่งต่อ |
+| ไล่ flow ก่อน implement | `@flow-builder` |
 | แก้ skill canonical ระหว่างทำแอป | `@upgrade` (repo นี้เท่านั้น) |

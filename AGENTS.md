@@ -40,6 +40,7 @@ Entry: [CLAUDE.md](CLAUDE.md) → `@AGENTS.md`
 | Skill | Use when |
 |-------|----------|
 | [feature-builder](ai-skills/feature-builder/SKILL.md) | Full FE+BE feature |
+| [flow-builder](ai-skills/flow-builder/SKILL.md) | Pre-build flow, data lineage, mutations |
 | [api-builder](ai-skills/api-builder/SKILL.md) | API, contract, migration |
 | [ui-builder](ai-skills/ui-builder/SKILL.md) | UI from mockup / Figma |
 | [debug](ai-skills/debug/SKILL.md) | Wrong data/logic on screen |

@@ -104,6 +104,7 @@ Manual smoke only in v1 ([integration-checklist](assets/checklist.integration.md
 
 | Situation | Skill |
 |-----------|-------|
+| Unclear button/data/create-update before F0 | `@flow-builder` (optional) → paste flow-spec in F0 |
 | Endpoint/validation/DB | `@api-builder` |
 | Pixel/layout vs ref | `@ui-builder` |
 | JSON correct, UI map wrong | `@debug` |

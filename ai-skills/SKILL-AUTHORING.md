@@ -25,6 +25,7 @@ ai-skills/                         # repo root (canonical)
 ├── ui-builder/
 ├── api-builder/
 ├── feature-builder/               # orchestrate FE+BE → api + ui
+├── flow-builder/                  # pre-build flow + data lineage + mutations
 ├── debug/                         # data/logic diagnosis
 ├── upgrade/                       # maintain skills ใน repo นี้
 ├── pr-review/                     # self-review ก่อน push
@@ -60,6 +61,7 @@ ai-skills/                         # repo root (canonical)
 | [ui-builder](ui-builder/SKILL.md) | ✓ | `template.viewport-spec`, `template.breakpoints-spec`, `template.gate-b`, `checklist.quality-tier` |
 | [api-builder](api-builder/SKILL.md) | ✓ | `template.contract-spec`, `template.crud-pack`, `template.endpoint-delta`, `template.handoff-to-ui` |
 | [feature-builder](feature-builder/SKILL.md) | ✓ | `template.feature-spec`, `template.phase-plan`, `template.api-invoke-packet`, `template.ui-invoke-packet`, `template.runbook`, `template.reply`, `checklist.integration` |
+| [flow-builder](flow-builder/SKILL.md) | ✓ | `template.action-flow`, `template.data-lineage`, `template.mutation-chain`, `template.flow-spec`, `template.reply`, `checklist.flow-gaps` |
 | [debug](debug/SKILL.md) | ✓ | `template.repro`, `template.evidence`, `template.diagnosis-report`, `template.breadcrumb-ledger`, `template.post-fix-learning` |
 | [pr-review](pr-review/SKILL.md) | ✓ | `template.review-comment` |
 | [git-push](git-push/SKILL.md) | — | `FILES.md` + `reference.md` only |
@@ -108,6 +110,7 @@ Agent Skills โหลดเป็น 3 ชั้น ([agentskills.io](https://a
 | Phase | Skill |
 |-------|--------|
 | สเปก / ฟีเจอร์ทั้งก้อน | `@feature-builder` |
+| ไล่ flow ปุ่ม/ข้อมูลก่อนลงมือ | `@flow-builder` |
 | API | `@api-builder` |
 | UI ตรงรูป | `@ui-builder` |
 | ข้อมูล/logic ผิด | `@debug` |
