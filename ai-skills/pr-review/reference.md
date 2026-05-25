@@ -1,24 +1,26 @@
-# reference — PR Review modes
+# reference — PR Review modes (v1.1.0)
 
 ## Modes matrix
 
-| Check | bugs | production | scale-security |
-|-------|:----:|:----------:|:--------------:|
-| P1 Intent / scope | req | req | req |
-| P2 Scope creep | req | req | req |
-| P3 Security / secrets | req | req | **req+** |
-| P4 Correctness / edge cases | **req+** | req | req |
-| P5 API contract / breaking | note | req | req |
-| P6 Data / migration | note | req | **req+** |
-| P7 Tests | note | req | req |
-| P8 Error handling | **req+** | req | req |
-| P9 Performance | note | req | **req+** |
-| P10 Maintainability | note | req | req |
-| P10b Dead / unused code | note | **req** | note |
-| P11 Docs / changelog | skip | req | req |
-| P12 Prior gate evidence | skip | req | note |
+| Check | bugs | production | clean-code | scale-security |
+|-------|:----:|:----------:|:----------:|:--------------:|
+| P1 Intent / scope | req | req | req | req |
+| P2 Scope creep | req | req | req | req |
+| P3 Security / secrets | req | req | req (blocker if found) | **req+** |
+| P4 Correctness / edge cases | **req+** | req | skip | req |
+| P5 API contract / breaking | note | req | skip | req |
+| P6 Data / migration | note | req | skip | **req+** |
+| P7 Tests | note | req | skip | req |
+| P8 Error handling | **req+** | req | skip | req |
+| P9 Performance | note | req | skip | **req+** |
+| P10 Maintainability | note | req | **req+** | req |
+| P10b Dead / unused code | note | **req** | **req** | note |
+| P10c Clean code (diff) | skip | note | **req+** | skip |
+| P11 Docs / changelog | skip | req | skip | req |
+| P12 Prior gate evidence | skip | req | skip | note |
 
-**req+** = extra scrutiny (more rows in table)
+**req+** = extra scrutiny (more rows in table)  
+**skip** = do not run unless user asks combo with another mode
 
 ### Mode one-liners
 
@@ -26,7 +28,20 @@
 |------|------|-------------------|
 | `bugs` | ก่อน commit | Review for bugs and edge cases |
 | `production` | ก่อน PR | Review for production readiness |
+| `clean-code` | ก่อน PR / หลัง implement | Structure, naming, DRY, hygiene in **diff** |
 | `scale-security` | ก่อน deploy | Scalability, security, and performance |
+
+### clean-code vs production
+
+| Topic | `clean-code` | `production` |
+|-------|--------------|----------------|
+| Naming, DRY, file size in diff | **focus** | partial (P10) |
+| Tests, docs, API contract | skip | req |
+| Edge cases / auth paths | skip | req |
+| Dead/unused in diff | **req** (P10b) | req |
+| Ship bar | 0 blockers for **clean-code** only | full production checklist |
+
+Not a separate skill — same `ready` / `revise` + `@git-push` handoff.
 
 ---
 
@@ -123,6 +138,40 @@ Scope: **diff only** — do not repo-wide purge unless user asks. Prefer grep/ID
 
 **Not here:** runtime memory leaks, deleting files user did not change — suggest separate cleanup task.
 
+## P10c Clean code (diff-only)
+
+**Scope:** files and hunks in this batch only — no repo-wide refactor sprint.
+
+| Find | Severity |
+|------|----------|
+| Unused import / variable introduced in diff | major |
+| New export with zero references in app code | major |
+| Large commented-out block left in diff | major |
+| Duplicate logic block copy-pasted in diff | major |
+| Function/component clearly too long **in changed file** (e.g. >>80 lines added without split) | major · **note** if user justified |
+| Naming inconsistent with surrounding module (casing, abbreviations) | major · nit for trivial |
+| Magic number/string in diff without named constant | note · major if repeated |
+| Business logic in UI layer (or API in view) introduced in diff | major |
+| Deep nesting added in diff (hard to follow) | note · major if extreme |
+| Drive-by rename/format unrelated to feature | major (also P2) |
+
+**blocker:** security-sensitive copy-paste (also P3) · secrets in diff
+
+**Not here:** pixel/layout (`@ui-builder`) · full OpenAPI review · monorepo dead-code purge · large refactor user did not scope — suggest follow-up PR
+
+**Token:** symbols and files **touched in diff** — do not read entire codebase for style.
+
+## Performance line by mode
+
+Always output **Performance (TH):** one sentence at end of deliverable.
+
+| Mode | Line (TH example) |
+|------|-------------------|
+| `bugs` | โฟกัส logic/edge — perf เฉพาะ regression ชัดใน diff |
+| `production` | สรุป perf ระดับ PR (pagination, N+1 ชัด) ตาม § P9 |
+| `clean-code` | โหมด clean-code — ไม่สแกน perf เต็ม; ใช้ `scale-security` ถ้าต้องการ |
+| `scale-security` | สรุปตาม § P9 ทุก layer ที่เกี่ยวกับ diff |
+
 ## P11 Docs / changelog
 
 - public API / env vars documented?
@@ -159,7 +208,7 @@ Same mode + unchanged diff → may cite prior verdict timestamp and only scan ne
 
 When Step 0 runs, use the tool **AskQuestion** — do not invent a text-only menu. Single-select only.
 
-If the environment has no AskQuestion, show the three options as a numbered list and **stop** until user replies with `bugs`, `production`, or `scale-security`.
+If the environment has no AskQuestion, show the four options as a numbered list and **stop** until user replies with `bugs`, `production`, `clean-code`, or `scale-security`.
 
 ## Common rationalizations (agent discipline)
 
@@ -167,6 +216,8 @@ If the environment has no AskQuestion, show the three options as a numbered list
 |-----------------|---------|
 | "ready เลย ไม่มี blocker ชัด" | `ready` = 0 blockers **สำหรับโหมดนี้** — ต้องมีตาราง |
 | "production ครอบ bugs แล้ว" | เลือกโหมดตรงงาน — bugs เล็กไม่ต้อง production ทุกครั้ง |
+| "clean-code แทน production ได้" | clean-code ไม่มี tests/docs/contract — รัน production ถ้าจะ push PR จริง |
+| "clean-code = ลบไฟล์ทั้ง repo" | P10b/P10c = **diff only** |
 | "ข้าม AskQuestion user บอก push" | Step 0 บังคับถ้าไม่ระบุโหมด |
 | "git-push จะรีวิวโค้ดให้" | git-push v2 ไม่รีวิวโค้ด — ใช้ pr-review ก่อนถ้าต้องการ |
 | "waive ทุก major ในหัว" | major waive ต้องเขียนใน chat ต่อแถว |

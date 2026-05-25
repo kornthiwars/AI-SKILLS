@@ -15,7 +15,7 @@ Universal index: [AGENTS.md](../AGENTS.md)
 | Feature Builder | 1.1.3 | [feature-builder/](feature-builder/SKILL.md) |
 | Flow Builder | 1.0.1 | [flow-builder/](flow-builder/SKILL.md) |
 | Debug | 1.0.5 | [debug/](debug/SKILL.md) |
-| PR Review | 1.0.5 | [pr-review/](pr-review/SKILL.md) — incl. P10b dead/unused code |
+| PR Review | 1.1.0 | [pr-review/](pr-review/SKILL.md) — modes: bugs, production, clean-code, scale-security |
 | Git Push | 2.0.2 | [git-push/](git-push/SKILL.md) — safety + push; no code review |
 | Upgrade | 1.1.2 | [upgrade/](upgrade/SKILL.md) |
 
@@ -32,7 +32,8 @@ Universal index: [AGENTS.md](../AGENTS.md)
 | สร้าง/แก้ API, contract, migration | `@api-builder` |
 | UI ตรง mockup / Figma / screenshot | `@ui-builder` |
 | ข้อมูลหรือ logic บนจอผิด (API ถูกแล้ว) | `@debug` |
-| รีวิวงานก่อน push / PR / deploy | `@pr-review` |
+| รีวิวงานก่อน push / PR / deploy | `@pr-review` (เลือกโหมด) |
+| โครงสร้างโค้ด / naming / dead code ใน diff | `@pr-review` → `clean-code` |
 | commit + push ขึ้น remote | `@git-push` |
 | แก้ skill ใน repo นี้ | `@upgrade` |
 
@@ -153,9 +154,18 @@ Universal index: [AGENTS.md](../AGENTS.md)
 - ต้องการ verdict `ready` หรือ `revise` + ตาราง findings
 
 **ต้องมีก่อนเริ่ม**
-- **Mode:** `bugs` | `production` | `scale-security` (ไม่ระบุ → เลือกจากเมนู)
+- **Mode:** `bugs` | `production` | `clean-code` | `scale-security` (ไม่ระบุ → เลือกจากเมนู)
 - Scope สั้นๆ ว่างานชุดนี้ควรทำอะไร
 - Diff scope (default: unstaged + staged)
+
+| Mode | โฟกัส |
+|------|--------|
+| `bugs` | edge cases, logic |
+| `production` | readiness ครบ (tests, docs, contract) |
+| `clean-code` | naming, DRY, hygiene, P10b ใน **diff** — ไม่แทน production |
+| `scale-security` | perf, security, scale ก่อน deploy |
+
+**Combo ที่ใช้บ่อย:** `bugs` → `clean-code` (optional) → `production` → `@git-push`
 
 **อย่าใช้เมื่อ**
 - งานยังไม่เสร็จ

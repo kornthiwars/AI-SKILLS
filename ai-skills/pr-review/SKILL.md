@@ -2,9 +2,10 @@
 name: pr-review
 description: >-
   PR Review — author self-review before commit, PR, or deploy. Modes: bugs (edge
-  cases), production (readiness), scale-security (scalability, security, performance).
-  User picks mode via select when not specified. Triggers on /pr-review, @pr-review,
-  pr review, รีวิวก่อน push, รีวิวก่อน commit, production readiness, scalability review,
+  cases), production (readiness), clean-code (structure, naming, hygiene in diff),
+  scale-security (scalability, security, performance). User picks mode via select when
+  not specified. Triggers on /pr-review, @pr-review, pr review, รีวิวก่อน push,
+  รีวิวก่อน commit, production readiness, clean code, code smell, refactor hygiene,
   dead code, unused code, โค้ดไม่ใช้, ลบโค้ดค้าง.
   Does not apply to pixel/mockup (ui-builder), API implementation (api-builder),
   full feature orchestration (feature-builder), debugging fixes (debug), ai-skills repo
@@ -12,7 +13,7 @@ description: >-
 compatibility: Cursor and Claude Code; read-only review; AskQuestion for mode when not specified
 disable-model-invocation: true
 metadata:
-  version: "1.0.5"
+  version: "1.1.0"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -28,21 +29,21 @@ Details: [reference.md](reference.md)
 ## Operating stance
 
 - **Author gate** — you are reviewing your own batch of work, not a stranger's PR on GitHub
-- **Mode drives depth** — `bugs` < `production` < `scale-security` ([reference.md](reference.md) § Modes)
+- **Mode drives depth** — pick one checklist ([reference.md](reference.md) § Modes); `clean-code` ≠ full `production`
 - **Read-only** — do not edit files unless user asks to fix findings in the same session
 - **Hand off git** — after `ready`, tell user `@git-push`; never run `git add` / `commit` / `push`
 - **Token** — one mode per pass unless user asks for combo; load [reference.md](reference.md) § for active mode only — not full file at start
 
 ## Language
 
-- **70% ไทย / 30% อังกฤษ** — สรุป findings, คำถาม, ข้อเสนอแก้เป็นภาษาไทย; ใช้อังกฤษ ~30% สำหรับ mode ids (bugs, production, scale-security), severity, ready/revise, blocker, P1–P9
+- **70% ไทย / 30% อังกฤษ** — สรุป findings, คำถาม, ข้อเสนอแก้เป็นภาษาไทย; ใช้อังกฤษ ~30% สำหรับ mode ids (bugs, production, clean-code, scale-security), severity, ready/revise, blocker, P1–P10c
 - **Mix ธรรมชาติ** — เช่น "โหมด **production** — ผล **ready** มี blocker 0 จุด"
 - **Gloss ครั้งแรกต่อ reply** — `ready (พร้อม push)`, `revise (ต้องแก้ก่อน)`, `blocker (ต้องแก้)`
 - **ไม่แปล** — file paths, mode ids ในตาราง
 
 ## Required inputs
 
-- [ ] **Mode** — `bugs` | `production` | `scale-security` (from select or user message)
+- [ ] **Mode** — `bugs` | `production` | `clean-code` | `scale-security` (from select or user message)
 - [ ] **Scope** — feature name or 1–2 sentences what this batch should achieve
 - [ ] **Diff scope** — default: unstaged + staged; or `main...HEAD` if user names a base branch
 
@@ -67,6 +68,7 @@ Detect mode from message (skip AskQuestion if any match):
 | `bugs` | `bugs`, `ก่อน commit`, `edge case`, `bug review` |
 | `production` | `production`, `ก่อน PR`, `production readiness`, `พร้อม PR` |
 | `scale-security` | `scale-security`, `scale`, `ก่อน deploy`, `scalability`, `security review` |
+| `clean-code` | `clean-code`, `clean code`, `code smell`, `refactor hygiene`, `maintainability`, `โค้ดสะอาด`, `clean code review` |
 
 **AskQuestion** (exact shape — single choice):
 
@@ -81,11 +83,12 @@ Detect mode from message (skip AskQuestion if any match):
 | `bugs` | ก่อน commit — Review for bugs and edge cases |
 | `production` | ก่อน PR — Review for production readiness |
 | `scale-security` | ก่อน deploy — Scalability, security, and performance |
+| `clean-code` | โครงสร้างโค้ด — Naming, DRY, hygiene in diff (not full production pass) |
 
 After the user selects (or types mode in chat), echo:
 
 ```text
-[pr-review] mode: <bugs|production|scale-security>
+[pr-review] mode: <bugs|production|clean-code|scale-security>
 ```
 
 Then continue from Step 1.
@@ -115,7 +118,9 @@ Inspect changed files in the workspace (open files around hunks). User may paste
 
 Run only checks marked **required** for the active mode in [reference.md](reference.md) § Modes.
 
-Include **P10b Dead / unused code** when in diff scope — [reference.md](reference.md) § P10b (diff-only, no full-repo purge).
+**clean-code:** load § Modes matrix column + [reference.md](reference.md) § P10c — always include **P10b** (diff-only).
+
+**Other modes:** include **P10b** when in diff scope — [reference.md](reference.md) § P10b (no full-repo purge).
 
 Record every **blocker** and **major** in the output table. **nit** / **note** optional.
 
@@ -126,7 +131,7 @@ Record every **blocker** and **major** in the output table. **nit** / **note** o
 | **ready** | 0 blockers for this mode; user may proceed to `@git-push` (or deploy for `scale-security`) |
 | **revise** | ≥1 blocker or user should fix majors before push/deploy |
 
-**Performance line (required):** one Thai sentence — see reference § P9.
+**Performance line (required):** one Thai sentence — [reference.md](reference.md) § Performance line by mode.
 
 ### 4 — Handoff
 
@@ -166,19 +171,20 @@ Next: …
 
 ## Combo (optional)
 
-User may run **two modes** on the same diff in one session:
+User may run **multiple modes** on the same diff in one session (separate invokes):
 
-1. `@pr-review` → select `bugs` → `ready`
-2. `@pr-review` → select `production` → `ready`
-3. then `@git-push`
+1. `@pr-review` → `bugs` → `ready`
+2. `@pr-review` → `clean-code` → `ready` (optional between bugs and production)
+3. `@pr-review` → `production` → `ready`
+4. then `@git-push`
 
-Do not merge checklists without running both modes.
+Do not merge checklists without running each mode. `clean-code` does **not** replace `production`.
 
 ## Resources
 
 | File | Use |
 |------|-----|
-| [reference.md](reference.md) | P1–P12 + P10b dead code · § Rationalizations / Red flags |
+| [reference.md](reference.md) | P1–P12 · P10b · P10c clean-code · § Rationalizations / Red flags |
 | [assets/template.review-comment.md](assets/template.review-comment.md) | Paste-ready summary |
 
 Canonical: `ai-skills/pr-review/`
