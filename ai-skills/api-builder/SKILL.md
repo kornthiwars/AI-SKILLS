@@ -14,7 +14,7 @@ description: >-
 compatibility: Cursor and Claude Code; project test runner and HTTP client; OpenAPI/GraphQL schema when present; stack conventions in reference.md
 disable-model-invocation: true
 metadata:
-  version: "1.0.2"
+  version: "1.0.3"
   author: kornthiwars
   license: MIT
   surfaces:

@@ -12,7 +12,7 @@ description: >-
 compatibility: Cursor and Claude Code; read-only review; AskQuestion for mode when not specified
 disable-model-invocation: true
 metadata:
-  version: "1.0.4"
+  version: "1.0.5"
   author: kornthiwars
   license: MIT
   surfaces:

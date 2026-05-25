@@ -11,7 +11,7 @@ description: >-
 compatibility: Cursor and Claude Code; project test runner and HTTP client; optional browser MCP for repro
 disable-model-invocation: true
 metadata:
-  version: "1.0.3"
+  version: "1.0.4"
   author: kornthiwars
   license: MIT
   surfaces:

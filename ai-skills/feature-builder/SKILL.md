@@ -11,7 +11,7 @@ description: >-
 compatibility: Cursor and Claude Code; orchestrates api-builder and ui-builder in user app repo; no implementation in this skill
 disable-model-invocation: true
 metadata:
-  version: "1.1.1"
+  version: "1.1.2"
   author: kornthiwars
   license: MIT
   surfaces:

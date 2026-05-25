@@ -10,13 +10,13 @@ Universal index: [AGENTS.md](../AGENTS.md)
 
 | Skill | Version | Path |
 |-------|---------|------|
-| UI Builder | 1.0.1 | [ui-builder/](ui-builder/SKILL.md) |
-| API Builder | 1.0.2 | [api-builder/](api-builder/SKILL.md) |
-| Feature Builder | 1.1.1 | [feature-builder/](feature-builder/SKILL.md) |
-| Debug | 1.0.3 | [debug/](debug/SKILL.md) |
-| PR Review | 1.0.4 | [pr-review/](pr-review/SKILL.md) — incl. P10b dead/unused code |
-| Git Push | 2.0.0 | [git-push/](git-push/SKILL.md) — safety + push; no code review |
-| Upgrade | 1.1.1 | [upgrade/](upgrade/SKILL.md) |
+| UI Builder | 1.0.2 | [ui-builder/](ui-builder/SKILL.md) |
+| API Builder | 1.0.3 | [api-builder/](api-builder/SKILL.md) |
+| Feature Builder | 1.1.2 | [feature-builder/](feature-builder/SKILL.md) |
+| Debug | 1.0.4 | [debug/](debug/SKILL.md) |
+| PR Review | 1.0.5 | [pr-review/](pr-review/SKILL.md) — incl. P10b dead/unused code |
+| Git Push | 2.0.2 | [git-push/](git-push/SKILL.md) — safety + push; no code review |
+| Upgrade | 1.1.2 | [upgrade/](upgrade/SKILL.md) |
 
 คู่มือสร้าง/แก้ skill: [SKILL-AUTHORING.md](SKILL-AUTHORING.md)
 

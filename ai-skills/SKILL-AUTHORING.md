@@ -31,13 +31,20 @@ ai-skills/                         # repo root (canonical)
 └── git-push/                      # sole git CLI skill
 ```
 
-**Cursor mirror:** junction `.cursor/skills` → `ai-skills` (ดู [scripts/README.md](../scripts/README.md))
+**Cursor links (install root):** รัน setup ด้วย `-InstallRoot` = workspace ที่เปิดใน Cursor — สร้างที่ `<workspace>/.cursor/`:
+
+- `skills` → `ai-skills/`
+- `rules` → `ai-rules/`
+- `vault` → `vault/` (canonical ใน clone)
+
+ดู [scripts/README.md](../scripts/README.md) · แก้เนื้อหาที่ `ai-skills/` / `ai-rules/` / `vault/` เท่านั้น — ไม่แก้ใน `.cursor/` โดยตรง
 
 ### โครงสร้างต่อ skill
 
 ```
 <skill-name>/
 ├── SKILL.md              # บังคับ — workflow, gates, hard rules (agentskills.io)
+├── FILES.md              # inventory — ตรงไฟล์จริง; อัปเมื่อเพิ่ม/ลบไฟล์
 ├── reference.md          # รายละเอียดลึก, pitfalls, gate forms
 └── assets/               # optional — template.* · checklist.*
     ├── template.{topic}.md
@@ -55,8 +62,8 @@ ai-skills/                         # repo root (canonical)
 | [feature-builder](feature-builder/SKILL.md) | ✓ | `template.feature-spec`, `template.phase-plan`, `template.api-invoke-packet`, `template.ui-invoke-packet`, `template.runbook`, `template.reply`, `checklist.integration` |
 | [debug](debug/SKILL.md) | ✓ | `template.repro`, `template.evidence`, `template.diagnosis-report`, `template.breadcrumb-ledger`, `template.post-fix-learning` |
 | [pr-review](pr-review/SKILL.md) | ✓ | `template.review-comment` |
-| [git-push](git-push/SKILL.md) | — | (reference only) |
-| [upgrade](upgrade/SKILL.md) | — | (reference only) |
+| [git-push](git-push/SKILL.md) | — | `FILES.md` + `reference.md` only |
+| [upgrade](upgrade/SKILL.md) | — | `FILES.md` + `reference.md` only |
 
 ## Git operations — `@git-push` · `@pr-review` optional
 

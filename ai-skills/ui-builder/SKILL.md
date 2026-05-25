@@ -15,7 +15,7 @@ description: >-
 compatibility: Cursor and Claude Code; cursor-ide-browser MCP; npx serve for preview; file:// blocked in agent browser
 disable-model-invocation: true
 metadata:
-  version: "1.0.1"
+  version: "1.0.2"
   author: kornthiwars
   license: MIT
   surfaces:

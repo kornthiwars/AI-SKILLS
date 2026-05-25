@@ -10,7 +10,7 @@ description: >-
 compatibility: Cursor and Claude Code; git CLI; gh for PR only when user asks
 disable-model-invocation: true
 metadata:
-  version: "2.0.0"
+  version: "2.0.2"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -62,7 +62,7 @@ If nothing to push and nothing to commit, report and **stop**.
 - **Never** run `git push` without push confirmation after step 3 table
 - **Stop after step 3** when confirmation is missing — step 4 only after user confirms
 - **Do not** create commits unless user asked to commit (or "push my work" with uncommitted changes)
-- **AI-SKILLS staging** — stage only paths in [reference.md](reference.md) § AI-SKILLS repo; **never** `.cursor/*`, `.claude/*` junctions or `vault/issues|learnings/*.md` notes
+- **AI-SKILLS staging** — stage only paths in [reference.md](reference.md) § AI-SKILLS repo; **never** `.cursor/*` junctions (skills, rules, vault, `ai-skills-vault.json`) or `vault/issues|learnings/*.md` notes
 
 ## Quick reference
 
