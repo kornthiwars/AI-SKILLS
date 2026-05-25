@@ -10,7 +10,7 @@ description: >-
 compatibility: Cursor and Claude Code; edits under ai-skills/ only; no app UI/API implementation
 disable-model-invocation: true
 metadata:
-  version: "1.1.2"
+  version: "1.1.3"
   author: kornthiwars
   license: MIT
   surfaces:

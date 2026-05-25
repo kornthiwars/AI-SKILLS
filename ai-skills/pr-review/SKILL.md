@@ -13,7 +13,7 @@ description: >-
 compatibility: Cursor and Claude Code; read-only review; AskQuestion for mode when not specified
 disable-model-invocation: true
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -130,6 +130,8 @@ Record every **blocker** and **major** in the output table. **nit** / **note** o
 |---------|---------|
 | **ready** | 0 blockers for this mode; user may proceed to `@git-push` (or deploy for `scale-security`) |
 | **revise** | ≥1 blocker or user should fix majors before push/deploy |
+
+**Ship confidence:** `ready` = 0 blockers **for this mode only** — see [reference.md](reference.md) § Ship confidence (`clean-code` ≠ “โค้ดไม่พัง”).
 
 **Performance line (required):** one Thai sentence — [reference.md](reference.md) § Performance line by mode.
 

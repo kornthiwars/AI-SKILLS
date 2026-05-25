@@ -44,7 +44,7 @@ Entry: [CLAUDE.md](CLAUDE.md) → `@AGENTS.md`
 | [api-builder](ai-skills/api-builder/SKILL.md) | API, contract, migration |
 | [ui-builder](ai-skills/ui-builder/SKILL.md) | UI from mockup / Figma |
 | [debug](ai-skills/debug/SKILL.md) | Wrong data/logic on screen |
-| [pr-review](ai-skills/pr-review/SKILL.md) | Self-review before push |
+| [pr-review](ai-skills/pr-review/SKILL.md) | Self-review before push — modes: bugs, production, clean-code, scale-security |
 | [git-push](ai-skills/git-push/SKILL.md) | Commit + push (sole git skill) |
 | [upgrade](ai-skills/upgrade/SKILL.md) | Maintain skills in this repo |
 

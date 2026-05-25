@@ -1,4 +1,4 @@
-# reference — PR Review modes (v1.1.0)
+# reference — PR Review modes (v1.1.1)
 
 ## Modes matrix
 
@@ -42,6 +42,30 @@
 | Ship bar | 0 blockers for **clean-code** only | full production checklist |
 
 Not a separate skill — same `ready` / `revise` + `@git-push` handoff.
+
+## Ship confidence (what `ready` means)
+
+`ready` is **per mode only** — it does not guarantee the app will not break at runtime.
+
+| Mode | `ready` means | Does **not** guarantee |
+|------|---------------|-------------------------|
+| `clean-code` | 0 blockers on hygiene in **diff** (P10c, P10b, P1–P2) | Correctness, tests, full PR readiness |
+| `bugs` | 0 blockers on logic/edge in scope | Style-only pass; production checklist |
+| `production` | 0 blockers on PR readiness checklist | Deploy-scale perf/security (use `scale-security`) |
+| `scale-security` | 0 blockers on perf/security layers in scope | Pixel-perfect UI |
+
+**If user asks “clean-code แล้วมั่นใจไม่พัง?”** — answer in Thai: hygiene ลดความเสี่ยงซ่อนเร้ง; ต้องรัน `bugs` + มักต้อง `production` + test/build ในโปรเจกต์
+
+**Suggested combo before push (app repo):**
+
+```text
+@pr-review bugs → ready
+@pr-review clean-code → ready   (optional)
+@pr-review production → ready
+@git-push
+```
+
+State which modes already `ready` when user pastes verdict to git-push.
 
 ---
 
@@ -218,6 +242,7 @@ If the environment has no AskQuestion, show the four options as a numbered list 
 | "production ครอบ bugs แล้ว" | เลือกโหมดตรงงาน — bugs เล็กไม่ต้อง production ทุกครั้ง |
 | "clean-code แทน production ได้" | clean-code ไม่มี tests/docs/contract — รัน production ถ้าจะ push PR จริง |
 | "clean-code = ลบไฟล์ทั้ง repo" | P10b/P10c = **diff only** |
+| "clean-code ready = โค้ดไม่พัง" | อธิบาย § Ship confidence — แนะนำ bugs + production |
 | "ข้าม AskQuestion user บอก push" | Step 0 บังคับถ้าไม่ระบุโหมด |
 | "git-push จะรีวิวโค้ดให้" | git-push v2 ไม่รีวิวโค้ด — ใช้ pr-review ก่อนถ้าต้องการ |
 | "waive ทุก major ในหัว" | major waive ต้องเขียนใน chat ต่อแถว |
@@ -225,7 +250,7 @@ If the environment has no AskQuestion, show the four options as a numbered list 
 ## Red flags
 
 - Verdict `ready` โดยไม่มี `| ID | severity | file:line |`
-- โหมด `scale-security` แต่ไม่มีบรรทัด Performance (TH)
+- โหมด `scale-security` หรือ `clean-code` แต่ไม่มีบรรทัด Performance (TH) ตาม § Performance line by mode
 - รีวิว pixel/layout แทน logic — ส่ง `@ui-builder`
 - รัน `git add` / `commit` ใน skill นี้
 - User ขอ deploy prod แต่ verdict `revise`

@@ -15,9 +15,9 @@ Universal index: [AGENTS.md](../AGENTS.md)
 | Feature Builder | 1.1.3 | [feature-builder/](feature-builder/SKILL.md) |
 | Flow Builder | 1.0.1 | [flow-builder/](flow-builder/SKILL.md) |
 | Debug | 1.0.5 | [debug/](debug/SKILL.md) |
-| PR Review | 1.1.0 | [pr-review/](pr-review/SKILL.md) — modes: bugs, production, clean-code, scale-security |
+| PR Review | 1.1.1 | [pr-review/](pr-review/SKILL.md) — modes: bugs, production, clean-code, scale-security |
 | Git Push | 2.0.2 | [git-push/](git-push/SKILL.md) — safety + push; no code review |
-| Upgrade | 1.1.2 | [upgrade/](upgrade/SKILL.md) |
+| Upgrade | 1.1.3 | [upgrade/](upgrade/SKILL.md) |
 
 คู่มือสร้าง/แก้ skill: [SKILL-AUTHORING.md](SKILL-AUTHORING.md)
 
@@ -234,7 +234,7 @@ implement (skill งาน) → @pr-review → ready → @git-push
 @feature-builder (แผน)
   → @api-builder (contract + implement + Ship)
   → @ui-builder (Gate A→B ตาม ref)
-  → @pr-review → @git-push
+  → @pr-review bugs → @pr-review clean-code (optional) → @pr-review production → @git-push
 ```
 
 ### UI ตรงรูป แต่ตัวเลขผิด

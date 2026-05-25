@@ -1,4 +1,4 @@
-# Upgrade — audit reference (v1.1.2)
+# Upgrade — audit reference (v1.1.3)
 
 ใช้เมื่อ **อัปเกรด skill อื่น** — เทียบกับ [SKILL-AUTHORING.md](../SKILL-AUTHORING.md) และ gold skills
 
@@ -18,6 +18,7 @@
 | `WORKSPACE_ROOT`, `-WorkspaceRoot`, `setup-macos-linux-parent.sh` | `setup-macos-linux.sh <workspace>` |
 | `.claude/skills`, `.claude/rules`, parent `vault/` at workspace root | `.cursor/skills`, `.cursor/rules`, `.cursor/vault` at install root only |
 | `ai-skills-vault.json` optional / parent `vault/` symlink | required at install root; `issuesRelative: .cursor/vault/issues` |
+| pr-review “3 modes” / no `clean-code` | four modes: `bugs`, `production`, `clean-code`, `scale-security` |
 
 ## Repo doc hygiene (when `scripts/` or vault layout changes)
 
