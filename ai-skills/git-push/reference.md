@@ -1,8 +1,77 @@
-# reference — git-push (v2.0.4)
+# reference — git-push (v2.0.5)
 
 **v2.0.0:** No code review in this skill — use [`@pr-review`](../pr-review/SKILL.md) for bugs/production/security. This file covers **git safety** only.
 
 **v2.0.1:** Staging blockers — `.cursor/*` junctions only (setup no longer creates `.claude/`).
+
+**v2.0.5:** Workflow steps 1–6 detail moved from [SKILL.md](SKILL.md) — confirm gate table stays in SKILL.
+
+## Workflow (steps 1–6)
+
+Load per [SKILL.md](SKILL.md) Quick reference. **Step 4 table** is in SKILL only — do not push without user confirm after that table.
+
+### 1 — Inspect
+
+```powershell
+git status -sb
+git diff
+git diff --cached
+git log -3 --oneline
+git rev-parse --abbrev-ref HEAD
+```
+
+Note ahead/behind origin, untracked, staged vs unstaged. Classify paths with § **AI-SKILLS repo** below. Short summary — **no** code-quality review.
+
+### 2 — Safety checks (not code review)
+
+Load § Secret scan + § AI-SKILLS repo now.
+
+| Check | Blocker? |
+|-------|----------|
+| Secrets in diff (`.env`, tokens, keys) | yes |
+| Junctions / local vault notes staged | yes |
+| Wrong paths for this repo layout | yes |
+| Logic bugs, missing tests, style | **out of scope** — `@pr-review` |
+
+**Git friction:** § Search vault learnings — Grep → ≤3 reads.
+
+If user pasted `@pr-review` `ready` — note in summary only; **do not** re-audit code.
+
+Output:
+
+```text
+[git-push] Safety — <branch>
+Files: N changed | commits to push: N
+Verdict: pass | block
+Blockers: … (secrets/staging only)
+```
+
+### 3 — Commit (optional)
+
+Only if user asked to commit or "push my changes" with uncommitted work:
+
+1. Stage only § AI-SKILLS repo paths.
+2. Message: 1–2 sentences, **why** (§ Commit message).
+3. Hook fails → **new commit**; amend only if § Amend rules pass.
+
+### 4 — Confirm (push gate)
+
+See **confirm table in [SKILL.md](SKILL.md)** — agent must fill and ask in Thai before push.
+
+Rules: § Push confirmation gate below. **No** `git push` same turn as steps 1–3 until user confirms after table.
+
+### 5 — Push (after confirm)
+
+```powershell
+git push -u origin HEAD
+```
+
+If behind remote → § Behind remote.
+
+### 6 — Report
+
+- `git status -sb` after push
+- `gh pr create` only if user asked
 
 ## Secret scan (block commit/push)
 

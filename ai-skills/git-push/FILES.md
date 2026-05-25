@@ -4,7 +4,7 @@ Inventory for `ai-skills/git-push/`. Update when adding or removing files.
 
 | File | Role | Read when |
 |------|------|-----------|
-| [SKILL.md](SKILL.md) | Inspect → safety → commit → confirm → push | Always on invoke |
-| [reference.md](reference.md) | Secret scan, AI-SKILLS staging, amend, confirm gate | Steps 2–4; git friction |
+| [SKILL.md](SKILL.md) | Quick ref, **step 4 confirm table**, hard rules | Always on invoke |
+| [reference.md](reference.md) | § Workflow steps 1–6 · secrets · staging · amend | Per Quick ref step |
 
 No `assets/` — safety detail stays in `reference.md`.

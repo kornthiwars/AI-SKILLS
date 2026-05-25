@@ -16,7 +16,7 @@ Universal index: [AGENTS.md](../AGENTS.md)
 | Flow Builder | 1.0.3 | [flow-builder/](flow-builder/SKILL.md) |
 | Debug | 1.0.6 | [debug/](debug/SKILL.md) |
 | PR Review | 1.1.2 | [pr-review/](pr-review/SKILL.md) — modes: bugs, production, clean-code, scale-security |
-| Git Push | 2.0.4 | [git-push/](git-push/SKILL.md) — safety + push; no code review |
+| Git Push | 2.0.5 | [git-push/](git-push/SKILL.md) — safety + push; no code review |
 | Upgrade | 1.1.4 | [upgrade/](upgrade/SKILL.md) |
 
 คู่มือสร้าง/แก้ skill: [SKILL-AUTHORING.md](SKILL-AUTHORING.md)
@@ -44,171 +44,19 @@ Universal index: [AGENTS.md](../AGENTS.md)
 
 ## รายละเอียดแต่ละ skill
 
-### `@feature-builder` — ประสานฟีเจอร์ FE+BE
+Agent: invoke `@skill-name` — rules อยู่ใน **SKILL.md** (และ `reference.md` / `assets/` ตาม Quick ref).  
+ไม่ duplicate เนื้อหาใน README นี้ (ประหยัด token ตอนอ่าน index)
 
-**ใช้เมื่อ**
-- อยากได้ฟีเจอร์ **ครบ stack** ในครั้งเดียว (login, register, checkout)
-- ยังไม่แยก scope ว่า API ก่อนหรือ UI ก่อน — ต้องการ **แผน phase + handoff**
-
-**ต้องมีก่อนเริ่ม**
-- ชื่อฟีเจอร์ + user story (เช่น login ด้วย email/password)
-- repo แอปจริง (ไม่ใช่แค่ maintain ai-skills repo)
-- ถ้ามี UI — ต้องมี visual ref หรือยอมรับว่า phase UI **blocked**
-
-**อย่าใช้เมื่อ**
-- แค่ endpoint เดียว → `@api-builder`
-- แค่ UI ตรงรูป → `@ui-builder`
-- ตัวเลข/รายการแสดงผิด → `@debug`
-
-**ลำดับลูก:** `@api-builder` (Ship) → handoff → `@ui-builder` (Gate A→B)
-
-**วิธีรัน:** `feature-builder/assets/template.runbook.md` · **รูปแบบตอบ agent:** `template.reply.md` (ทุกเทิร์น)
-
-**แนะนำ (ไม่บังคับ):** ถ้ายังไม่ชัดปุ่ม/ข้อมูล/สร้าง-อัปเดต → `@flow-builder` ก่อน F0 แล้ว paste `flow-spec` ใน F0
-
----
-
-### `@flow-builder` — ไล่ flow ก่อนลงมือ
-
-**ใช้เมื่อ**
-- อยากรู้ **กดปุ่มนี้แล้วเกิดอะไร** (ขั้นตอน, API, redirect)
-- **ข้อมูลบนจอมาจากไหน** (GET path, state, cache)
-- คิดว่า **กดแล้วสร้าง X แล้วอัปเดต Y** — ต้องการยืนยัน **ใช่มั้ย** ก่อน implement
-
-**ต้องมีก่อนเริ่ม**
-- Trigger (ปุ่ม/เหตุการณ์) + หน้าจอ/โซน
-- ผลที่คาด (1–3 ประโยค)
-- repo แอป หรือ requirement อย่างเดียว
-
-**อย่าใช้เมื่อ**
-- ของพังบนจอแล้ว → `@debug`
-- สร้าง API/UI จริง → `@api-builder` / `@ui-builder`
-- ฟีเจอร์ครบ FE+BE พร้อมแผน phase → `@feature-builder` (อาจแนบ flow-spec หลัง Gate Flow)
-
-**Deliverable:** `template.flow-spec.md` — Gate Flow **Approved** | **Revise**
-
----
-
-### `@api-builder` — API, contract, persistence
-
-**ใช้เมื่อ**
-- สร้าง/แก้ **endpoint**, validation, auth, migration, webhook, GraphQL
-- ต้องการ **contract ชัด** ก่อน implement (Gate Contract / Ship)
-
-**ต้องมีก่อนเริ่ม**
-- Operation ชัด (create/change/remove endpoint ไหน)
-- Contract sketch (method, path, body, response)
-- AuthZ (ใครเรียกได้)
-- Persistence (table/entity, migration ใหม่ไหม)
-- Error model (status + body)
-
-**อย่าใช้เมื่อ**
-- งาน pixel / mockup → `@ui-builder`
-- API response ถูก แต่ UI แสดงผิด → `@debug`
-- ฟีเจอร์ครบ FE+BE → `@feature-builder`
-
----
-
-### `@ui-builder` — UI ตรง reference
-
-**ใช้เมื่อ**
-- มี **รูปอ้างอิง** — mockup, screenshot, Figma, live URL
-- ต้องการ UI **ตรงดีไซน์** ที่ viewport ที่ lock ไว้
-
-**ต้องมีก่อนเริ่ม**
-- Visual reference (รูป / Figma / URL)
-- Viewport — W×H เดียว **หรือ** รายการ breakpoint ทุก width พร้อม ref ต่อ width
-- Build target (repo/stack ที่จะเขียน)
-
-**อย่าใช้เมื่อ**
-- ไม่มีรูป / wireframe เปล่าๆ
-- รูปเดียวแล้วบอก “ทำ responsive” โดยไม่ให้ ref ต่อ width
-- ตัวเลข รายการ label ผิด (layout ตรงรูปแล้ว) → `@debug`
-- แก้ API / contract → `@api-builder`
-
----
-
-### `@debug` — ข้อมูล / logic ผิดบนจอ
-
-**ใช้เมื่อ**
-- ยอดรวมผิด, label ผิด, list ไม่อัปเดต, map field ผิด
-- **API ตอบถูกแล้ว** แต่ค่าบนจอยังผิด
-- ต้องการ **วินิจฉัยก่อน** (Gate D) แล้วค่อย fix หลัง user ยืนยัน
-
-**ต้องมีก่อนเริ่ม**
-- Symptom (อาการบนจอ)
-- Expected vs actual อย่างน้อย 1 คู่
-- ขั้นตอน reproduce (หรือช่วยไล่ด้วยกัน)
-
-**อย่าใช้เมื่อ**
-- สี/spacing ไม่ตรงรูป → `@ui-builder`
-- ออกแบบ API ใหม่ → `@api-builder`
-- ฟีเจอร์ใหม่ทั้งก้อน → `@feature-builder`
-
----
-
-### `@pr-review` — self-review ก่อนส่งงาน
-
-**ใช้เมื่อ**
-- **implement เสร็จแล้ว** อยากเช็คก่อน push / เปิด PR / deploy prod
-- ต้องการ verdict `ready` หรือ `revise` + ตาราง findings
-
-**ต้องมีก่อนเริ่ม**
-- **Mode:** `bugs` | `production` | `clean-code` | `scale-security` (ไม่ระบุ → เลือกจากเมนู)
-- Scope สั้นๆ ว่างานชุดนี้ควรทำอะไร
-- Diff scope (default: unstaged + staged)
-
-| Mode | โฟกัส |
-|------|--------|
-| `bugs` | edge cases, logic |
-| `production` | readiness ครบ (tests, docs, contract) |
-| `clean-code` | naming, DRY, hygiene, P10b ใน **diff** — ไม่แทน production |
-| `scale-security` | perf, security, scale ก่อน deploy |
-
-**Combo ที่ใช้บ่อย:** `bugs` → `clean-code` (optional) → `production` → `@git-push`
-
-**อย่าใช้เมื่อ**
-- งานยังไม่เสร็จ
-- แค่อยาก push → `@git-push` (แต่แนะนำ pr-review ก่อนใน app repo)
-- งาน visual / API / debug ยังไม่จบ — กลับไป skill นั้นก่อน
-
-**ไม่รัน git** — อ่านและรีวิวอย่างเดียว
-
----
-
-### `@git-push` — commit + push ปลอดภัย
-
-**ใช้เมื่อ**
-- อยาก **push ขึ้น GitHub / remote**
-- ต้องการ inspect diff + safety (secrets/staging) + ยืนยันก่อน push — **ไม่**รีวิวโค้ด (ใช้ `@pr-review` แยกถ้าต้องการ)
-
-**ต้องมีก่อนเริ่ม**
-- Workspace เป็น git repo (มี `.git`)
-- Branch / remote ชัด (default: branch ปัจจุบัน + `origin`)
-- User intent: push only | commit แล้ว push | สร้าง PR (ถ้าขอ `gh`)
-
-**อย่าใช้เมื่อ**
-- force push / amend commit ที่ push แล้ว (ยกเว้น user ขอชัด)
-- เปลี่ยน git config
-
-**รีวิวโค้ด (optional):** `@pr-review` → `ready` → `@git-push`  
-`@git-push` v2 — safety + push เท่านั้น ไม่รัน R1–R10 ซ้ำ
-
----
-
-### `@upgrade` — แก้ skill ใน repo นี้
-
-**ใช้เมื่อ**
-- skill **ล่าสมัย, ผิด, ไม่ตรง** SKILL-AUTHORING
-- อยาก audit, bump version, แก้ cross-ref
-
-**ต้องมีก่อนเริ่ม**
-- อยู่ใน **ai-skills repo** (หรือ path ไป skill ที่จะแก้)
-- ระบุ skill เป้าหมาย (เช่น `@upgrade ui-builder`) หรือให้ scan ทั้ง repo
-
-**อย่าใช้เมื่อ**
-- สร้าง UI/API ใน **โปรเจกต์แอป** → `@ui-builder` / `@api-builder`
-- push โค้ด → `@git-push`
+| Skill | SKILL.md | เอกสารเพิ่ม |
+|-------|----------|-------------|
+| feature-builder | [SKILL.md](feature-builder/SKILL.md) | [reference.md](feature-builder/reference.md) · [runbook](feature-builder/assets/template.runbook.md) |
+| flow-builder | [SKILL.md](flow-builder/SKILL.md) | [reference.md](flow-builder/reference.md) · [flow-spec](flow-builder/assets/template.flow-spec.md) |
+| api-builder | [SKILL.md](api-builder/SKILL.md) | [reference.md](api-builder/reference.md) · [contract](api-builder/assets/template.contract-spec.md) |
+| ui-builder | [SKILL.md](ui-builder/SKILL.md) | [reference.md](ui-builder/reference.md) · [quality-tier](ui-builder/assets/checklist.quality-tier.md) |
+| debug | [SKILL.md](debug/SKILL.md) | [reference.md](debug/reference.md) |
+| pr-review | [SKILL.md](pr-review/SKILL.md) | [reference.md](pr-review/reference.md) — modes: bugs, production, clean-code, scale-security |
+| git-push | [SKILL.md](git-push/SKILL.md) | [reference.md](git-push/reference.md) |
+| upgrade | [SKILL.md](upgrade/SKILL.md) | [reference.md](upgrade/reference.md) |
 
 ---
 
