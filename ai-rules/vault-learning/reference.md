@@ -42,7 +42,7 @@ Fallback: `AI-SKILLS/vault/issues/` (rule § Resolve vault root step 4).
 ```
 work Q&A        → issues/YYYY-MM-DD.md (append, tags [issues, …topics])
 off-topic       → skip
-problem ≥3 rnds → learnings/ (tags [learning])
+problem ≥2 rnds → learnings/ (tags [learning])
 ```
 
 ## Obsidian graph

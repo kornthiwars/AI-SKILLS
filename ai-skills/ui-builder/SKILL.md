@@ -110,7 +110,7 @@ Paste A + B → summary (viewport, theme, verify, deviations)
 4. **Gate B** — 0 blockers; post **Score** using [assets/checklist.quality-tier.md](assets/checklist.quality-tier.md) (default target **10/10**).
 5. Post A + B ([assets/template.gate-b.md](assets/template.gate-b.md)) + summary in chat.
 6. Repeatable gap → patch [reference.md](reference.md) (one pitfall or verify note).
-7. **Vault:** search `vault/learnings/` before heavy UI debug; learning if ≥3 prompt rounds on same problem; issues auto on Q&A — [vault/README.md](../../vault/README.md).
+7. **Vault:** search `vault/learnings/` before heavy UI debug; learning if ≥2 prompt rounds on same problem; issues auto on Q&A — [vault/README.md](../../vault/README.md).
 8. When user will **commit/push** → suggest `@pr-review` (e.g. `production`) then `@git-push` (code/quality — not visual Gate A/B).
 
 ## Language

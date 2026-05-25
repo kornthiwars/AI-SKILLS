@@ -39,7 +39,7 @@ Topic tags เดียวกับ issues: `vault`, `git`, `research`, `ui`, `a
 
 ## When agent writes
 
-≥3 prompt rounds · problem solved · `tags: [learning, <skill>]`
+≥2 prompt rounds · problem solved · `tags: [learning, <skill>]`
 
 ## Template
 

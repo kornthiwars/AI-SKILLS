@@ -94,7 +94,7 @@ Use [assets/template.diagnosis-report.md](assets/template.diagnosis-report.md).
 | 6 Gate D | diagnosis template | Approved / Revise |
 | 7 Fix | user confirm | Patch or handoff packet |
 | 8 Validate | re-pro | Same steps → expected |
-| 9 Close | [post-fix-learning](assets/template.post-fix-learning.md) | `vault/learnings/YYYY-MM-DD-HHmm.md` if ≥3 prompt rounds on same problem |
+| 9 Close | [post-fix-learning](assets/template.post-fix-learning.md) | `vault/learnings/YYYY-MM-DD-HHmm.md` if ≥2 prompt rounds on same problem |
 
 ## When to use / NOT
 
@@ -184,7 +184,7 @@ Next: …
 5. **Gate D** (Approved only if D1 pass)  
 6. User confirms fix → minimal patch **or** handoff  
 7. Re-pro validate  
-8. Write [post-fix-learning](assets/template.post-fix-learning.md) → `vault/learnings/` if ≥3 prompt rounds on same problem (rule vault-learning)  
+8. Write [post-fix-learning](assets/template.post-fix-learning.md) → `vault/learnings/` if ≥2 prompt rounds on same problem (rule vault-learning)  
 9. Suggest `@pr-review` (select mode) then `@git-push` when user wants to ship  
 
 ## Cross-skill

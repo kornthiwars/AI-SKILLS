@@ -13,7 +13,7 @@
 | bare `skills/<name>/` in footers | `ai-skills/<name>/` |
 | `skills repo` (ambiguous) | `ai-skills repo` (this monorepo) |
 | `.cursor/learnings.md`, `project-learnings-template`, `cursor-rule-learnings.mdc`, `bootstrap-learnings.ps1` | `vault/learnings/` + `ai-rules/vault-learning` |
-| issues ไฟล์ละเรื่อง / learnings ≥2 | `issues/YYYY-MM-DD.md` วันละไฟล์ · `learnings/` ≥3 rounds |
+| issues ไฟล์ละเรื่อง / learnings ≥3 | `issues/YYYY-MM-DD.md` วันละไฟล์ · `learnings/` ≥2 rounds |
 | `setup-windows.ps1` without `-InstallRoot` | mandatory `-InstallRoot <workspace>` |
 | `WORKSPACE_ROOT`, `-WorkspaceRoot`, `setup-macos-linux-parent.sh` | `setup-macos-linux.sh <workspace>` |
 | `.claude/skills`, `.claude/rules`, parent `vault/` at workspace root | `.cursor/skills`, `.cursor/rules`, `.cursor/vault` at install root only |
@@ -167,7 +167,7 @@ semver: ui-builder 2.2.1 → 2.2.2 (PATCH)
 
 ถ้า user ให้ path โปรเจกต์เป้าหมาย:
 
-1. ตรวจ `vault/` + rule `vault-learning` — issues auto · learnings ≥3 rounds · **search learnings ก่อน debug**
+1. ตรวจ `vault/` + rule `vault-learning` — issues auto · learnings ≥2 rounds · **search learnings ก่อน debug**
 2. แถวที่ tag skill → **candidate** สำหรับ canonical หรือเก็บใน vault โปรเจกต์เท่านั้น
 3. ยืนยันกับ user ก่อน merge เข้า `ai-skills/`
 4. ไม่มี vault → แนะนำ copy `templates/` + `ai-rules/vault-learning.mdc` จาก AI-SKILLS

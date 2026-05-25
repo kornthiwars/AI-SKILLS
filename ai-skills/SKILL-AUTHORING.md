@@ -225,15 +225,15 @@ Skill ที่ไม่มี template/checklist (เช่น `git-push`, `upg
 | ที่ | เก็บอะไร |
 |-----|----------|
 | `vault/issues/YYYY-MM-DD.md` | ประจำวัน — append `## N.` — auto · **English** body |
-| `vault/learnings/*.md` | **≥3 prompt rounds** · **English** body |
+| `vault/learnings/*.md` | **≥2 prompt rounds** · **English** body |
 | `templates/template.*.md` | template สั้น (repo root) |
 | `ai-rules/vault-learning.mdc` | อ่าน learnings ก่อน debug |
 
-เมื่องานกินเวลา (แก้ปัญหา ≥3 รอบ):
+เมื่องานกินเวลา (แก้ปัญหา ≥2 รอบ):
 
 1. **อย่า** ยัดยาวใน `SKILL.md` canonical
 2. **อ่าน** `vault/learnings/` ก่อน debug (ถ้ามี vault)
-3. **เขียน** `vault/learnings/...` เมื่อ ≥3 prompt rounds บนปัญหาเดียวกัน
+3. **เขียน** `vault/learnings/...` เมื่อ ≥2 prompt rounds บนปัญหาเดียวกัน
 4. **issues** — rule จัดการ auto หลัง Q&A (ไม่ต้องใส่ใน skill ยาวๆ)
 5. App repo: copy `vault/` + rule จาก AI-SKILLS
 

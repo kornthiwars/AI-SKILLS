@@ -101,7 +101,7 @@ Paste Contract + Ship → summary → [FE handoff](assets/template.handoff-to-ui
 4. **Gate Ship** — 0 blockers required for Confirmed.
 5. Post Contract + Ship + summary in chat.
 6. Repeatable gap → patch [reference.md](reference.md) (one pitfall or verify note).
-7. **Vault:** search `vault/learnings/` before API debug; learning if ≥3 prompt rounds on same problem; issues auto on Q&A — [vault/README.md](../../vault/README.md).
+7. **Vault:** search `vault/learnings/` before API debug; learning if ≥2 prompt rounds on same problem; issues auto on Q&A — [vault/README.md](../../vault/README.md).
 8. When user will **commit/push** → suggest `@pr-review` (e.g. `production` mode) then `@git-push`.
 
 ## Cross-skill (feature-builder)
