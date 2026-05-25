@@ -1,4 +1,18 @@
-# reference — PR Review modes (v1.1.2)
+# reference — PR Review modes (v1.1.3)
+
+## Index
+
+Jump to section (load **active mode** + needed rows only):
+
+| § | Section |
+|---|---------|
+| — | [Modes matrix](#modes-matrix) · [Mode one-liners](#mode-one-liners) · [clean-code vs production](#clean-code-vs-production) |
+| — | [Ship confidence](#ship-confidence-what-ready-means) |
+| P1–P12 | [P1](#p1-intent--scope) · [P2](#p2-scope-creep) · [P3](#p3-security--secrets) · [P4](#p4-correctness--edge-cases) · [P5](#p5-api-contract--breaking) · [P6](#p6-data--migration) · [P7](#p7-tests) · [P8](#p8-error-handling) · [P9](#p9-performance) · [P10](#p10-maintainability) · [P10b](#p10b-dead--unused-code) · [P10c](#p10c-clean-code-diff-only) · [P11](#p11-docs--changelog) · [P12](#p12-prior-gate-evidence) |
+| — | [Performance line by mode](#performance-line-by-mode) |
+| — | [Severity](#severity) · [Waivers](#waivers) · [Re-review](#re-review) |
+| 0–4 | [Workflow (steps 1–4)](#workflow-steps-14) · [Combo](#combo-optional) · [Output deliverable](#output-deliverable) · [AskQuestion](#askquestion-agent--step-0) |
+| — | [Common rationalizations](#common-rationalizations-agent-discipline) · [Red flags](#red-flags) |
 
 ## Modes matrix
 

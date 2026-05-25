@@ -1,6 +1,85 @@
-# Upgrade — audit reference (v1.1.4)
+# Upgrade — audit reference (v1.1.5)
 
 ใช้เมื่อ **อัปเกรด skill อื่น** — เทียบกับ [SKILL-AUTHORING.md](../SKILL-AUTHORING.md) และ gold skills
+
+## Workflow — upgrade another skill
+
+Run in order after [SKILL.md](SKILL.md) gates. Severity examples: [§ Severity guide](#severity-guide) · Pros/cons templates: [§ Pros and cons](#pros-and-cons-บังคับใน-reply-§4-และ-§7).
+
+### 1 — Pick target
+
+- Read `ai-skills/**/SKILL.md` → table `# | name | version | path`
+- If many skills and user did not name one: sort findings by severity or ask where to start
+
+### 2 — Load standard
+
+1. [SKILL-AUTHORING.md](../SKILL-AUTHORING.md)
+2. [reference.md](reference.md) — audit checklist · § Repo doc hygiene (when `scripts/` changed)
+3. **Gold skill** by complexity:
+   - Heavy gates / deliverables → `ui-builder` or `api-builder`
+   - Short skills (pr-review, git-push, upgrade) → frontmatter + Language + Hard rules + clear workflow
+
+### 3 — Audit target
+
+Read every file in `ai-skills/<name>/` plus repo-wide cross-ref search (old names, paths, wrong `@invoke`).
+
+Record findings:
+
+| Severity | Meaning |
+|----------|---------|
+| **blocker** | Wrong context, conflicting steps, broken invoke/path |
+| **major** | Missing Required inputs / Hard rules / WHEN NOT; incomplete workflow |
+| **minor** | typo, stale headings, README version drift, FILES.md mismatch |
+
+### 4 — Plan + semver
+
+| Bump | When |
+|------|------|
+| PATCH | Wording, cross-ref, README version; no step change |
+| MINOR | New section, checklist, template, backward-compatible workflow |
+| MAJOR | Gate / invoke change; removed step users rely on |
+
+Propose: files to edit · brief headings · new version.
+
+**Pros / cons (required before user OK)** — [§ Pros and cons](#pros-and-cons-บังคับใน-reply-§4-และ-§7):
+
+| Topic | Content |
+|-------|---------|
+| **Benefits** | What improves (standard, fewer wrong invokes, ship flow, shorter tokens, etc.) |
+| **Risks** | Longer SKILL, slower agent, MAJOR breakage, extra steps (e.g. pr-review), mirror sync |
+| **If unchanged** | What risk remains |
+| **Alternatives** | PATCH only vs MINOR workflow vs defer scope |
+
+Multi-skill plans: repo-level pros/cons + **short per-skill** bump notes.
+
+**Ask user:** confirm scope (all / blocker+major only / single item / **skip** with reason from risks).
+
+### 5 — Implement (after OK)
+
+- Edit `ai-skills/<name>/` and repo version tables (`README.md`, `AI-NOTES.md`, `.claude-plugin/plugin.json` if present)
+- If scope includes **setup / vault path** changes: sync repo docs per [§ Repo doc hygiene](#repo-doc-hygiene-when-scripts-or-vault-layout-changes) (same PR as skill edits when possible)
+- Do not exceed confirmed scope
+- Keep `disable-model-invocation: true` and **70% Thai / 30% English** in chat replies; **English** `SKILL.md` body per AUTHORING
+
+### 6 — Verify
+
+- Cross-ref in edited skills — no broken links
+- Frontmatter, Required inputs, Hard rules, workflow complete
+- `metadata.version` matches README / repo tables if any
+
+### 7 — Report
+
+Deliver:
+
+1. What changed (short before/after)
+2. New version(s)
+3. **Actual benefits** vs **accepted risks** (vs plan §4 — note surprises)
+4. Deferred items (if any) + reason / trade-off
+5. Next: `@pr-review` (app ship) then `@git-push` for commit in this repo when user asks
+
+### Install note (secondary)
+
+After canonical fix, if user consumes skills from another project: briefly suggest copy/link to `.cursor/skills/<name>/` — do not end with “mirror OK” without fixing skill content.
 
 ## Repo-wide stale patterns (ค้นทั้ง repo)
 

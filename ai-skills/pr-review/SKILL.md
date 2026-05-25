@@ -13,7 +13,7 @@ description: >-
 compatibility: Cursor and Claude Code; read-only review; AskQuestion for mode when not specified
 disable-model-invocation: true
 metadata:
-  version: "1.1.2"
+  version: "1.1.3"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -79,7 +79,7 @@ Implement done → pick mode → review → `ready` → `@git-push`. See `descri
 
 | File | Use |
 |------|-----|
-| [reference.md](reference.md) | Modes · P1–P12 · Workflow · AskQuestion · Combo · deliverable |
+| [reference.md](reference.md) | § Index · Modes · P1–P12 · Workflow · AskQuestion · Combo · deliverable |
 | [assets/template.review-comment.md](assets/template.review-comment.md) | Paste-ready summary |
 
 Canonical: `ai-skills/pr-review/`

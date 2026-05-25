@@ -10,7 +10,7 @@ description: >-
 compatibility: Cursor and Claude Code; edits under ai-skills/ only; no app UI/API implementation
 disable-model-invocation: true
 metadata:
-  version: "1.1.4"
+  version: "1.1.5"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -23,7 +23,7 @@ metadata:
 
 **Not:** mirror/global checks as primary work (brief only after canonical fix) · no UI/API work in child app repos.
 
-Full audit checklist: [reference.md](reference.md)
+Details: [reference.md](reference.md)
 
 ## Operating stance
 
@@ -52,84 +52,21 @@ Full audit checklist: [reference.md](reference.md)
 - **No git commands** — no `git status` / `add` / `commit` / `push` / `pull` / `rebase`; ship in **this repo** → `@git-push` · ship **app repo** after implement → `@pr-review` then `@git-push`
 - Do not merge project learnings into canonical without user approval per row
 
-## Workflow — upgrade another skill
+## Quick reference
 
-Run in order. Pros/cons templates and severity examples: [reference.md](reference.md).
+| Step | Load | Action |
+|------|------|--------|
+| 1 | [reference.md](reference.md) § Workflow §1 | pick target · version table |
+| 2 | § Workflow §2 · gold skills | load standard |
+| 3 | § Workflow §3 · § Per-skill checklist · § Repo-wide stale patterns | audit |
+| 4 | § Workflow §4 · § Pros and cons | plan + semver · **user OK** |
+| 5 | § Workflow §5 · § Repo doc hygiene (if setup) | implement |
+| 6 | § Workflow §6 | verify cross-ref + versions |
+| 7 | § Workflow §7 · § Install note | report · mirror hint |
 
-### 1 — Pick target
+## Workflow
 
-- Read `ai-skills/**/SKILL.md` → table `# | name | version | path`
-- If many skills and user did not name one: sort findings by severity or ask where to start
-
-### 2 — Load standard
-
-1. [SKILL-AUTHORING.md](../SKILL-AUTHORING.md)
-2. [reference.md](reference.md) — audit checklist · § Repo doc hygiene (when `scripts/` changed)
-3. **Gold skill** by complexity:
-   - Heavy gates / deliverables → `ui-builder` or `api-builder`
-   - Short skills (pr-review, git-push, upgrade) → frontmatter + Language + Hard rules + clear workflow
-
-### 3 — Audit target
-
-Read every file in `ai-skills/<name>/` plus repo-wide cross-ref search (old names, paths, wrong `@invoke`).
-
-Record findings:
-
-| Severity | Meaning |
-|----------|---------|
-| **blocker** | Wrong context, conflicting steps, broken invoke/path |
-| **major** | Missing Required inputs / Hard rules / WHEN NOT; incomplete workflow |
-| **minor** | typo, stale headings, README version drift, FILES.md mismatch |
-
-### 4 — Plan + semver
-
-| Bump | When |
-|------|------|
-| PATCH | Wording, cross-ref, README version; no step change |
-| MINOR | New section, checklist, template, backward-compatible workflow |
-| MAJOR | Gate / invoke change; removed step users rely on |
-
-Propose: files to edit · brief headings · new version.
-
-**Pros / cons (required before user OK)** — [reference.md](reference.md) § Pros and cons:
-
-| Topic | Content |
-|-------|---------|
-| **Benefits** | What improves (standard, fewer wrong invokes, ship flow, shorter tokens, etc.) |
-| **Risks** | Longer SKILL, slower agent, MAJOR breakage, extra steps (e.g. pr-review), mirror sync |
-| **If unchanged** | What risk remains |
-| **Alternatives** | PATCH only vs MINOR workflow vs defer scope |
-
-Multi-skill plans: repo-level pros/cons + **short per-skill** bump notes.
-
-**Ask user:** confirm scope (all / blocker+major only / single item / **skip** with reason from risks).
-
-### 5 — Implement (after OK)
-
-- Edit `ai-skills/<name>/` and repo version tables (`README.md`, `AI-NOTES.md`, `.claude-plugin/plugin.json` if present)
-- If scope includes **setup / vault path** changes: sync repo docs per [reference.md](reference.md) § Repo doc hygiene (same PR as skill edits when possible)
-- Do not exceed confirmed scope
-- Keep `disable-model-invocation: true` and **70% Thai / 30% English** in chat replies; **English** `SKILL.md` body per AUTHORING
-
-### 6 — Verify
-
-- Cross-ref in edited skills — no broken links
-- Frontmatter, Required inputs, Hard rules, workflow complete
-- `metadata.version` matches README / repo tables if any
-
-### 7 — Report
-
-Deliver:
-
-1. What changed (short before/after)
-2. New version(s)
-3. **Actual benefits** vs **accepted risks** (vs plan §4 — note surprises)
-4. Deferred items (if any) + reason / trade-off
-5. Next: `@pr-review` (app ship) then `@git-push` for commit in this repo when user asks
-
-### Install note (secondary)
-
-After canonical fix, if user consumes skills from another project: briefly suggest copy/link to `.cursor/skills/<name>/` — do not end with “mirror OK” without fixing skill content.
+Run Quick ref in order. Steps 1–7 detail: [reference.md](reference.md) § Workflow — upgrade another skill. **Do not edit** until step 4 scope confirmed.
 
 ## Output flow
 
@@ -142,7 +79,7 @@ Pick → Audit (table) → Plan + pros/cons + semver → [user OK] → Edit cano
 | Resource | Use |
 |----------|-----|
 | [SKILL-AUTHORING.md](../SKILL-AUTHORING.md) | Repo standard |
-| [reference.md](reference.md) | Audit checklist · § Rationalizations / Red flags |
+| [reference.md](reference.md) | Workflow · audit checklist · pros/cons · rationalizations |
 | [ui-builder/SKILL.md](../ui-builder/SKILL.md) | Gates + required inputs example |
 | [api-builder/SKILL.md](../api-builder/SKILL.md) | Workflow + self-upgrade example |
 
