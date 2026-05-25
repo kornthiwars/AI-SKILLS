@@ -6,12 +6,13 @@ description: >-
   /debug, @debug, debug, ข้อมูลผิด, แสดงผิด, map ผิด, state ไม่อัปเดต,
   API ถูกแต่ UI ผิด, render ผิด, ไล่บั๊กข้อมูล. Does not apply to
   pixel/mockup (ui-builder), new API design (api-builder), full FE+BE
-  orchestration (feature-builder), git commit/push (hand off @pr-review then @git-push)
-  maintenance (@upgrade).
+  orchestration (feature-builder), unclear pre-build button/data flow before implement
+  (@flow-builder), git commit/push (hand off @pr-review then @git-push) maintenance
+  (@upgrade).
 compatibility: Cursor and Claude Code; project test runner and HTTP client; optional browser MCP for repro
 disable-model-invocation: true
 metadata:
-  version: "1.0.4"
+  version: "1.0.5"
   author: kornthiwars
   license: MIT
   surfaces:

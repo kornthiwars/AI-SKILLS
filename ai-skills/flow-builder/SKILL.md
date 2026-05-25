@@ -4,15 +4,16 @@ description: >-
   Flow Builder — maps pre-build action flows, data lineage, and create/update
   chains for one UI trigger; asks the user to confirm "ใช่มั้ย" before
   implementation. Triggers on /flow-builder, @flow-builder, flow builder,
-  ไล่ flow, กดปุ่มแล้วเกิดอะไร, ข้อมูลมาจากไหน, สร้างแล้วอัปเดต, data flow,
-  user journey, mutation chain. Does not apply when the app already fails on
-  screen (use @debug), pixel/mockup work (@ui-builder), API implementation
-  (@api-builder), full FE+BE orchestration (@feature-builder), ai-skills
+  ไล่ flow, กดปุ่มแล้วเกิดอะไร, ข้อมูลมาจากไหน, สร้างแล้วอัปเดต, mutation chain,
+  one button flow. Does not apply when the app already fails on screen (use
+  @debug), pixel/mockup work (@ui-builder), API implementation (@api-builder),
+  full FE+BE orchestration (@feature-builder), skill catalog or how @skills work
+  (read ai-skills/README.md), whole-app architecture review, ai-skills repo
   maintenance (@upgrade), or git commit/push (hand off @pr-review then @git-push).
 compatibility: Cursor and Claude Code; user app repo or requirements only; read-only code inspection; optional mermaid in chat
 disable-model-invocation: true
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -51,7 +52,7 @@ List gaps in Thai and **stop**.
 - **No app implementation** — no TS/JS/CSS/SQL edits in this skill/thread
 - **No git commands** — ship elsewhere → `@pr-review` then `@git-push`
 - **No pixel gates** — not `@ui-builder` Gate A/B
-- **No API Contract/Ship** — not `@api-builder` gates; may **suggest** endpoints in flow-spec only
+- **No API Contract/Ship** — not `@api-builder` gates; flow-spec may list **endpoint skeletons only** (method/path/body intent) — not OpenAPI, status matrix, or Gate Contract
 - **No full-feature orchestration** — use `@feature-builder` when user wants phased FE+BE build
 - **No runtime debug** — wrong data already on screen → `@debug`
 - **No rubber-stamp Gate Flow** — F4 checklist + resolved **ใช่มั้ย** on mutations before **Approved**
@@ -75,7 +76,18 @@ Detail: [reference.md](reference.md) § Repo discovery · § Pitfalls
 
 ### F0 — Intake
 
-Confirm required inputs. Echo scope in Thai. If user only has a vague feature idea with **many** buttons, ask them to **pick one trigger** for this pass.
+Confirm required inputs. Echo scope in Thai.
+
+**Redirect (do not start F1–F4):**
+
+| User asks | Action |
+|-----------|--------|
+| How each **@skill** works / skill catalog | Point to [ai-skills/README.md](../README.md) — **stop** |
+| Maintain or audit **AI-SKILLS** repo skills | `@upgrade` — **stop** |
+| Whole app or **many** buttons at once | Pick **one trigger** or `@feature-builder` for multi-phase — **stop** until scoped |
+| Data **already wrong** on screen | `@debug` — **stop** |
+
+If user only has a vague feature idea with **many** buttons, ask them to **pick one trigger** for this pass.
 
 ### F1 — Action flow
 

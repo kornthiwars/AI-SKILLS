@@ -7,6 +7,8 @@ Scope: <one trigger on one screen>
 Repo: <path or n/a>
 Date/session: <optional>
 
+**Not API contract:** HTTP rows below are skeletons for discussion/handoff — full contract → `@api-builder` Gate Contract.
+
 ## F1 Action flow
 <paste or link template.action-flow summary>
 

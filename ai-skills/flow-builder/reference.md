@@ -1,6 +1,30 @@
-# reference — flow-builder (v1.0.0)
+# reference — flow-builder (v1.0.1)
 
-**Index:** Layers · Repo discovery · Pitfalls F1–F12 · Optional handoffs · Rationalizations · Red flags · Troubleshooting
+**Index:** Skill boundaries · Layers · Repo discovery · Pitfalls F1–F15 · Optional handoffs · Rationalizations · Red flags · Troubleshooting
+
+## Skill boundaries (do not duplicate)
+
+| Question | Use | Not flow-builder |
+|----------|-----|------------------|
+| One button → steps → data source → create/update **ใช่มั้ย** | **flow-builder** | — |
+| Wrong value **now** on screen (repro) | `@debug` | diagnose + fix |
+| Full feature phases + api/ui packets | `@feature-builder` | F0–F5 orchestration |
+| OpenAPI / Gate Contract / implement API | `@api-builder` | Ship |
+| Pixel / Gate A·B | `@ui-builder` | visual |
+| Code review before push | `@pr-review` | R1–P12 |
+| What each **skill** does (catalog) | [README.md](../README.md) | no Gate Flow |
+| Edit skill files in AI-SKILLS | `@upgrade` | canonical |
+
+**Deliverable contrast**
+
+| Artifact | Scope |
+|----------|--------|
+| `flow-spec` (this skill) | **One trigger** on one screen |
+| `feature-spec` (feature-builder) | **Whole feature** + phases |
+| `contract-spec` (api-builder) | **Endpoint contract** + gates |
+| diagnosis report (debug) | **Bug** layers D1–D6 |
+
+Suggested HTTP rows in flow-spec are **skeletons for handoff** — not Gate Contract.
 
 ## Layers
 
@@ -43,6 +67,9 @@ Stack-agnostic: adapt names (Vue action, Rails controller, etc.) — same column
 | F10 | ai-skills repo as app target | Refuse or scope = docs only |
 | F11 | Long prose no tables | Use templates |
 | F12 | Run git in flow-builder | Forbidden — `@git-push` |
+| F13 | User wants skill catalog / “เช็คทุก skill” | [README.md](../README.md); one-skill boundary table above |
+| F14 | Target is ai-skills repo maintenance | `@upgrade` |
+| F15 | Whole user journey / all screens | `@feature-builder` or multiple flow-builder passes (one trigger each) |
 
 ## Optional handoffs (detail)
 

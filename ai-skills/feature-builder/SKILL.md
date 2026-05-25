@@ -6,12 +6,13 @@ description: >-
   Triggers on /feature-builder, @feature-builder, feature builder, Feature Builder,
   ฟีเจอร์ทั้งก้อน, login ครบ, full stack feature, FE+BE, ทำฟีเจอร์ครบ. Does not
   apply when API-only (@api-builder), UI-only with ref (@ui-builder), debug/data
-  mapping only (debug), ai-skills repo maintenance (@upgrade), or git commit/push
-  (hand off @pr-review then @git-push).
+  mapping only (debug), single-button flow clarity only (@flow-builder — optional
+  before F0), ai-skills repo maintenance (@upgrade), or git commit/push (hand off
+  @pr-review then @git-push).
 compatibility: Cursor and Claude Code; orchestrates api-builder and ui-builder in user app repo; no implementation in this skill
 disable-model-invocation: true
 metadata:
-  version: "1.1.2"
+  version: "1.1.3"
   author: kornthiwars
   license: MIT
   surfaces:

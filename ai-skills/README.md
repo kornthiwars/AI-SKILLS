@@ -12,9 +12,9 @@ Universal index: [AGENTS.md](../AGENTS.md)
 |-------|---------|------|
 | UI Builder | 1.0.2 | [ui-builder/](ui-builder/SKILL.md) |
 | API Builder | 1.0.3 | [api-builder/](api-builder/SKILL.md) |
-| Feature Builder | 1.1.2 | [feature-builder/](feature-builder/SKILL.md) |
-| Flow Builder | 1.0.0 | [flow-builder/](flow-builder/SKILL.md) |
-| Debug | 1.0.4 | [debug/](debug/SKILL.md) |
+| Feature Builder | 1.1.3 | [feature-builder/](feature-builder/SKILL.md) |
+| Flow Builder | 1.0.1 | [flow-builder/](flow-builder/SKILL.md) |
+| Debug | 1.0.5 | [debug/](debug/SKILL.md) |
 | PR Review | 1.0.5 | [pr-review/](pr-review/SKILL.md) — incl. P10b dead/unused code |
 | Git Push | 2.0.2 | [git-push/](git-push/SKILL.md) — safety + push; no code review |
 | Upgrade | 1.1.2 | [upgrade/](upgrade/SKILL.md) |
