@@ -30,17 +30,22 @@ Do **not** assume `vault/issues/` exists at Cursor workspace root. Resolve **onc
 
 | Step | Check | If true, vault root = |
 |------|--------|------------------------|
-| 1 | Read `.cursor/ai-skills-vault.json` at workspace root (`repoRoot`, `vaultRoot`) | paths in JSON |
-| 2 | `vault/issues/` exists at workspace root (dir or symlink) | workspace root |
-| 3 | Find **AI-SKILLS clone** under workspace: directory containing `ai-skills/`, `ai-rules/`, `vault/`, `scripts/setup-macos-linux.sh` | **that directory** (e.g. `AI-SKILLS/`) |
-| 4 | Open file is under `*/AI-SKILLS/*` | that repo root |
+| 1 | Read `.cursor/ai-skills-vault.json` at workspace root (`repoRoot`, `vaultRoot`, `issuesRelative`) | use `issuesRelative` / `learningsRelative` under workspace |
+| 2 | `.cursor/vault/issues/` exists (junction/symlink to repo `vault/`) | workspace via `.cursor/vault` |
+| 3 | `vault/issues/` at workspace root (legacy layout) | workspace root |
+| 4 | Find **AI-SKILLS clone** under workspace: `ai-skills/`, `ai-rules/`, `vault/`, `scripts/setup-macos-linux.sh` | **that directory** (e.g. `AI-SKILLS/`) |
+| 5 | Open file is under `*/AI-SKILLS/*` | that repo root |
 
-Daily issues path: `<vaultRoot>/issues/YYYY-MM-DD.md` or `<repoRoot>/vault/issues/YYYY-MM-DD.md` (same after resolve).
+Daily issues: prefer `<workspace>/.cursor/vault/issues/YYYY-MM-DD.md` when step 1–2 apply; else `<repoRoot>/vault/issues/YYYY-MM-DD.md`.
 
-**Multi-project layout** (example: parent has `AI-SKILLS/`, `web/`, `api/`):
+**Multi-project layout** (parent has `AI-SKILLS/` + app folders):
 
-- Setup **auto-links parent** on Windows and macOS/Linux when other project folders sit beside the clone (or use `WORKSPACE_ROOT` / `-WorkspaceRoot`).
-- If parent has no `vault/` symlink yet, write using **`AI-SKILLS/vault/issues/`** (step 3) — never skip because path unclear.
+- Run setup once with **`-InstallRoot` = parent** (folder you open in Cursor):
+  - Windows: `.\AI-SKILLS\scripts\setup-windows.ps1 -InstallRoot <parent>`
+  - macOS: `./AI-SKILLS/scripts/setup-macos-linux.sh ..` from clone
+- Creates `<parent>/.cursor/vault` → repo `vault/` (not `<parent>/vault/` at root)
+- Agents write issues at `.cursor/vault/issues/` (same files as `AI-SKILLS/vault/issues/`)
+- If setup not run: fallback step 4 — never skip a write because path is unclear
 
 ## Ensure folders
 

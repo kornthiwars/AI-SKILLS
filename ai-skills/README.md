@@ -1,8 +1,8 @@
 # ai-skills
 
-ชุด Agent Skills — Cursor `@skill-name` · Claude Code อ่านจาก `.claude/skills/`
+ชุด Agent Skills — Cursor `@skill-name`
 
-**Setup:** junction `.cursor/skills` + `.claude/skills` → `ai-skills` — [scripts/README.md](../scripts/README.md) · [AGENTS.md](../AGENTS.md) § Setup
+**Setup:** `.cursor/skills` → `ai-skills/` (และ `.cursor/rules`, `.cursor/vault`) — [scripts/README.md](../scripts/README.md) · `-InstallRoot` = workspace ที่เปิดใน Cursor
 
 แต่ละ skill อยู่ที่ **`<skill-name>/`**
 
@@ -16,7 +16,7 @@ Universal index: [AGENTS.md](../AGENTS.md)
 | Debug | 1.0.3 | [debug/](debug/SKILL.md) |
 | PR Review | 1.0.4 | [pr-review/](pr-review/SKILL.md) — incl. P10b dead/unused code |
 | Git Push | 2.0.0 | [git-push/](git-push/SKILL.md) — safety + push; no code review |
-| Upgrade | 1.1.0 | [upgrade/](upgrade/SKILL.md) |
+| Upgrade | 1.1.1 | [upgrade/](upgrade/SKILL.md) |
 
 คู่มือสร้าง/แก้ skill: [SKILL-AUTHORING.md](SKILL-AUTHORING.md)
 

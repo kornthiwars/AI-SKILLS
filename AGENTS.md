@@ -8,12 +8,28 @@ Canonical: [`ai-skills/`](ai-skills/README.md) · [`ai-rules/`](ai-rules/README.
 
 ## Setup (once per clone)
 
+Pass **install root** = the folder you open in Cursor (workspace root). See [scripts/README.md](scripts/README.md).
+
 | OS | Command |
 |----|---------|
-| Windows | `.\scripts\setup-windows.ps1` · optional `-WorkspaceRoot <path>` |
-| macOS / Linux | `./scripts/setup-macos-linux.sh` · optional `WORKSPACE_ROOT=/path` |
+| Windows | `.\scripts\setup-windows.ps1 -InstallRoot <workspace>` |
+| macOS / Linux | `./scripts/setup-macos-linux.sh <workspace>` (requires `python3`) |
 
-Creates `.cursor/` + `.claude/` links to `ai-skills/` and `ai-rules/`, plus `vault/issues/` + `vault/learnings/`. See [scripts/README.md](scripts/README.md).
+**Examples**
+
+| Cursor workspace | From inside `AI-SKILLS` clone |
+|------------------|-------------------------------|
+| Repo root only | `-InstallRoot .` or `.\scripts\setup-windows.ps1 -InstallRoot (Get-Location)` |
+| Parent (e.g. `SK/` with clone inside) | `-InstallRoot ..` |
+
+Creates under `<workspace>/.cursor/`:
+
+- `skills` → `ai-skills/`
+- `rules` → `ai-rules/`
+- `vault` → `vault/` (junction/symlink)
+- `ai-skills-vault.json` (paths for agents)
+
+Canonical notes stay in `<AI-SKILLS>/vault/issues/` and `vault/learnings/` (same files via `.cursor/vault`).
 
 Entry: [CLAUDE.md](CLAUDE.md) → `@AGENTS.md`
 
@@ -58,10 +74,9 @@ Design: [ai-rules/vault-learning/reference.md](ai-rules/vault-learning/reference
 ai-skills/
 ai-rules/
 templates/
-.cursor/   skills/ rules/  → junction
-.claude/   skills/ rules/  → junction
+.cursor/   skills/ rules/ vault/  → link at workspace root (after setup)
 CLAUDE.md · AGENTS.md
-vault/
+vault/     canonical (in clone)
 ```
 
 ---

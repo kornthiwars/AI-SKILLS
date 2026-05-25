@@ -14,12 +14,13 @@ ai-rules/
 
 ## Cursor mirror
 
+ใช้ [scripts/README.md](../scripts/README.md) — `-InstallRoot` ชี้ workspace ที่เปิดใน Cursor:
+
 ```powershell
-cmd /c mklink /J .cursor\rules ai-rules
-cmd /c mklink /J .claude\rules ai-rules
+.\scripts\setup-windows.ps1 -InstallRoot <workspace>
 ```
 
-รันจาก **repo root** (เหมือน skills)
+สร้าง `.cursor/rules` → `ai-rules/` (พร้อม `skills`, `vault`)
 
 ## หลัก
 

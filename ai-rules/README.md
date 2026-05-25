@@ -10,14 +10,17 @@ Rules canonical — Cursor: junction `.cursor/rules` → `ai-rules`
 
 ---
 
-## Cursor setup (จาก repo root)
+## Cursor setup
+
+รัน [scripts/README.md](../scripts/README.md) — สร้าง `.cursor/rules` (และ `skills`, `vault`) ที่ **install root**:
 
 ```powershell
-cmd /c mklink /J .cursor\rules ai-rules
-cmd /c mklink /J .claude\rules ai-rules
+cd AI-SKILLS
+.\scripts\setup-windows.ps1 -InstallRoot ..   # Cursor opens parent SK/
+# or -InstallRoot . when workspace is AI-SKILLS
 ```
 
-Setup ครบ: [scripts/README.md](../scripts/README.md) · [AGENTS.md](../AGENTS.md) § Setup
+แก้ rule ที่ `ai-rules/` เท่านั้น — ไม่แก้ใน `.cursor/rules/` โดยตรง
 
 ---
 

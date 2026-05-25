@@ -26,39 +26,28 @@ cd AI-SKILLS
 
 ### 2 — Setup (ครั้งเดียวหลัง clone)
 
-สคริปต์จะสร้าง link ให้ Cursor / Claude Code อ่าน skill จาก `ai-skills/` และ rule จาก `ai-rules/` รวมถึงโฟลเดอร์ `vault/issues/` + `vault/learnings/`
+สคริปต์สร้าง link ใต้ **โฟลเดอร์ที่เปิดใน Cursor** (install root): `.cursor/skills`, `.cursor/rules`, `.cursor/vault` + `ai-skills-vault.json`  
+เนื้อหา vault จริงอยู่ใน `AI-SKILLS/vault/` (ผ่าน link)
 
-**Windows** (PowerShell จาก repo root):
+**Windows** — ดับเบิลคลิก `scripts\setup-windows.bat` (workspace = repo) หรือ:
 
 ```powershell
 cd AI-SKILLS
-.\scripts\setup-windows.ps1
+.\scripts\setup-windows.ps1 -InstallRoot C:\path\to\workspace
 ```
 
-หรือดับเบิลคลิก `scripts\setup-windows.bat`
+| เปิด Cursor ที่ | รัน (จากใน clone) |
+|-----------------|-------------------|
+| `AI-SKILLS` | `.\scripts\setup-windows.ps1 -InstallRoot .` |
+| โฟลเดอร์แม่ `SK/` | `.\scripts\setup-windows.ps1 -InstallRoot ..` |
 
-**ถ้าเปิด Cursor ที่โฟลเดอร์แม่** (มี `AI-SKILLS` + โปรเจกต์อื่นข้างๆ):
-
-- รัน setup จากใน clone ครั้งเดียว — **ทั้ง Windows และ macOS/Linux จะตรวจจับโฟลเดอร์แม่ให้อัตโนมัติ** (ไม่ต้องตั้งชื่อ `SK`)
-- Windows จากแม่: ดับเบิลคลิก `setup-windows.bat` ที่ root workspace (ถ้ามี)
-- macOS/Linux จากแม่: `./AI-SKILLS/scripts/setup-macos-linux-parent.sh`
-
-หรือบังคับ path แม่:
-
-```powershell
-.\scripts\setup-windows.ps1 -WorkspaceRoot C:\path\to\your-workspace
-```
-
-```bash
-WORKSPACE_ROOT=/path/to/your-workspace ./scripts/setup-macos-linux.sh
-```
-
-**macOS / Linux** (จากใน clone):
+**macOS / Linux:**
 
 ```bash
 cd AI-SKILLS
 chmod +x scripts/setup-macos-linux.sh
-./scripts/setup-macos-linux.sh
+./scripts/setup-macos-linux.sh .    # workspace = AI-SKILLS
+./scripts/setup-macos-linux.sh ..   # workspace = parent
 ```
 
 รายละเอียด / troubleshooting: [scripts/README.md](scripts/README.md)
@@ -74,7 +63,7 @@ chmod +x scripts/setup-macos-linux.sh
 2. **Developer: Reload Window** (หรือปิดเปิด Cursor ใหม่)
 3. ในแชทลอง `@ui-builder`, `@debug`, `@git-push` ฯลฯ
 
-แก้ skill / rule ที่ canonical เท่านั้น: `ai-skills/`, `ai-rules/` — อย่าแก้ใน `.cursor/` หรือ `.claude/` (เป็น mirror)
+แก้ skill / rule ที่ canonical เท่านั้น: `ai-skills/`, `ai-rules/` — อย่าแก้ใน `.cursor/` (เป็น link/mirror)
 
 ### 4 — Obsidian (ถ้าใช้ vault)
 
@@ -101,10 +90,9 @@ chmod +x scripts/setup-macos-linux.sh
 ai-skills/          canonical
 ai-rules/           canonical
 templates/          vault note templates (repo root)
-.cursor/            junction → ai-skills, ai-rules
-.claude/            junction → ai-skills, ai-rules
+.cursor/            at workspace root after setup (skills, rules, vault)
 AGENTS.md · CLAUDE.md
-vault/
+vault/              canonical in clone
 ```
 
 ---

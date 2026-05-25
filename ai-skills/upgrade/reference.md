@@ -1,4 +1,4 @@
-# Upgrade — audit reference (v1.1.0)
+# Upgrade — audit reference (v1.1.1)
 
 ใช้เมื่อ **อัปเกรด skill อื่น** — เทียบกับ [SKILL-AUTHORING.md](../SKILL-AUTHORING.md) และ gold skills
 
@@ -14,6 +14,26 @@
 | `skills repo` (ambiguous) | `ai-skills repo` (this monorepo) |
 | `.cursor/learnings.md`, `project-learnings-template`, `cursor-rule-learnings.mdc`, `bootstrap-learnings.ps1` | `vault/learnings/` + `ai-rules/vault-learning` |
 | issues ไฟล์ละเรื่อง / learnings ≥2 | `issues/YYYY-MM-DD.md` วันละไฟล์ · `learnings/` ≥3 rounds |
+| `setup-windows.ps1` without `-InstallRoot` | mandatory `-InstallRoot <workspace>` |
+| `WORKSPACE_ROOT`, `-WorkspaceRoot`, `setup-macos-linux-parent.sh` | `setup-macos-linux.sh <workspace>` |
+| `.claude/skills`, `.claude/rules`, parent `vault/` at workspace root | `.cursor/skills`, `.cursor/rules`, `.cursor/vault` at install root only |
+| `ai-skills-vault.json` optional / parent `vault/` symlink | required at install root; `issuesRelative: .cursor/vault/issues` |
+
+## Repo doc hygiene (when `scripts/` or vault layout changes)
+
+Run when setup scripts, junction targets, or vault resolve paths change — **blocker** if docs still describe old layout.
+
+| File | Must match |
+|------|------------|
+| [scripts/README.md](../../scripts/README.md) | source of truth for commands |
+| [AGENTS.md](../../AGENTS.md) § Setup | `-InstallRoot`, `.cursor/` links, no `.claude/` |
+| [README.md](../../README.md) § Setup | same; no parent `setup-windows.bat` / parent-only scripts |
+| [ai-rules/vault-learning.mdc](../../ai-rules/vault-learning.mdc) | resolve steps: JSON → `.cursor/vault/issues` → clone fallback |
+| [ai-rules/vault-learning/reference.md](../../ai-rules/vault-learning/reference.md) | multi-project install root, not `parent/vault/` |
+| [ai-skills/README.md](../README.md) | setup line: `.cursor/skills` only |
+| [ai-rules/README.md](../../ai-rules/README.md) · [RULE-AUTHORING.md](../../ai-rules/RULE-AUTHORING.md) | setup via script, not manual `.claude/` mklink |
+
+After edit: grep repo for `WORKSPACE_ROOT`, `WorkspaceRoot`, `setup-macos-linux-parent`, `.claude/skills` in setup context — should be zero.
 
 ## Per-skill checklist
 

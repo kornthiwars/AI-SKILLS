@@ -10,7 +10,7 @@ description: >-
 compatibility: Cursor and Claude Code; edits under ai-skills/ only; no app UI/API implementation
 disable-model-invocation: true
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -64,7 +64,7 @@ Run in order. Pros/cons templates and severity examples: [reference.md](referenc
 ### 2 — Load standard
 
 1. [SKILL-AUTHORING.md](../SKILL-AUTHORING.md)
-2. [reference.md](reference.md) — audit checklist
+2. [reference.md](reference.md) — audit checklist · § Repo doc hygiene (when `scripts/` changed)
 3. **Gold skill** by complexity:
    - Heavy gates / deliverables → `ui-builder` or `api-builder`
    - Short skills (pr-review, git-push, upgrade) → frontmatter + Language + Hard rules + clear workflow
@@ -106,7 +106,8 @@ Multi-skill plans: repo-level pros/cons + **short per-skill** bump notes.
 
 ### 5 — Implement (after OK)
 
-- Edit only `ai-skills/<name>/` and repo version tables (`README.md`, `AI-NOTES.md`, `.claude-plugin/plugin.json` if present)
+- Edit `ai-skills/<name>/` and repo version tables (`README.md`, `AI-NOTES.md`, `.claude-plugin/plugin.json` if present)
+- If scope includes **setup / vault path** changes: sync repo docs per [reference.md](reference.md) § Repo doc hygiene (same PR as skill edits when possible)
 - Do not exceed confirmed scope
 - Keep `disable-model-invocation: true` and **70% Thai / 30% English** in chat replies; **English** `SKILL.md` body per AUTHORING
 

@@ -22,10 +22,20 @@ parent/                    ← open in Cursor
 └── api/
 ```
 
-Setup (either OS): run `./scripts/setup-macos-linux.sh` or `.\scripts\setup-windows.ps1` from clone — **auto** parent when `web/`/`api/` siblings exist.  
-Or explicit: `WORKSPACE_ROOT=<parent>` / `-WorkspaceRoot`.  
-Creates: `parent/.cursor/ai-skills-vault.json` · `parent/vault` → `AI-SKILLS/vault`.  
-Fallback: agents use `AI-SKILLS/vault/issues/` (rule § Resolve vault root).
+Setup from clone — pass **install root** = Cursor workspace ([scripts/README.md](../../scripts/README.md)):
+
+| Workspace | Command (examples) |
+|-----------|----------------------|
+| Parent `SK/` | `.\scripts\setup-windows.ps1 -InstallRoot ..` (Windows) · `./scripts/setup-macos-linux.sh ..` (macOS) |
+| Repo only | `-InstallRoot .` |
+
+Creates at `<installRoot>/.cursor/`:
+
+- `skills` · `rules` · `vault` (link to repo)
+- `ai-skills-vault.json` with `issuesRelative: .cursor/vault/issues`
+
+Does **not** create `<parent>/vault/` beside `AI-SKILLS/`.  
+Fallback: `AI-SKILLS/vault/issues/` (rule § Resolve vault root step 4).
 
 ## Flow
 
