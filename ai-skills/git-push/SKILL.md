@@ -10,7 +10,7 @@ description: >-
 compatibility: Cursor and Claude Code; git CLI; gh for PR only when user asks
 disable-model-invocation: true
 metadata:
-  version: "2.0.2"
+  version: "2.0.3"
   author: kornthiwars
   license: MIT
   surfaces:

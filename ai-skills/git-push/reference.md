@@ -1,4 +1,4 @@
-# reference — git-push (v2.0.2)
+# reference — git-push (v2.0.3)
 
 **v2.0.0:** No code review in this skill — use [`@pr-review`](../pr-review/SKILL.md) for bugs/production/security. This file covers **git safety** only.
 
@@ -64,6 +64,7 @@ Before guessing on rebase/hooks/auth — [ai-rules/vault-learning.mdc](../../ai-
 |------|-----|
 | Bugs, edge cases | `@pr-review` mode `bugs` |
 | Production readiness | `@pr-review` mode `production` |
+| Structure, naming, hygiene in diff | `@pr-review` mode `clean-code` (does not replace `production`) |
 | Security / scale | `@pr-review` mode `scale-security` |
 | Then push | `@git-push` — safety only; optional note if pr-review was `ready` |
 

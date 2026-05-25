@@ -96,7 +96,7 @@ Agent Skills โหลดเป็น 3 ชั้น ([agentskills.io](https://a
 | **อ่าน reference ตามขั้น** | “Load [reference.md](reference.md) § X” **ที่ขั้น X** |
 | **อ่าน assets เมื่อถึง gate** | `assets/template.*` / `assets/checklist.*` — เปิดเมื่อ post Gate หรือ deliver |
 | **description สั้น แม่น** | WHAT + WHEN NOT — อย่ายัด workflow |
-| **pr-review โหมดเดียว** | `bugs` / `production` / `scale-security` — ไม่รันทั้ง 3 ถ้าไม่จำเป็น |
+| **pr-review โหมดเดียว** | `bugs` / `production` / `clean-code` / `scale-security` — หนึ่งโหมดต่อรอบ; ไม่รันทุกโหมดพร้อมกัน |
 | **หลัง pr-review `ready`** | `@git-push` — safety only; ไม่รีวิวโค้ดซ้ำ (git-push v2) |
 
 ### สำหรับผู้เขียน skill

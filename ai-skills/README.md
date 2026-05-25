@@ -16,7 +16,7 @@ Universal index: [AGENTS.md](../AGENTS.md)
 | Flow Builder | 1.0.1 | [flow-builder/](flow-builder/SKILL.md) |
 | Debug | 1.0.5 | [debug/](debug/SKILL.md) |
 | PR Review | 1.1.1 | [pr-review/](pr-review/SKILL.md) — modes: bugs, production, clean-code, scale-security |
-| Git Push | 2.0.2 | [git-push/](git-push/SKILL.md) — safety + push; no code review |
+| Git Push | 2.0.3 | [git-push/](git-push/SKILL.md) — safety + push; no code review |
 | Upgrade | 1.1.3 | [upgrade/](upgrade/SKILL.md) |
 
 คู่มือสร้าง/แก้ skill: [SKILL-AUTHORING.md](SKILL-AUTHORING.md)
