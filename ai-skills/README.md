@@ -14,7 +14,7 @@ Universal index: [AGENTS.md](../AGENTS.md)
 | API Builder | 1.0.4 | [api-builder/](api-builder/SKILL.md) |
 | Feature Builder | 1.1.4 | [feature-builder/](feature-builder/SKILL.md) |
 | Flow Builder | 1.0.3 | [flow-builder/](flow-builder/SKILL.md) |
-| Debug | 1.1.0 | [debug/](debug/SKILL.md) |
+| Debug | 1.2.0 | [debug/](debug/SKILL.md) — repro matrix, evidence priority, root-cause ledger |
 | PR Review | 1.1.3 | [pr-review/](pr-review/SKILL.md) — modes: bugs, production, clean-code, scale-security |
 | Git Push | 2.0.5 | [git-push/](git-push/SKILL.md) — safety + push; no code review |
 | Upgrade | 1.1.5 | [upgrade/](upgrade/SKILL.md) |

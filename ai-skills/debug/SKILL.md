@@ -1,18 +1,19 @@
 ---
 name: debug
 description: >-
-  Debug — traces wrong data/display/logic: API evidence vs client map, state,
-  and render conditions. Diagnose-first; repeat repro to confirm; fix after
-  Gate D Approved + user confirms. Triggers on /debug, @debug, debug, ข้อมูลผิด,
-  แสดงผิด, map ผิด, state ไม่อัปเดต, API ถูกแต่ UI ผิด, render ผิด, ไล่บั๊กข้อมูล,
-  ทำซ้ำยืนยัน, ยืนยันบั๊ก. Does not apply to pixel/mockup (ui-builder), new API
-  design (api-builder), full FE+BE orchestration (feature-builder), unclear
-  pre-build button/data flow before implement (@flow-builder), git commit/push
-  (hand off @pr-review then @git-push) maintenance (@upgrade).
+  Debug — production-style data/logic diagnosis: repro reliability matrix,
+  evidence priority, layer ownership, root-cause ledger, instrumentation,
+  minimal patch scoring, regression surface. Diagnose-first; repeat to confirm;
+  fix after Gate D Approved + user confirms. Triggers on /debug, @debug, debug,
+  ข้อมูลผิด, แสดงผิด, map ผิด, state ไม่อัปเดต, API ถูกแต่ UI ผิด, render ผิด,
+  ไล่บั๊กข้อมูล, ทำซ้ำยืนยัน, flaky, async bug. Does not apply to pixel/mockup
+  (ui-builder), new API design (api-builder), full FE+BE orchestration
+  (feature-builder), unclear pre-build flow (@flow-builder), git commit/push
+  (@pr-review then @git-push), ai-skills maintenance (@upgrade).
 compatibility: Cursor and Claude Code; project test runner and HTTP client; optional browser MCP for repro
 disable-model-invocation: true
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -21,73 +22,75 @@ metadata:
 
 # Debug
 
-**Diagnose** wrong **data or logic** — narrow with evidence, **repeat to confirm**, then fix after **Gate D Approved** + user OK. Not pixel work or new API design.
+**Diagnose** wrong **data or logic** — repro matrix, ranked evidence, layer ownership, root-cause ledger, then fix after **Gate D Approved** + user OK.
 
 Details: [reference.md](reference.md)
 
 ## Operating stance
 
-- **Pinpoint before patch** — one primary layer (D1–D6); no fix until fail path + disproof ([reference.md](reference.md) § Diagnosis precision)
-- **Repeat to confirm** — D1 = same steps → same wrong **actual** ≥2 runs; D7 = re-run D1 after fix
-- **Diagnose before fix** — API → map → state → render; evidence at each layer
-- **Data vs visual** — values/logic here; layout → `@ui-builder`
-- **Server vs client** — wrong response → `@api-builder`; body OK → stay in debug
-- **Minimal patch** — smallest fix; no drive-by refactors
+- **Framework in reference** — load § per Quick ref; do not read full reference at invoke
+- **Pinpoint before patch** — one primary layer + [§ Minimal patch scoring](reference.md#minimal-patch-scoring)
+- **Repeat to confirm** — [§ Repro reliability matrix](reference.md#repro-reliability-matrix); D7 + [§ Regression surface](reference.md#regression-surface-d7)
+- **Evidence over assumption** — [§ Evidence priority](reference.md#evidence-priority-order) (runtime before screenshot)
+- **Server vs client** — [§ Layer ownership](reference.md#layer-ownership); handoff by owner
+- **Remove temp instrumentation** before ship — [§ Instrumentation rules](reference.md#instrumentation-rules)
 
 ## Required inputs — refuse without these
 
 - [ ] **Symptom** · **Expected vs actual** · **Repro steps** · **Scope** · **Evidence hint**
 
-Mockup-only "doesn't match design" → `@ui-builder`. List gaps in Thai and **stop**.
+Mockup-only → `@ui-builder`. List gaps in Thai and **stop**.
 
 ## Hard rules
 
 - **No pixel/API orchestration/git/ai-skills edits** — see `description` WHEN NOT
 - **No git commands** — [SKILL-AUTHORING.md](../SKILL-AUTHORING.md) § Git operations
-- **Gate D before large fix** — no module rewrite without Approved diagnosis
-- **No fix before D1 pass** — no reliable repro → Revise or stop ([reference.md](reference.md) § D1)
+- **No fix before repro class allows** — `non-repro` → Revise; `semi-flaky` / `flaky` → [§ Instrumentation](reference.md#instrumentation-rules) before Approved
 - **No hypothesis before fail path** — [reference.md](reference.md) § Fail path first
-- **No root cause without disproof** — top hypothesis disproved first; ledger must fit all rows
-- **No "done" without D7** — re-run D1 steps after patch; actual must match expected
+- **No root cause without root-cause ledger + disproof** — [template.root-cause-ledger](assets/template.root-cause-ledger.md)
+- **No patch above tier without Gate D** — module rewrite / architecture → Revise or re-approve
+- **No "done" without D7 + regression checklist** — [§ Regression surface](reference.md#regression-surface-d7)
+- **No ship with `[DBG-` logs** — remove temp instrumentation first
 
 ## Gate D — Diagnosis
 
 | Verdict | Meaning |
 |---------|---------|
-| **Approved** | **D1 pass** (≥2 identical wrong actuals or flake harness) + one layer + ledger consistent |
-| **Revise** | No D1 pass, fail path empty, disproof skipped, or ledger contradicts hypothesis |
+| **Approved** | Repro class **stable** or **semi-flaky** with instrumentation note + evidence priority satisfied + root-cause ledger consistent + one layer + patch tier chosen |
+| **Revise** | `non-repro`, `flaky` without harness, fail path empty, ledger contradicts, or evidence is assumption-only |
 
-Template: [assets/template.diagnosis-report.md](assets/template.diagnosis-report.md). Layers: [reference.md](reference.md) § Diagnosis layers.
+Templates: [diagnosis-report](assets/template.diagnosis-report.md) · [root-cause-ledger](assets/template.root-cause-ledger.md)
 
 ## Quick reference
 
 | Step | Load | Outcome |
 |------|------|---------|
-| 0 | [reference.md](reference.md) § Search learnings | ≤3 prior lessons |
-| 1 | [template.repro](assets/template.repro.md) · § D1 | D1 pass / flaky / none (**2 runs**) |
-| 2 | [template.evidence](assets/template.evidence.md) | API + client paths |
-| 3 | § Fail path | narrow **where** it breaks |
-| 4 | § Diagnosis layers · § Falsify · [breadcrumb](assets/template.breadcrumb-ledger.md) | one layer + disproof |
+| 0 | § Search learnings | ≤3 prior lessons |
+| 1 | [template.repro](assets/template.repro.md) · § Repro matrix | stable / semi-flaky / flaky / non-repro |
+| 2 | [template.evidence](assets/template.evidence.md) · § Evidence priority | ranked evidence |
+| 3 | § Fail path · § Instrumentation | break site; logs if unclear |
+| 4 | § Layer ownership · § Falsify · [root-cause-ledger](assets/template.root-cause-ledger.md) · [breadcrumb](assets/template.breadcrumb-ledger.md) | owner + ledger + experiments |
 | 5 | diagnosis template | Approved / Revise |
-| 6–8 | § Workflow D6–D8 · § Cross-skill | fix/handoff · **D7 re-pro** · report |
+| 6 | § Minimal patch · § Cross-skill | smallest patch / handoff |
+| 7–8 | § Regression surface · § Report | D7 re-pro + checklist · close |
 
 ## Workflow
 
-Run Quick ref in order. **Do not skip step 3 or disproof in step 4.** Detail: [reference.md](reference.md) § Workflow (D0–D8) · § Diagnosis precision.
+Run Quick ref. Detail: [reference.md](reference.md) § Workflow (D0–D8) · § Diagnosis precision.
 
 ## Output flow
 
-Inputs → D0 → D1 repro (confirm) → evidence → fail path → layers + disproof → Gate D → fix/handoff → **D7 re-pro** → ship `@pr-review` → `@git-push`
+D0 → D1 matrix → D2 priority evidence → fail path → layers + ledger + disproof → Gate D → patch tier → D7 regression → ship `@pr-review` → `@git-push`
 
 ## Language
 
-[SKILL-AUTHORING.md](../SKILL-AUTHORING.md) § Language. **Gloss:** `root cause (สาเหตุหลัก)`, `D1 pass (ยืนยันซ้ำได้)` · EN: Gate D, D1–D6.
+[SKILL-AUTHORING.md](../SKILL-AUTHORING.md) § Language. **Gloss:** `stable (2/2 fail)`, `semi-flaky (3/5)` · EN: Gate D, layer ownership, patch tier.
 
 ## Resources
 
 | File | Use |
 |------|-----|
-| [reference.md](reference.md) | § Index · Diagnosis precision · Workflow · layers · handoffs · pitfalls |
-| [assets/](assets/) | repro · evidence · ledger · diagnosis-report |
+| [reference.md](reference.md) | Framework § Index — matrix, evidence, ownership, instrumentation, regression, false diagnoses |
+| [assets/](assets/) | repro · evidence · root-cause-ledger · breadcrumb · diagnosis-report |
 
 Canonical: `ai-skills/debug/`

@@ -1,21 +1,28 @@
-# Evidence — copy into chat
+# Evidence — copy into chat (priority order)
 
 ```
 [debug evidence]
-## API
+## Priority (fill highest available first)
+1-runtime actual: …
+2-network payload: …
+3-persisted state: …
+4-logs: …
+5-screenshot/video: … (context only)
+6-assumption (mark unverified): …
+
+## API (priority 2)
 | call | status | notes |
 | GET /api/… | 200 | … |
 
 ### Response sample (redact secrets)
 { … }
 
-## Client
+## Client (paths)
 | file | role |
-| components/OrderRow.tsx | displays total |
 | hooks/useOrders.ts | fetch + cache |
+| components/OrderRow.tsx | displays total |
 
 ## User-provided
-- [ ] Network screenshot
 - [ ] HAR / curl
-- [ ] None — inspect repo only
+- [ ] Screenshot (not sufficient alone for root cause)
 ```

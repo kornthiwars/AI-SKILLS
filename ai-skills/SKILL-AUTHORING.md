@@ -62,7 +62,7 @@ ai-skills/                         # repo root (canonical)
 | [api-builder](api-builder/SKILL.md) | ✓ | `template.contract-spec`, `template.crud-pack`, `template.endpoint-delta`, `template.handoff-to-ui` |
 | [feature-builder](feature-builder/SKILL.md) | ✓ | `template.feature-spec`, `template.phase-plan`, `template.api-invoke-packet`, `template.ui-invoke-packet`, `template.runbook`, `template.reply`, `checklist.integration` |
 | [flow-builder](flow-builder/SKILL.md) | ✓ | `template.action-flow`, `template.data-lineage`, `template.mutation-chain`, `template.flow-spec`, `template.reply`, `checklist.flow-gaps` |
-| [debug](debug/SKILL.md) | ✓ | `template.repro`, `template.evidence`, `template.diagnosis-report`, `template.breadcrumb-ledger`, `template.post-fix-learning` |
+| [debug](debug/SKILL.md) | ✓ | `template.repro`, `template.evidence`, `template.root-cause-ledger`, `template.diagnosis-report`, `template.breadcrumb-ledger`, `template.post-fix-learning` |
 | [pr-review](pr-review/SKILL.md) | ✓ | `template.review-comment` |
 | [git-push](git-push/SKILL.md) | — | `FILES.md` + `reference.md` only |
 | [upgrade](upgrade/SKILL.md) | — | `FILES.md` + `reference.md` only |

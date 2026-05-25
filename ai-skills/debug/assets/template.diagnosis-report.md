@@ -3,32 +3,40 @@
 ```
 [debug] Diagnosis — <scope>
 Gate D: Approved | Revise
-D1 repro: pass (reliable x2 | flaky harness) | fail | none
+Repro class: stable | semi-flaky | flaky | non-repro
+Instrumentation: none | [DBG-…] planned | removed
+Evidence top tier: 1 | 2 | 3 | 4 | 5 | 6
+
+## Root cause ledger (summary)
+| Evidence | Supports | Contradicts |
 
 ## Breadcrumb ledger
 | # | change | result | ruled in | ruled out |
 
 ## Hypotheses
-| rank | hypothesis | disproof run | survived? |
+| rank | hypothesis | disproof | survived? |
 
-## Layer table
-| Layer | status | evidence | finding |
-| D1 Repro | pass/fail | … | … |
-| D2 API | pass/fail | … | … |
-| D3 Shape | pass/fail | … | … |
-| D4 Map | pass/fail | … | … |
-| D5 State | pass/fail | … | … |
-| D6 Render | pass/fail | … | … |
+## Layer + ownership
+| Layer | owner | status | finding |
+| D2 API | backend | pass/fail | … |
+| D4 Map | frontend data | pass/fail | … |
 
 Primary root cause layer: D?_…
+Patch tier: 1-5loc | function | module
+
+## Regression (D7)
+| check | pass |
+| original repro | |
+| adjacent flows | |
+| loading / empty / error | |
+| retry / stale cache / nav | |
 
 ## Handoff
 none | @api-builder | @ui-builder
 
 ## Blockers (if Revise)
-| # | need from user |
-| 1 | … |
+| # | need |
 
 Summary (TH): …
-Next: confirm fix | handoff packet | re-pro
+Next: confirm fix | handoff | D7 item | remove DBG before ship
 ```
