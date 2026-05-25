@@ -35,6 +35,8 @@ If labels still show filenames:
 
 Grep with `symptoms:` / `files:` frontmatter + tags — read **≤3** files max. Rule: [ai-rules/vault-learning.mdc](../../ai-rules/vault-learning.mdc) § Search learnings.
 
+**Empty folder:** only this `README.md` is tracked in git; no `YYYY-MM-DD-HHmm.md` yet → Grep returns nothing → agent **skips** search (normal). Add a lesson after a solved problem (≥2 prompt rounds) to make search useful.
+
 Topic tags เดียวกับ issues: `vault`, `git`, `research`, `ui`, `api`, `infrastructure`, `debug`
 
 ## When agent writes

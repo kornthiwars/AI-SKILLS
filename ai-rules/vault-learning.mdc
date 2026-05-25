@@ -98,7 +98,7 @@ Before debug, git friction, or repeating a hard fix — search **`vault/learning
 
 **No hub file** — do not maintain a manual index; optional frontmatter on each learning (`symptoms`, `files`) makes step 1 precise.
 
-If `vault/learnings/` is empty or missing, skip search.
+**Empty learnings folder:** If there are no lesson files (only `README.md` or the folder is missing), **skip** steps 1–3 — do not read the whole folder. That is normal until someone writes `YYYY-MM-DD-HHmm.md` after a solved problem (≥2 prompt rounds). Daily `issues/` still works independently.
 
 ## Write — issues (auto · one file per day)
 

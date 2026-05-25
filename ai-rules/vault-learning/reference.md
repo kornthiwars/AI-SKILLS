@@ -64,6 +64,8 @@ Many learning files → **Grep narrow, read few**.
 3. Read **≤3** best-matching notes
 4. Optional: same-day `vault/issues/YYYY-MM-DD.md` if still unclear
 
+**Empty folder:** no `YYYY-MM-DD-HHmm.md` yet (only `learnings/README.md`) → skip search; write a lesson after ≥2 prompt rounds on a solved problem.
+
 No hub/index file — optional `symptoms` / `files` arrays in [template.learning.md](../../templates/template.learning.md) replace a central catalog.
 
 ## Git

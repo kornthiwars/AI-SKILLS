@@ -7,4 +7,4 @@
 
 **No hub file.** Graph groups by tags. No wikilink footers.
 
-**Search learnings:** Grep `vault/learnings/` (keywords, `skill:`, `symptoms:`, `files:`) → read **≤3** files max — never load the whole folder. Details: [vault-learning.mdc](vault-learning.mdc) § Search learnings.
+**Search learnings:** Grep `vault/learnings/` (keywords, `skill:`, `symptoms:`, `files:`) → read **≤3** files max — never load the whole folder. **Empty folder (no lesson files):** skip search. Details: [vault-learning.mdc](vault-learning.mdc) § Search learnings.

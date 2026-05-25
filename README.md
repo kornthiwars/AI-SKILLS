@@ -61,7 +61,7 @@ chmod +x scripts/setup-macos-linux.sh
 
 1. **File → Open Folder** → เลือกโฟลเดอร์ `AI-SKILLS` (repo root)
 2. **Developer: Reload Window** (หรือปิดเปิด Cursor ใหม่)
-3. ในแชทลอง `@ui-builder`, `@debug`, `@git-push` ฯลฯ
+3. ในแชทลอง `@flow-builder`, `@ui-builder`, `@debug`, `@git-push` ฯลฯ
 
 แก้ skill / rule ที่ canonical เท่านั้น: `ai-skills/`, `ai-rules/` — อย่าแก้ใน `.cursor/` (เป็น link/mirror)
 
@@ -80,6 +80,7 @@ chmod +x scripts/setup-macos-linux.sh
 ## เริ่มใช้
 
 - Ship งาน: `implement → @pr-review → @git-push` — [ai-skills/README.md](ai-skills/README.md)
+- ไล่ flow ปุ่ม/ข้อมูลก่อนลงมือ (ไม่บังคับ): `@flow-builder` → แล้ว implement / `@feature-builder`
 - แก้ skill ใน repo นี้: `@upgrade`
 
 ---
@@ -106,6 +107,7 @@ Versions: [ai-skills/README.md](ai-skills/README.md) (table at top)
 | [@feature-builder](ai-skills/feature-builder/SKILL.md) | ฟีเจอร์ครบ FE+BE |
 | [@api-builder](ai-skills/api-builder/SKILL.md) | API, contract |
 | [@ui-builder](ai-skills/ui-builder/SKILL.md) | UI ตรง mockup |
+| [@flow-builder](ai-skills/flow-builder/SKILL.md) | ไล่ flow / data / create-update ก่อน implement |
 | [@debug](ai-skills/debug/SKILL.md) | logic บนจอผิด |
 | [@pr-review](ai-skills/pr-review/SKILL.md) | review ก่อน push |
 | [@git-push](ai-skills/git-push/SKILL.md) | commit + push |
