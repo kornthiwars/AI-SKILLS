@@ -105,6 +105,30 @@ Agent Skills โหลดเป็น 3 ชั้น ([agentskills.io](https://a
 - **Quick reference** ตาราง Phase | Load | Outcome
 - **Output flow** ท้าย SKILL — ไม่ซ้ำย่อหน้าเดียวกันใน reference
 
+## SKILL tiers (SKILL.md shape)
+
+| Tier | Examples | Keep in SKILL.md | Move to reference / assets |
+|------|----------|------------------|----------------------------|
+| **Gate** | `api-builder`, `ui-builder` | Required inputs, Hard rules, Quick ref, gate verdict tables, thin Workflow → `reference.md` | Phase prose, pitfalls, Voice, Operating rules |
+| **Orchestrator** | `feature-builder`, `flow-builder` | Gates, packets, **หยุดจนกว่า**, Quick ref row for runbook/reply | Runbook table, Reply discipline, phase prose |
+| **Ops** | `pr-review`, `git-push`, `debug`, `upgrade` | Hard rules, deliverable shape, Quick ref | Step detail, AskQuestion spec, combo chains |
+
+Gold pattern ([api-builder](api-builder/SKILL.md)): Workflow = one line per phase group + `Load reference.md § …`.
+
+## Dedup rules (required on upgrade)
+
+| Do not duplicate in SKILL.md | Single source |
+|------------------------------|---------------|
+| Full workflow steps already in Quick ref | `reference.md` § Workflow |
+| AskQuestion option tables | `reference.md` § AskQuestion |
+| `When to use / NOT` that repeats `description` WHEN NOT | `description` + 1-line **Use** trigger |
+| Full Language block (70/30 rules) | § Language below + skill-specific **Gloss** line only |
+| Long `No git commands` list | One line → § Git operations + `@pr-review` then `@git-push` |
+| Vault grep steps | [ai-rules/vault-learning.mdc](../ai-rules/vault-learning.mdc) § Search learnings — one line in Output flow |
+| Runbook / reply block tables | `assets/template.*` + `reference.md` § discipline |
+
+**Keep in SKILL.md:** gate tables, verdict enums, **หยุดจนกว่า** phrases, deliverable fenced block (short).
+
 ### โหลด skill ตาม phase (app repo)
 
 | Phase | Skill |

@@ -14,7 +14,7 @@ description: >-
 compatibility: Cursor and Claude Code; project test runner and HTTP client; OpenAPI/GraphQL schema when present; stack conventions in reference.md
 disable-model-invocation: true
 metadata:
-  version: "1.0.3"
+  version: "1.0.4"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -58,7 +58,7 @@ If the repo already has OpenAPI or GraphQL schema, treat it as baseline and docu
 - Senior API Reviewer: **no implementation edits** (review contract and verify evidence only)
 - **UI work is out of scope** — FE changes → `@ui-builder` with [fe-handoff template](assets/template.handoff-to-ui.md)
 - **Data correct in API but wrong on screen** → `@debug`, not api-builder
-- **No git commands** — no `git status` / `add` / `commit` / `push` / `pull` / `rebase`; ship → `@pr-review` then `@git-push` only
+- **No git commands** — [SKILL-AUTHORING.md](../SKILL-AUTHORING.md) § Git operations
 
 ## Quick reference
 
@@ -75,12 +75,6 @@ If the repo already has OpenAPI or GraphQL schema, treat it as baseline and docu
 
 Prefix: `[Implementer]` / `[Senior API Reviewer]`.
 
-## When to use / NOT
-
-**Use:** new endpoint, fix validation/query, migration, contract tests, CRUD pack, GraphQL mutation, webhook, `@api-builder`
-
-**NOT:** mockup / pixel UI → `@ui-builder` · API response correct but UI shows wrong data → `@debug` · FE map-only without server change → `@debug` · full feature FE+BE one pass → `@feature-builder` (split: api-builder then ui-builder) · `@upgrade`
-
 ## Workflow
 
 Run in order. Do not skip gates.
@@ -95,14 +89,7 @@ Paste Contract + Ship → summary → [FE handoff](assets/template.handoff-to-ui
 
 ## Output flow
 
-1. Confirm **required inputs** (above).
-2. Phase 0–1 → **Gate Contract** ([reference.md](reference.md) form).
-3. Phase 1.5 (DTO map) → Phase 2–3 only if **Approved**.
-4. **Gate Ship** — 0 blockers required for Confirmed.
-5. Post Contract + Ship + summary in chat.
-6. Repeatable gap → patch [reference.md](reference.md) (one pitfall or verify note).
-7. **Vault:** search `vault/learnings/` before API debug; learning if ≥2 prompt rounds on same problem; issues auto on Q&A — [vault/README.md](../../vault/README.md).
-8. When user will **commit/push** → suggest `@pr-review` (e.g. `production` mode) then `@git-push`.
+Inputs → Gate Contract → DTO → implement/verify → Gate Ship → deliver + optional FE handoff · vault: [vault-learning.mdc](../../ai-rules/vault-learning.mdc) · ship: `@pr-review` → `@git-push`
 
 ## Cross-skill (feature-builder)
 
@@ -115,21 +102,9 @@ When user wants a **full feature** (e.g. login):
 
 ## Language
 
-- **70% ไทย / 30% อังกฤษ** — อธิบาย contract, สรุป, คำถาม user เป็นภาษาไทย; ใช้อังกฤษ ~30% สำหรับ Gate Contract/Ship, Approved, Revise, Confirmed, Phase 1.5, endpoint, pitfall #N, E1, status code
-- **Mix ธรรมชาติ** — เช่น "Gate Contract **Approved** แล้ว — เริ่ม Phase 2 implement endpoint E1"
-- **Gloss ครั้งแรกต่อ reply** — ศัพท์ที่อาจสับสน: `Approved (อนุมัติแล้ว)`, `Not confirmed (ยังไม่ยืนยัน)`, `blocker (จุดที่ต้องแก้ก่อนส่ง)`
-- **ไม่แปล** — `@api-builder`, path, โค้ด
+[SKILL-AUTHORING.md](../SKILL-AUTHORING.md) § Language. **Gloss:** `Approved (อนุมัติแล้ว)`, `Not confirmed (ยังไม่ยืนยัน)`, `blocker (จุดที่ต้องแก้ก่อนส่ง)` · EN: Gate Contract/Ship, E1, pitfall #N.
 
-## Voice
-
-| Role | Do | Don't |
-|------|-----|-------|
-| Implementer | contract, DTO map, code, tests, verify, fix | Skip gates; "done" with blockers |
-| Senior API Reviewer | Contract / Ship vs approved spec | Write or edit implementation |
-
-## Maintainer
-
-Canonical: `ai-skills/api-builder/`
+**Voice:** [reference.md](reference.md) § Voice
 
 ## Resources
 

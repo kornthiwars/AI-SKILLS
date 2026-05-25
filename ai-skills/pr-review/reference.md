@@ -228,11 +228,107 @@ Same mode + unchanged diff → may cite prior verdict timestamp and only scan ne
 
 ---
 
-## AskQuestion (agent)
+## Workflow (steps 1–4)
+
+Load when executing Quick ref steps 1–4 in [SKILL.md](SKILL.md).
+
+### 1 — Scope and diff
+
+Confirm with user if unclear: batch goal; which files/commits are in scope (no unrelated drive-by). Inspect workspace hunks or user-pasted `git diff`.
+
+### 2 — Checklist by mode
+
+Run only checks **required** for the active mode in § Modes above.
+
+- **clean-code:** § Modes matrix column + § P10c — always **P10b** (diff-only).
+- **Other modes:** **P10b** when in diff scope — § P10b (no full-repo purge).
+
+Record every **blocker** and **major** in the output table. **nit** / **note** optional.
+
+### 3 — Verdict
+
+| Verdict | Meaning |
+|---------|---------|
+| **ready** | 0 blockers for this mode; user may `@git-push` (or deploy for `scale-security`) |
+| **revise** | ≥1 blocker or fix majors before push/deploy |
+
+**Ship confidence:** `ready` = 0 blockers **for this mode only** — see § Ship confidence (`clean-code` ≠ “โค้ดไม่พัง”).
+
+**Performance line (required):** one Thai sentence — § Performance line by mode.
+
+### 4 — Handoff
+
+| Verdict | Next |
+|---------|------|
+| `ready` + before push | `@git-push` — user may paste verdict; git-push v2 does **not** re-review code |
+| `revise` | list fixes; re-run `@pr-review` same mode after fix |
+| `ready` + `scale-security` before deploy | deploy checklist / monitoring; still no git from pr-review |
+
+## Combo (optional)
+
+Separate invokes on the same diff — do not merge checklists:
+
+1. `@pr-review` → `bugs` → `ready`
+2. `@pr-review` → `clean-code` → `ready` (optional)
+3. `@pr-review` → `production` → `ready`
+4. `@git-push`
+
+`clean-code` does **not** replace `production`.
+
+## Output deliverable
+
+Required before ending turn:
+
+```text
+[pr-review] mode: <mode> — <scope>
+Diff: <description>
+Verdict: ready | revise
+
+| ID | severity | file:line | finding | suggestion |
+
+Performance (TH): …
+Summary (TH): …
+Next: …
+```
+
+---
+
+## AskQuestion (agent) — Step 0
 
 When Step 0 runs, use the tool **AskQuestion** — do not invent a text-only menu. Single-select only.
 
 If the environment has no AskQuestion, show the four options as a numbered list and **stop** until user replies with `bugs`, `production`, `clean-code`, or `scale-security`.
+
+**Detect mode from message** (skip AskQuestion if any alias matches):
+
+| Mode id | Aliases in user message |
+|---------|-------------------------|
+| `bugs` | `bugs`, `ก่อน commit`, `edge case`, `bug review` |
+| `production` | `production`, `ก่อน PR`, `production readiness`, `พร้อม PR` |
+| `scale-security` | `scale-security`, `scale`, `ก่อน deploy`, `scalability`, `security review` |
+| `clean-code` | `clean-code`, `clean code`, `code smell`, `refactor hygiene`, `maintainability`, `โค้ดสะอาด`, `clean code review` |
+
+**AskQuestion** (exact shape):
+
+- **title:** `PR Review — เลือกโหมด`
+- **question id:** `pr-review-mode`
+- **prompt:** `จะรีวิวชุดงานนี้แบบไหน? (เลือก 1)`
+- **allow_multiple:** `false`
+
+| id | label |
+|----|--------|
+| `bugs` | ก่อน commit — Review for bugs and edge cases |
+| `production` | ก่อน PR — Review for production readiness |
+| `scale-security` | ก่อน deploy — Scalability, security, and performance |
+| `clean-code` | โครงสร้างโค้ด — Naming, DRY, hygiene in diff (not full production pass) |
+
+After select or typed mode, echo:
+
+```text
+[pr-review] mode: <bugs|production|clean-code|scale-security>
+```
+
+Then continue Step 1.
 
 ## Common rationalizations (agent discipline)
 

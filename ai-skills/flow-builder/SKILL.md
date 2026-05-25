@@ -13,7 +13,7 @@ description: >-
 compatibility: Cursor and Claude Code; user app repo or requirements only; read-only code inspection; optional mermaid in chat
 disable-model-invocation: true
 metadata:
-  version: "1.0.1"
+  version: "1.0.2"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -50,7 +50,7 @@ List gaps in Thai and **stop**.
 ## Hard rules
 
 - **No app implementation** — no TS/JS/CSS/SQL edits in this skill/thread
-- **No git commands** — ship elsewhere → `@pr-review` then `@git-push`
+- **No git commands** — [SKILL-AUTHORING.md](../SKILL-AUTHORING.md) § Git operations
 - **No pixel gates** — not `@ui-builder` Gate A/B
 - **No API Contract/Ship** — not `@api-builder` gates; flow-spec may list **endpoint skeletons only** (method/path/body intent) — not OpenAPI, status matrix, or Gate Contract
 - **No full-feature orchestration** — use `@feature-builder` when user wants phased FE+BE build
@@ -124,9 +124,9 @@ Merge F1–F4 into [template.flow-spec.md](assets/template.flow-spec.md).
 
 Paste flow-spec to user. Optional: suggest saving as `docs/flows/<name>.md` in app repo (user commits via `@git-push`).
 
-## Reply format (required every turn)
+## Reply format
 
-Load [assets/template.reply.md](assets/template.reply.md).
+Every turn: [assets/template.reply.md](assets/template.reply.md).
 
 ## Optional handoffs (after Gate Flow Approved)
 
@@ -146,22 +146,18 @@ Load [assets/template.reply.md](assets/template.reply.md).
 5. F4 gaps → Gate Flow **Approved** \| **Revise**  
 6. Optional: child skill or stop  
 
-## Cross-skill
+## Handoffs
 
 | Need | Skill |
 |------|-------|
-| Implement API | `@api-builder` |
-| Implement UI | `@ui-builder` |
-| Orchestrate feature | `@feature-builder` |
-| Data/logic bug | `@debug` |
-| Maintain skills repo | `@upgrade` |
+| Implement API / UI | `@api-builder` / `@ui-builder` |
+| Full feature | `@feature-builder` |
+| Wrong on screen | `@debug` |
 | Ship | `@pr-review` → `@git-push` |
 
 ## Language
 
-- **70% ไทย / 30% อังกฤษ** — reply ไทย; Gate Flow, F1–F4, trigger, mutation chain
-- **Gloss once per reply** — `lineage (แหล่งข้อมูล)`, `mutation chain (สร้าง/อัปเดต)`
-- **Do not translate** — paths, `@skill`, template blocks
+[SKILL-AUTHORING.md](../SKILL-AUTHORING.md) § Language. **Gloss:** `lineage (แหล่งข้อมูล)`, `mutation chain (สร้าง/อัปเดต)` · EN: Gate Flow, F1–F4.
 
 ## Resources
 

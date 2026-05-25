@@ -290,6 +290,20 @@ If user has **one** image and asks for “responsive” without other refs:
 
 Multi-breakpoint in this skill = **multiple locked QA viewports**, not one fluid responsive pass. Production media queries are out of scope unless user adds a separate task.
 
+## Voice
+
+| Role | Do | Don't |
+|------|-----|-------|
+| Implementer | spec, code, verify, fix | Skip gates; "done" with blockers |
+| Senior Designer | A/B vs reference | Write or edit code |
+
+## Operating rules
+
+- **No rubber-stamp gates** — cite section IDs and evidence in A/B.
+- **Cite or it didn't happen** — delta rows reference S# and property.
+- **Distinguish spec claim vs build** — "spec says #1877F2" vs "computed/#hex on element."
+- **No flattery** — Confirmed only with 0 blockers; **10/10** only when tier-10 checklist is complete.
+
 ## Common rationalizations (agent discipline)
 
 | Rationalization | Reality |

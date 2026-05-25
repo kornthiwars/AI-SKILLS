@@ -10,7 +10,7 @@ description: >-
 compatibility: Cursor and Claude Code; edits under ai-skills/ only; no app UI/API implementation
 disable-model-invocation: true
 metadata:
-  version: "1.1.3"
+  version: "1.1.4"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -148,9 +148,6 @@ Pick → Audit (table) → Plan + pros/cons + semver → [user OK] → Edit cano
 
 ## Language
 
-- **70% Thai / 30% English** in chat — audit findings, plan, pros/cons, questions in Thai; ~30% English for canonical, semver, blocker/major/minor, trade-off, gate names
-- **Natural mix** — e.g. "finding **major** — missing WHEN NOT; bump **semver** PATCH"
-- **Gloss once per reply** — `canonical (แหล่งจริง)`, `semver (MAJOR.MINOR.PATCH)`, `trade-off (แลกเปลี่ยน)`
-- **Do not translate** — paths, PowerShell blocks
+[SKILL-AUTHORING.md](../SKILL-AUTHORING.md) § Language. **Gloss:** `canonical (แหล่งจริง)`, `semver (MAJOR.MINOR.PATCH)`, `trade-off (แลกเปลี่ยน)` · EN: blocker/major/minor.
 
 Canonical: `ai-skills/upgrade/`

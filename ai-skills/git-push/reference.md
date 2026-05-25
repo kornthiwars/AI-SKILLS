@@ -1,4 +1,4 @@
-# reference — git-push (v2.0.3)
+# reference — git-push (v2.0.4)
 
 **v2.0.0:** No code review in this skill — use [`@pr-review`](../pr-review/SKILL.md) for bugs/production/security. This file covers **git safety** only.
 

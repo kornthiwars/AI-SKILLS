@@ -1,6 +1,6 @@
-# Debug — reference (v1.0.3)
+# Debug — reference (v1.0.6)
 
-Layer detail, fail path, breadcrumb ledger, pitfalls.
+Layer detail, workflow steps, fail path, breadcrumb ledger, pitfalls.
 
 ## Search learnings (step 0)
 
@@ -13,6 +13,62 @@ Before D1 — [ai-rules/vault-learning.mdc](../../ai-rules/vault-learning.mdc) �
 | `head_limit` on grep output | Paste full archive of old lessons |
 
 If a prior lesson matches, cite filename in diagnosis — do not duplicate long bodies in chat.
+
+## Workflow (D0–D8)
+
+Load per step in [SKILL.md](SKILL.md) Quick reference.
+
+### D0 — Search learnings
+
+[§ Search learnings](#search-learnings-step-0) above — before D1.
+
+### D1 — Repro
+
+Fill [assets/template.repro.md](assets/template.repro.md). Repro classes: [§ D1 — Repro](#d1--repro-confirmed-defect) below. **D1 pass** required before "confirmed defect."
+
+### D2 — Evidence
+
+Fill [assets/template.evidence.md](assets/template.evidence.md) — request/response (redact secrets), client paths.
+
+### D3 — Fail path
+
+[§ Fail path](#fail-path-before-hypotheses) — trace before hypotheses.
+
+### D4 — Layers + hypotheses
+
+Walk D2→D6; hand off `@api-builder` if server wrong. **3–5 ranked hypotheses**; disproof top candidate first. Ledger: [assets/template.breadcrumb-ledger.md](assets/template.breadcrumb-ledger.md).
+
+### D5 — Gate D
+
+[assets/template.diagnosis-report.md](assets/template.diagnosis-report.md). **Approved** only if D1 pass + ledger consistent.
+
+### D6 — Fix or handoff
+
+| Root cause | Action |
+|------------|--------|
+| D2–D3 server | Packet → `@api-builder` |
+| D4–D6 client | Minimal fix after user OK; `@ui-builder` if styling-only |
+| Mixed | Server first, re-run D4–D6 |
+
+### D7 — Validate
+
+Re-run D1 repro steps; actual must match expected.
+
+### D8 — Report + close
+
+Use [§ Report template](#report-template) below. Optional: [post-fix-learning](assets/template.post-fix-learning.md) if ≥2 rounds (vault-learning). Ship: `@pr-review` → `@git-push`.
+
+## Report template
+
+```text
+[debug] Diagnosis — <scope>
+Gate D: Approved | Revise
+Root cause layer: D4_map
+| Layer | status | evidence | finding |
+Handoff: none | @api-builder | @ui-builder
+Summary (TH): …
+Next: …
+```
 
 ## Layer detail
 

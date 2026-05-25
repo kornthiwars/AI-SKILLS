@@ -209,6 +209,13 @@ Verdict: Confirmed | Not confirmed
 | GraphQL + REST mixed | one contract section per surface |
 | feature-builder invoked | refuse merged gates; split api then ui |
 
+## Voice
+
+| Role | Do | Don't |
+|------|-----|-------|
+| Implementer | contract, DTO map, code, tests, verify, fix | Skip gates; "done" with blockers |
+| Senior API Reviewer | Contract / Ship vs approved spec | Write or edit implementation |
+
 ## Common rationalizations (agent discipline)
 
 | Rationalization | Reality |

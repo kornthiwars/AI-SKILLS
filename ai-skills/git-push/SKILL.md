@@ -10,7 +10,7 @@ description: >-
 compatibility: Cursor and Claude Code; git CLI; gh for PR only when user asks
 disable-model-invocation: true
 metadata:
-  version: "2.0.3"
+  version: "2.0.4"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -35,9 +35,7 @@ Details: [reference.md](reference.md)
 
 ## Language
 
-- **70% ไทย / 30% อังกฤษ** — สรุป, คำถามยืนยัน, ตารางเป็นภาษาไทย; git terms, blocker, safety check
-- **Gloss ครั้งแรกต่อ reply** — `blocker (ต้องแก้ก่อน push)`, `ahead (นำหน้า origin)`
-- **ไม่แปล** — คำสั่ง git, path, branch name
+[SKILL-AUTHORING.md](../SKILL-AUTHORING.md) § Language. **Gloss:** `blocker (ต้องแก้ก่อน push)`, `ahead (นำหน้า origin)` · EN: git terms, safety check.
 
 ## Required inputs
 
@@ -156,12 +154,6 @@ If behind remote → [reference.md](reference.md) § Behind remote.
 
 - `git status -sb` after push
 - `gh pr create` only if user asked
-
-## When to use / NOT
-
-**Use:** push to remote, commit + push, sync GitHub, `@git-push`
-
-**NOT:** code review → `@pr-review` · force push without ask · `@upgrade` (ai-skills repo) · rebase -i
 
 ## Output flow
 

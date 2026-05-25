@@ -15,7 +15,7 @@ description: >-
 compatibility: Cursor and Claude Code; cursor-ide-browser MCP; npx serve for preview; file:// blocked in agent browser
 disable-model-invocation: true
 metadata:
-  version: "1.0.2"
+  version: "1.0.3"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -55,7 +55,7 @@ Confirm all three with the user. If any are missing, list gaps and **stop** (no 
 - **No extra UI** vs reference (#17 promos unless requested)
 - Senior Designer: **no code**
 - **Wrong data/logic on screen** (totals, labels, list not updating, API OK but UI wrong) → `@debug`, not ui-builder — even if user attached a mockup
-- **No git commands** — no `git status` / `add` / `commit` / `push` / `pull` / `rebase`; ship → `@pr-review` then `@git-push` only
+- **No git commands** — [SKILL-AUTHORING.md](../SKILL-AUTHORING.md) § Git operations
 
 ## Quick reference
 
@@ -72,13 +72,7 @@ Confirm all three with the user. If any are missing, list gaps and **stop** (no 
 
 Prefix: `[Implementer]` / `[Senior Designer]`.
 
-## When to use / NOT
-
-**Use:** mockup, screenshot, Figma, live URL, ตรงรูป, `/ui-builder`, `@ui-builder`, UI Builder
-
-**NOT:** no reference · wireframe-only · one mockup + “make responsive” without per-width refs · backend-only → `@api-builder` · **wrong data/logic** (ตัวเลข รายการ map/state) → `@debug` · critique-only · other-tool deliverable · analytical canvas
-
-## Cross-skill
+## Handoffs
 
 | Situation | Skill |
 |-----------|--------|
@@ -104,40 +98,13 @@ Paste A + B → summary (viewport, theme, verify, deviations)
 
 ## Output flow
 
-1. Confirm **required inputs** (above).
-2. Phase 0–1 → **Gate A** ([reference.md](reference.md) form).
-3. Phase 2 (token table) → Phase 3–4 only if **Approved**.
-4. **Gate B** — 0 blockers; post **Score** using [assets/checklist.quality-tier.md](assets/checklist.quality-tier.md) (default target **10/10**).
-5. Post A + B ([assets/template.gate-b.md](assets/template.gate-b.md)) + summary in chat.
-6. Repeatable gap → patch [reference.md](reference.md) (one pitfall or verify note).
-7. **Vault:** search `vault/learnings/` before heavy UI debug; learning if ≥2 prompt rounds on same problem; issues auto on Q&A — [vault/README.md](../../vault/README.md).
-8. When user will **commit/push** → suggest `@pr-review` (e.g. `production`) then `@git-push` (code/quality — not visual Gate A/B).
+Inputs → Gate A → Phase 2–4 if Approved → Gate B (tier 10) → deliver A+B+summary · optional reference pitfall patch · vault: [vault-learning.mdc](../../ai-rules/vault-learning.mdc) · ship: `@pr-review` → `@git-push`
 
 ## Language
 
-- **70% ไทย / 30% อังกฤษ** — spec อธิบาย, สรุป, คำถาม user เป็นภาษาไทย; ใช้อังกฤษ ~30% สำหรับ Gate A/B, Approved, Revise, Confirmed, Phase 2, viewport, pitfall #N, S0/B0, tier 10
-- **Mix ธรรมชาติ** — เช่น "Gate A **Approved** — เริ่ม Phase 2 token table ที่ viewport 390×844"
-- **Gloss ครั้งแรกต่อ reply** — `Approved (อนุมัติแล้ว)`, `Not confirmed (ยังไม่ยืนยัน)`, `blocker (จุดที่ต้องแก้ก่อนส่ง)`
-- ตาราง Gate / delta: หัวแถวไทยได้; ค่าเทคนิค EN + วงเล็บแปลไทยเมื่อจำเป็น
-- **ไม่แปล** — `@ui-builder`, path, โค้ด
+[SKILL-AUTHORING.md](../SKILL-AUTHORING.md) § Language. **Gloss:** `Approved (อนุมัติแล้ว)`, `Not confirmed (ยังไม่ยืนยัน)`, `blocker (จุดที่ต้องแก้ก่อนส่ง)` · EN: Gate A/B, S0/B0, tier 10, pitfall #N.
 
-## Voice
-
-| Role | Do | Don't |
-|------|-----|-------|
-| Implementer | spec, code, verify, fix | Skip gates; "done" with blockers |
-| Senior Designer | A/B vs reference | Write or edit code |
-
-## Operating rules
-
-- **No rubber-stamp gates** — cite section IDs and evidence in A/B.
-- **Cite or it didn't happen** — delta rows reference S# and property.
-- **Distinguish spec claim vs build** — "spec says #1877F2" vs "computed/#hex on element."
-- **No flattery** — Confirmed only with 0 blockers; **10/10** only when tier-10 checklist is complete.
-
-## Maintainer
-
-Canonical: `ai-skills/ui-builder/`
+**Voice · Operating rules:** [reference.md](reference.md) § Voice · § Operating rules
 
 ## Resources
 
