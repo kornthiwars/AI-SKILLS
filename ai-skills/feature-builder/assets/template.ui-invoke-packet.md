@@ -1,5 +1,7 @@
 # F4 UI packet — paste for @ui-builder (from @feature-builder)
 
+**วิธีรัน:** ข้อความใหม่ (หลัง API Ship + fe-handoff) → วางบล็อกด้านล่าง → `@ui-builder` → รอ **Gate B Confirmed** → กลับ `@feature-builder`
+
 ```text
 @ui-builder
 Feature: <name> · Phase F4 (from @feature-builder)

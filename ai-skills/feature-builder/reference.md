@@ -1,6 +1,39 @@
-# Feature Builder — reference (v1.0.1)
+# Feature Builder — reference (v1.1.1)
 
-Orchestration detail, pitfalls, troubleshooting.
+Orchestration detail, run playbook, pitfalls, troubleshooting.
+
+## Run playbook (agent)
+
+When user asks how to proceed or after Gate F Approved:
+
+1. Paste [assets/template.runbook.md](assets/template.runbook.md) (short TH intro OK).
+2. Post the **next** packet only (F2 or F4) — not both unless F2 already Confirmed.
+3. End turn with explicit **stop line**: what user must run and exact resume phrase.
+
+| Phase | User runs | Agent stops until |
+|-------|-----------|-------------------|
+| F2 | New msg + `@api-builder` + F2 packet | `Gate Ship = Confirmed` |
+| F3 | `@feature-builder` + fe-handoff | handoff complete |
+| F4 | New msg + `@ui-builder` + F4 packet | `Gate B Confirmed` + Score |
+| F5 | `@feature-builder` | Feature Ship table |
+
+Do not say "ทำต่อได้เลย" without naming **which @skill** and **new message vs same thread**.
+
+## Reply discipline
+
+Every orchestrator turn uses [assets/template.reply.md](assets/template.reply.md).
+
+| Rule | Detail |
+|------|--------|
+| Order | สถานะ → สรุป → **คุณทำต่อ** (1 step) → หยุดจนกว่า → อย่าทำ |
+| คุณทำต่อ | One numbered line; must include `@skill` when delegating |
+| หยุดจนกว่า | Backticks with exact user phrase (`Gate Ship = Confirmed`) |
+| Questions | F0 gaps: numbered list; do not mix with F2 packet in same reply |
+| Packets | After reply scaffold; full packet in ` ```text ` block — not paraphrased |
+| Runbook | Paste [template.runbook.md](assets/template.runbook.md) only when user asks how to run |
+
+**Bad:** "เสร็จแล้วค่อยบอก" / "ทำ UI ต่อได้" / paragraph without หยุดจนกว่า  
+**Good:** "## คุณทำต่อ … ข้อความใหม่ + `@api-builder`" + "## หยุดจนกว่า `Gate Ship = Confirmed`"
 
 ## Phase detail
 
@@ -21,8 +54,9 @@ Minimum rows in phase plan:
 
 ### F2 — API delegation
 
+- Packet file: [template.api-invoke-packet.md](assets/template.api-invoke-packet.md) — do not shorten below template headings.
 - Prefer **narrow delta** when user names one endpoint; **CRUD pack** when user lists E1–E4 for a resource.
-- Packet must say: return with Ship evidence before UI phase.
+- Tell user **new message** before `@api-builder`.
 - If api-builder stops at Revise → update plan or fix blockers; do not skip to UI.
 
 ### F3 — Handoff
@@ -61,6 +95,10 @@ Manual smoke only in v1 ([integration-checklist](assets/checklist.integration.md
 | F14 | Feature Ship without Gate B paste | **Not confirmed** until ui-builder B evidence |
 | F15 | UI ~6/10 but "works" | Re-run `@ui-builder` for Gate A→B at locked viewport; do not lower bar in Feature Ship |
 | F16 | Multi-pane layout floats | Hand off layout fix to `@ui-builder` (pitfall #25) or `@debug` if data OK but wrong bind |
+| F17 | User ไม่รู้ว่าต้องรัน skill ไหน | Post [template.runbook.md](assets/template.runbook.md) + บอก step ถัดไปเดียว |
+| F18 | F2/F4 ในเทรดเดียวกับ orchestrator ยาว | แนะนำข้อความใหม่ + @skill ลูก; F3/F5 กลับ feature-builder |
+| F19 | Reply ยาวไม่มี "คุณทำต่อ" | บังคับ [template.reply.md](assets/template.reply.md) |
+| F20 | หลายคำถาม + packet ปนกัน | แยกเทิร์น: ถาม input ก่อน หรือส่ง packet หลัง Gate F |
 
 ## Cross-skill
 
@@ -81,6 +119,8 @@ Manual smoke only in v1 ([integration-checklist](assets/checklist.integration.md
 | "เขียน component ในเทิร์น feature-builder เร็วกว่า" | F4 = packet ไป `@ui-builder` — orchestrator ไม่เขียน TSX/CSS |
 | "API เกือบ Ship ไป UI ก่อน" | Hard stop ที่ F3 — ต้อง API Ship Confirmed |
 | "push ทันทีหลัง Feature Ship" | Ship → `@pr-review` แล้ว `@git-push` |
+| "รันยังไง / ต่อยังไง" | Paste runbook; ระบุ @skill + new message + stop until phrase |
+| "ตอบยาวไม่รู้ขั้นถัดไป" | ใช้ reply template — คุณทำต่อ 1 ขั้น + หยุดจนกว่า |
 
 ## Red flags
 

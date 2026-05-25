@@ -52,7 +52,7 @@ ai-skills/                         # repo root (canonical)
 |-------|--------------|------------------|
 | [ui-builder](ui-builder/SKILL.md) | ✓ | `template.viewport-spec`, `template.breakpoints-spec`, `template.gate-b`, `checklist.quality-tier` |
 | [api-builder](api-builder/SKILL.md) | ✓ | `template.contract-spec`, `template.crud-pack`, `template.endpoint-delta`, `template.handoff-to-ui` |
-| [feature-builder](feature-builder/SKILL.md) | ✓ | `template.feature-spec`, `template.phase-plan`, `template.ui-invoke-packet`, `checklist.integration` |
+| [feature-builder](feature-builder/SKILL.md) | ✓ | `template.feature-spec`, `template.phase-plan`, `template.api-invoke-packet`, `template.ui-invoke-packet`, `template.runbook`, `template.reply`, `checklist.integration` |
 | [debug](debug/SKILL.md) | ✓ | `template.repro`, `template.evidence`, `template.diagnosis-report`, `template.breadcrumb-ledger`, `template.post-fix-learning` |
 | [pr-review](pr-review/SKILL.md) | ✓ | `template.review-comment` |
 | [git-push](git-push/SKILL.md) | — | (reference only) |

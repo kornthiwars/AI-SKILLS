@@ -12,7 +12,7 @@ Universal index: [AGENTS.md](../AGENTS.md)
 |-------|---------|------|
 | UI Builder | 1.0.1 | [ui-builder/](ui-builder/SKILL.md) |
 | API Builder | 1.0.2 | [api-builder/](api-builder/SKILL.md) |
-| Feature Builder | 1.0.1 | [feature-builder/](feature-builder/SKILL.md) |
+| Feature Builder | 1.1.1 | [feature-builder/](feature-builder/SKILL.md) |
 | Debug | 1.0.3 | [debug/](debug/SKILL.md) |
 | PR Review | 1.0.4 | [pr-review/](pr-review/SKILL.md) — incl. P10b dead/unused code |
 | Git Push | 2.0.0 | [git-push/](git-push/SKILL.md) — safety + push; no code review |
@@ -58,6 +58,8 @@ Universal index: [AGENTS.md](../AGENTS.md)
 - ตัวเลข/รายการแสดงผิด → `@debug`
 
 **ลำดับลูก:** `@api-builder` (Ship) → handoff → `@ui-builder` (Gate A→B)
+
+**วิธีรัน:** `feature-builder/assets/template.runbook.md` · **รูปแบบตอบ agent:** `template.reply.md` (ทุกเทิร์น)
 
 ---
 

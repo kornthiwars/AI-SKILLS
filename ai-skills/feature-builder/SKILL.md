@@ -11,7 +11,7 @@ description: >-
 compatibility: Cursor and Claude Code; orchestrates api-builder and ui-builder in user app repo; no implementation in this skill
 disable-model-invocation: true
 metadata:
-  version: "1.0.1"
+  version: "1.1.1"
   author: kornthiwars
   license: MIT
   surfaces:
@@ -31,6 +31,8 @@ metadata:
 - **Evidence-based handoff** — paste [fe-handoff](../api-builder/assets/template.handoff-to-ui.md) after API Ship
 - **UI quality = Gate B** — Feature Ship is **Not confirmed** without ui-builder **Gate B Confirmed** evidence (paste or `docs/**/gate-b-*.md`)
 - **Default UI bar = 10/10** — F4 packet must cite [ui-builder quality-tier-10](../ui-builder/assets/checklist.quality-tier.md); accept `Score: 9/10` only with documented waivers
+- **One next action** — every reply ends with **คุณทำต่อ** (single step) + **หยุดจนกว่า** (exact phrase); no vague "ทำต่อได้เลย"
+- **Reply scaffold** — use [assets/template.reply.md](assets/template.reply.md) every turn (TH); packets in separate fenced blocks
 
 ## Required inputs — refuse F0 without these
 
@@ -55,6 +57,48 @@ List gaps in Thai and **stop** until user fills or defers UI phase explicitly.
 - **Refuse** "do full feature in one shot without phases" — offer F0→F5 plan + child packets instead
 - **Do not** replace `@debug`, `@upgrade`, `@git-push`
 - **No git commands** — orchestrator does not run git CLI; ship → tell user `@pr-review` then `@git-push`
+- **No wall of text** — สรุปเทิร์น ≤5 bullets; ไม่ซ้ำ runbook ทั้งก้อนถ้า user ไม่ถาม "รันยังไง"
+
+## Reply format (บังคับทุกเทิร์น)
+
+Load [assets/template.reply.md](assets/template.reply.md). ทุกตอบต้องมีหัวข้อนี้ครบ:
+
+| Block | กฎ |
+|-------|-----|
+| **สถานะ** | Phase F? + ชื่อฟีเจอร์ + gate ล่าสุด |
+| **สรุปเทิร์นนี้** | bullet สั้นภาษาไทย |
+| **คุณทำต่อ** | **ขั้นเดียว** — ระบุ ข้อความใหม่/เทรดเดิม + `@skill` |
+| **หยุดจนกว่า** | ประโยค copy-paste ที่ user ต้องส่งกลับ |
+| **อย่าทำตอนนี้** | 1–2 ข้อ (เช่น ห้าม @ui-builder ก่อน Ship) |
+
+หลัง F2/F4: วาง packet ใน code block แยก — อย่าฝังในย่อหน้ายาว
+
+## How to run (คุณรัน skill ไหน — บังคับอ่าน)
+
+Orchestrator **ไม่เขียนโค้ดแอป** — คุณ **invoke skill ลูก** ตามลำดับ Full runbook: [assets/template.runbook.md](assets/template.runbook.md).
+
+| Step | คุณทำ | หยุดจนกว่า |
+|------|--------|------------|
+| 0 | `@feature-builder` + ฟีเจอร์ + repo แอป | required inputs ครบ |
+| 1 | ตอบ **Gate F Approved** | อย่าส่ง F2/F4 ก่อน |
+| 2 | **ข้อความใหม่** → วาง [F2 packet](assets/template.api-invoke-packet.md) → `@api-builder` | รายงาน **Gate Ship = Confirmed** |
+| 3 | กลับ `@feature-builder` → [fe-handoff](../api-builder/assets/template.handoff-to-ui.md) | handoff ครบ |
+| 4 | **ข้อความใหม่** → วาง [F4 packet](assets/template.ui-invoke-packet.md) → `@ui-builder` | **Gate B Confirmed** + evidence |
+| 5 | `@feature-builder` → F5 Feature Ship | **Feature Ship = Confirmed** |
+| 6 | `@pr-review` (optional) → `@git-push` | เมื่อจะ commit/push |
+
+**แชทใหม่ (แนะนำ):** F2 และ F4 — ลด context ปน gate  
+**เทรดเดิม:** F0–F1, F3, F5 กับ `@feature-builder`
+
+**ส่งกลับ orchestrator (copy-paste):**
+
+```text
+Gate Ship = Confirmed · <สรุปสั้น>
+```
+
+```text
+Gate B Confirmed · Score: 10/10 · evidence: <paste table or docs/.../gate-b.md>
+```
 
 ## Quick reference
 
@@ -62,10 +106,12 @@ List gaps in Thai and **stop** until user fills or defers UI phase explicitly.
 |-------|------|---------|
 | F0 Intake | [feature-spec-template](assets/template.feature-spec.md) | Feature spec draft |
 | F1 Plan | [phase-plan-template](assets/template.phase-plan.md) | Phase order + **Gate F** |
-| F2 API | packet → `@api-builder` | API work in child skill |
+| F2 API | [api-invoke-packet](assets/template.api-invoke-packet.md) → `@api-builder` | API work in child skill |
 | F3 Handoff | [fe-handoff](../api-builder/assets/template.handoff-to-ui.md) | Block after API Ship |
-| F4 UI | packet → `@ui-builder` | UI work in child skill |
+| F4 UI | [ui-invoke-packet](assets/template.ui-invoke-packet.md) → `@ui-builder` | UI work in child skill |
 | F5 Ship | [integration-checklist](assets/checklist.integration.md) | **Feature Ship** |
+| Runbook | [template.runbook.md](assets/template.runbook.md) | User copy-paste steps |
+| Reply | [template.reply.md](assets/template.reply.md) | Agent reply scaffold |
 | Close | SKILL-AUTHORING learnings | Optional project learnings |
 
 ## When to use / NOT
@@ -96,19 +142,15 @@ Fill [assets/template.phase-plan.md](assets/template.phase-plan.md). Post **Gate
 
 **Stop** child invokes until Gate F = Approved.
 
+Post [assets/template.runbook.md](assets/template.runbook.md) when user asks "รันยังไง" / "ต้องทำอะไรต่อ".
+
 ### F2 — API delegation
 
-Post a **copy-paste packet** for a **new chat or same thread**:
+1. Tell user: **new message** → paste [assets/template.api-invoke-packet.md](assets/template.api-invoke-packet.md) → `@api-builder`
+2. **Stop** this turn after posting packet — do not implement API here
+3. Resume F3 only when user reports **Gate Ship = Confirmed** (exact phrase or equivalent evidence table)
 
-```text
-@api-builder
-Feature: <name> · Phase F2 (from @feature-builder)
-Scope: <endpoints / CRUD / narrow delta>
-Stack: <from repo>
-Gate: complete Contract + Ship before returning to feature-builder.
-```
-
-Track until user reports **Gate Ship = Confirmed**. Do not proceed on "mostly done."
+Do not proceed on "mostly done" / "เกือบเสร็จ".
 
 ### F3 — Handoff
 
@@ -116,19 +158,9 @@ Verify API Ship evidence (summary or checklist from api-builder). Fill and paste
 
 ### F4 — UI delegation
 
-Use [assets/template.ui-invoke-packet.md](assets/template.ui-invoke-packet.md). Post packet (new message strongly preferred):
-
-```text
-@ui-builder
-Feature: <name> · Phase F4 (from @feature-builder)
-Handoff: [paste fe-handoff block]
-Scope: <S0…Sn or "full page shell"> · Viewport <W×H> · Ref: <file or URL>
-Deliverables: Gate A Approved · Gate B Confirmed (0 blockers) · build screenshot @ viewport
-Forbidden: ship UI without Gate B · emoji icons if ref uses SVG/icon font
-Gate: complete Gate A + B before returning to feature-builder.
-```
-
-**Stop** after posting F4 — do not write `*.tsx` / `*.css` for the UI surface in the feature-builder turn.
+1. Tell user: **new message** → paste [assets/template.ui-invoke-packet.md](assets/template.ui-invoke-packet.md) (fill handoff, viewport, ref) → `@ui-builder`
+2. **Stop** after posting packet — do not write `*.tsx` / `*.css` here
+3. Resume F5 only when user reports **Gate B Confirmed** + Score + evidence (paste or `docs/**/gate-b*.md`)
 
 ### F5 — Feature Ship
 
@@ -150,11 +182,11 @@ Run [integration-checklist](assets/checklist.integration.md). Post **Feature Shi
 
 1. Confirm required inputs · app repo: auto-scan learnings (project rule)  
 2. F0 spec → F1 plan → **Gate F Approved**  
-3. F2 `@api-builder` packet → wait for **API Ship**  
-4. F3 fe-handoff  
-5. F4 `@ui-builder` packet → wait for **Gate B Confirmed**  
+3. Post **runbook** + F2 packet → user runs `@api-builder` (new message) → wait for **Gate Ship = Confirmed**  
+4. F3 fe-handoff in feature-builder thread  
+5. Post F4 packet → user runs `@ui-builder` (new message) → wait for **Gate B Confirmed**  
 6. F5 Feature Ship + summary (TH)  
-7. Suggest `@pr-review` (mode select) then `@git-push` when user wants to ship  
+7. Tell user: `@pr-review` (optional) then `@git-push` — not in same breath as F5 unless user asks  
 
 ## Cross-skill
 
@@ -170,15 +202,21 @@ Child order for full features: **api-builder Ship → fe-handoff → ui-builder*
 
 ## Language
 
-- **70% ไทย / 30% อังกฤษ** — แผน, Gate F, Feature Ship, คำถามเป็นภาษาไทย; ใช้อังกฤษ ~30% สำหรับ Gate F, Approved, Confirmed, phase packets (F1–F5), handoff, orchestrate
-- **Mix ธรรมชาติ** — เช่น "Gate F **Approved** — ส่ง **handoff** ให้ @api-builder ทำ contract E1"
-- **Gloss ครั้งแรกต่อ reply** — `orchestrate (ประสานงาน)`, `handoff (ส่งต่อให้ skill ลูก)`
-- **ไม่แปล** — path, `@skill`, phase packet blocks
+- **70% ไทย / 30% อังกฤษ** — หัวข้อ reply ไทย; Gate labels EN (`Approved`, `Confirmed`, F2/F4)
+- **ชัดก่อนยาว** — บอก **คุณทำต่อ** ก่อนอธิบายยาว; ถาม user ทีละชุด (required inputs) ไม่ยิงหลายคำถามปนกัน
+- **Mix ธรรมชาติ** — "Gate F **Approved** — ขั้นถัดไป: ข้อความใหม่ + `@api-builder`"
+- **Gloss ครั้งแรกต่อ reply** — `orchestrate (ประสานงาน)`, `handoff (ส่งต่อ)`
+- **ไม่แปล** — path, `@skill`, packet blocks
+- Detail: [reference.md](reference.md) § Reply discipline
 
 ## Resources
 
 | File | Use |
 |------|-----|
-| [reference.md](reference.md) | Pitfalls F1–F12, § Rationalizations / Red flags |
+| [template.runbook.md](assets/template.runbook.md) | User: what to run each step |
+| [template.api-invoke-packet.md](assets/template.api-invoke-packet.md) | F2 paste block |
+| [template.ui-invoke-packet.md](assets/template.ui-invoke-packet.md) | F4 paste block |
+| [template.reply.md](assets/template.reply.md) | Reply scaffold |
+| [reference.md](reference.md) | Pitfalls F1–F20, § Run playbook · § Reply discipline |
 
 Canonical: `ai-skills/feature-builder/`

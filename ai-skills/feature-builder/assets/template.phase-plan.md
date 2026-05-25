@@ -6,11 +6,11 @@ Feature: <name>
 Gate F — Feature plan
 
 ## Phase order
-| # | Phase | Skill | Done when |
-| 1 | F2 API | @api-builder | Gate Ship Confirmed |
-| 2 | F3 Handoff | feature-builder | fe-handoff pasted |
-| 3 | F4 UI | @ui-builder | Gate B Confirmed |
-| 4 | F5 Integration | feature-builder | Feature Ship Confirmed |
+| # | Phase | Skill | You run (next action) | Done when |
+| 1 | F2 API | @api-builder | New message: paste F2 packet + `@api-builder` | Gate Ship Confirmed |
+| 2 | F3 Handoff | feature-builder | Same thread: `@feature-builder` + fe-handoff | fe-handoff pasted |
+| 3 | F4 UI | @ui-builder | New message: paste F4 packet + `@ui-builder` | Gate B Confirmed |
+| 4 | F5 Integration | feature-builder | `@feature-builder` + integration checklist | Feature Ship Confirmed |
 
 ## API slice (for F2 packet)
 Mode: narrow-delta | crud-pack | single
